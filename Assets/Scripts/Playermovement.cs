@@ -6,7 +6,7 @@ public class Playermovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     InputAction moveAction;
     Vector3 position;
-    float speed = 10f;
+    [SerializeField] float speed;
     Vector3 scale;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
