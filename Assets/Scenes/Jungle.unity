@@ -996,7 +996,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -274364767623227413, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       propertyPath: speed
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394728262880320684, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394728262880320684, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
+      propertyPath: m_GravityScale
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1537011665674289733, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       propertyPath: m_Name
