@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class DetectionZone : MonoBehaviour
 {
-    [Tooltip("Layer mà enemy sẽ phát hiện (ví dụ: Player)")]
     public LayerMask detectionLayer;
 
     // Danh sách các collider đang ở trong vùng detection
