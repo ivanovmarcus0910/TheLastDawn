@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: 9531874120a89cd4c8e6fa22937fee8d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1546704698229420813
+    second: objectCongnuoc_0
+  - first:
+      213: 8513633469102134664
+    second: objectCongnuoc_1
+  - first:
+      213: 7940244020050419612
+    second: objectCongnuoc_2
+  - first:
+      213: 7161820882308026965
+    second: objectCongnuoc_3
+  - first:
+      213: 4983353047083296969
+    second: objectCongnuoc_4
+  - first:
+      213: -3439512707676899126
+    second: objectCongnuoc_5
+  - first:
+      213: -3353220457020500954
+    second: objectCongnuoc_6
+  - first:
+      213: -1689979873401451185
+    second: objectCongnuoc_7
+  - first:
+      213: 7934576284047323702
+    second: objectCongnuoc_8
+  - first:
+      213: 4076708421675103943
+    second: objectCongnuoc_9
+  - first:
+      213: -4871069925059264333
+    second: objectCongnuoc_10
+  - first:
+      213: 1855508388215249501
+    second: objectCongnuoc_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: objectCongnuoc_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 420
+        width: 456
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d03746e6abff67510800000000000000
+      internalID: 1546704698229420813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 307
+        width: 87
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88595b17880862670800000000000000
+      internalID: 8513633469102134664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_2
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 286
+        width: 161
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9f5605fdd9613e60800000000000000
+      internalID: 7940244020050419612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_3
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 310
+        width: 87
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 552d1f2c526e36360800000000000000
+      internalID: 7161820882308026965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_4
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 138
+        width: 100
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c8a2c1813d682540800000000000000
+      internalID: 4983353047083296969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_5
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 190
+        width: 153
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac8f97a6a656440d0800000000000000
+      internalID: -3439512707676899126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_6
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 205
+        width: 84
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62458bda2c7f671d0800000000000000
+      internalID: -3353220457020500954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_7
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 120
+        width: 146
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4dc850524cfb88e0800000000000000
+      internalID: -1689979873401451185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_8
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 88
+        width: 82
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63231e557174d1e60800000000000000
+      internalID: 7934576284047323702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_9
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 37
+        width: 91
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c6b9cec5b0639830800000000000000
+      internalID: 4076708421675103943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_10
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 17
+        width: 130
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b001c016bb766cb0800000000000000
+      internalID: -4871069925059264333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: objectCongnuoc_11
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 13
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5ad3555c0710c910800000000000000
+      internalID: 1855508388215249501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      objectCongnuoc_0: 1546704698229420813
+      objectCongnuoc_1: 8513633469102134664
+      objectCongnuoc_10: -4871069925059264333
+      objectCongnuoc_11: 1855508388215249501
+      objectCongnuoc_2: 7940244020050419612
+      objectCongnuoc_3: 7161820882308026965
+      objectCongnuoc_4: 4983353047083296969
+      objectCongnuoc_5: -3439512707676899126
+      objectCongnuoc_6: -3353220457020500954
+      objectCongnuoc_7: -1689979873401451185
+      objectCongnuoc_8: 7934576284047323702
+      objectCongnuoc_9: 4076708421675103943
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
