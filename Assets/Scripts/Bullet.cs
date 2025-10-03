@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        Destroy(gameObject, 2f); // tự hủy sau 2s
+        Destroy(gameObject, 1f); // tự hủy sau 2s
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
