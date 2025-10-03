@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     // Hàm setup để nhận hướng bắn từ Player
     public void Setup(Vector2 direction)
     {
+        print("Tao : "+direction);
+
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = direction.normalized * speed;
 
@@ -26,6 +28,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
+        print("Huy : "+hitInfo.name);
         // Hủy khi va chạm với vật thể khác
         Destroy(gameObject);
     }
