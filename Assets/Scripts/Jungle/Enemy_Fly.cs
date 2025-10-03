@@ -56,8 +56,6 @@ public class Enemy_Fly : MonoBehaviour
             spriteRenderer.flipX = true;
         }
     }
-<<<<<<< Updated upstream
-=======
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -68,5 +66,4 @@ public class Enemy_Fly : MonoBehaviour
             Destroy(gameObject);           // xóa enemy
         }
     }
->>>>>>> Stashed changes
 }

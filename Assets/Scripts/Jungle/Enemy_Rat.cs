@@ -103,8 +103,7 @@ public class Enemy_Rat : MonoBehaviour
             attackZone.localPosition = pos;
         }
     }
-<<<<<<< Updated upstream
-=======
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
@@ -113,5 +112,4 @@ public class Enemy_Rat : MonoBehaviour
             Destroy(gameObject);           // xóa enemy
         }
     }
->>>>>>> Stashed changes
 }
