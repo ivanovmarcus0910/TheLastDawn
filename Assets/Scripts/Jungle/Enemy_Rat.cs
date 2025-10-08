@@ -9,7 +9,6 @@ public class Enemy_Rat : MonoBehaviour
     [SerializeField] private int startDirection = -1;
     [SerializeField] private Animator animator;
 
-    [Header("Attack Zones")]
     public DetectionZone attackDetectionZone;   // Vùng phát hiện player
     public Transform attackZone;                // Collider attack (luôn bật)
     public Action onDeath;   // event để Spawner nghe khi con này chết

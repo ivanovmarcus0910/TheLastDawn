@@ -75,10 +75,5 @@ public class MapManager : MonoBehaviour
         currentIndex = targetIndex;
     }
 
-    void ApplyBoundsForCurrent()
-    {
-        var bg = maps[currentIndex].background;
-        if (playerScript && bg) playerScript.SetBounds(bg);
-        if (cameraFollow && bg) cameraFollow.SetBounds(bg);
-    }
+ 
 }
