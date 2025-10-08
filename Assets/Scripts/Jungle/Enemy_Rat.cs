@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System; // để dùng Action
 
 public class Enemy_Rat : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class Enemy_Rat : MonoBehaviour
     [SerializeField] private int startDirection = -1;
     [SerializeField] private Animator animator;
 
-    [Header("Attack Zones")]
     public DetectionZone attackDetectionZone;   // Vùng phát hiện player
     public Transform attackZone;                // Collider attack (luôn bật)
+    public Action onDeath;   // event để Spawner nghe khi con này chết
 
     private int currentDirection;
     private float halfWidth;
@@ -101,10 +102,12 @@ public class Enemy_Rat : MonoBehaviour
             attackZone.localPosition = pos;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Bullet"))
         {
+            onDeath?.Invoke();  // báo cho Spawner
             Destroy(gameObject);           // xóa enemy
         }
     }

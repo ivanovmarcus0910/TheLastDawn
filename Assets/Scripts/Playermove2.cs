@@ -154,10 +154,4 @@ public class Playermove2 : MonoBehaviour
         }
     }
 
-    // Nếu scale hoặc collider đổi, có thể gọi lại để cập nhật halfSize + bounds
-    public void RefreshBounds()
-    {
-        RecalcHalfSize();
-        if (background != null) SetBounds(background);
-    }
 }

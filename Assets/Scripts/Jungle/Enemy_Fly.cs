@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using System;
 public class Enemy_Fly : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rigidBody;
@@ -9,6 +9,7 @@ public class Enemy_Fly : MonoBehaviour
     [SerializeField] private Animator animator;
 
     public DetectionZone attackDetectionZone;
+    public Action onDeath;   // event để Spawner nghe khi con này chết
 
     private int currentDirection;
     private float halfWidth;
@@ -60,6 +61,8 @@ public class Enemy_Fly : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
+            onDeath?.Invoke();  // báo cho Spawner
+
             Destroy(gameObject);           // xóa enemy
         }
     }
