@@ -1,0 +1,923 @@
+fileFormatVersion: 2
+guid: 33d4b88b7727e3c4594db95f7cd3fa8f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 519240606578048475
+    second: rat-die_0
+  - first:
+      213: 8271671344910887029
+    second: rat-die_1
+  - first:
+      213: -5488732086828000051
+    second: rat-die_2
+  - first:
+      213: -321141361254121553
+    second: rat-die_3
+  - first:
+      213: 6595548923556610849
+    second: rat-die_4
+  - first:
+      213: -7255427074036505817
+    second: rat-die_5
+  - first:
+      213: 2018269862124719521
+    second: rat-die_6
+  - first:
+      213: 2308527575776862634
+    second: rat-die_7
+  - first:
+      213: -9185590417728860255
+    second: rat-die_8
+  - first:
+      213: -9001260273189680634
+    second: rat-die_9
+  - first:
+      213: -5157646210477641770
+    second: rat-die_10
+  - first:
+      213: -1200002511244890982
+    second: rat-die_11
+  - first:
+      213: 8173967111988841447
+    second: rat-die_12
+  - first:
+      213: -1530661531715437914
+    second: rat-die_13
+  - first:
+      213: -1073246793592584372
+    second: rat-die_14
+  - first:
+      213: -1230107513577346610
+    second: rat-die_15
+  - first:
+      213: 7755895194030863589
+    second: rat-die_16
+  - first:
+      213: 7243143483757825137
+    second: rat-die_17
+  - first:
+      213: 8845105997413030955
+    second: rat-die_18
+  - first:
+      213: -1367152387492993772
+    second: rat-die_19
+  - first:
+      213: 8468676339221144146
+    second: rat-die_20
+  - first:
+      213: -6681456033722266989
+    second: rat-die_21
+  - first:
+      213: 8364966482685957074
+    second: rat-die_22
+  - first:
+      213: -8908653552192024514
+    second: rat-die_23
+  - first:
+      213: 352455274513688474
+    second: rat-die_24
+  - first:
+      213: 2013349089602510067
+    second: rat-die_25
+  - first:
+      213: -286596272926958215
+    second: rat-die_26
+  - first:
+      213: -6211359420230506913
+    second: rat-die_27
+  - first:
+      213: -6090017228526060001
+    second: rat-die_28
+  - first:
+      213: -1064452646893069596
+    second: rat-die_29
+  - first:
+      213: -8710178540673563097
+    second: rat-die_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rat-die_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 385
+        width: 202
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bddfa04a496b43700800000000000000
+      internalID: 519240606578048475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_1
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 386
+        width: 207
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 578e0345341eac270800000000000000
+      internalID: 8271671344910887029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_2
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 389
+        width: 212
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcc14516f3b14d3b0800000000000000
+      internalID: -5488732086828000051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_3
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 206
+        width: 202
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faf33c722a31b8bf0800000000000000
+      internalID: -321141361254121553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_4
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 209
+        width: 206
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1234d4f1dc8188b50800000000000000
+      internalID: 6595548923556610849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_5
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 240
+        width: 38
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7236d4e548b8f4b90800000000000000
+      internalID: -7255427074036505817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_6
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 207
+        width: 178
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ad02d01fb5520c10800000000000000
+      internalID: 2018269862124719521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_7
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 132
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa1af5c5999890020800000000000000
+      internalID: 2308527575776862634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_8
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 121
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af0a03be2a368080800000000000000
+      internalID: -9185590417728860255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_9
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 88
+        width: 56
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60a81b5e879151380800000000000000
+      internalID: -9001260273189680634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_10
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 38
+        width: 194
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6df2753191c5c68b0800000000000000
+      internalID: -5157646210477641770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_11
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 49
+        width: 64
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9cebabe21cb85fe0800000000000000
+      internalID: -1200002511244890982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_12
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 91
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eb02d3e7c3cf6170800000000000000
+      internalID: 8173967111988841447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_13
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 70
+        width: 52
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6aafeba527ff1cae0800000000000000
+      internalID: -1530661531715437914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_14
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 72
+        width: 38
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c47469f3abf0b11f0800000000000000
+      internalID: -1073246793592584372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_15
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 99
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec9eea9dbb7cdeee0800000000000000
+      internalID: -1230107513577346610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_16
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 86
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e47e53269972ab60800000000000000
+      internalID: 7755895194030863589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_17
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 52
+        width: 17
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17c02966f90d48460800000000000000
+      internalID: 7243143483757825137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_18
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 71
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2c1b709a0120ca70800000000000000
+      internalID: 8845105997413030955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_19
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 52
+        width: 34
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41527a5a526e60de0800000000000000
+      internalID: -1367152387492993772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_20
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 45
+        width: 61
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2522805f248c68570800000000000000
+      internalID: 8468676339221144146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_21
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 81
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39a089f1323b643a0800000000000000
+      internalID: -6681456033722266989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_22
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 21
+        width: 38
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d39b8e42b4561470800000000000000
+      internalID: 8364966482685957074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_23
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 52
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e30929a5bca1e5480800000000000000
+      internalID: -8908653552192024514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_24
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 40
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a97e99c643c24e400800000000000000
+      internalID: 352455274513688474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_25
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 41
+        width: 42
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fc1d9e645ad0fb10800000000000000
+      internalID: 2013349089602510067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_26
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 52
+        width: 17
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97ddc3e453ec50cf0800000000000000
+      internalID: -286596272926958215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_27
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 56
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5662e83481dcc9a0800000000000000
+      internalID: -6211359420230506913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_28
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 64
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ef1b1d899eb7ba0800000000000000
+      internalID: -6090017228526060001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_29
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 24
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ead6b515fd4a31f0800000000000000
+      internalID: -1064452646893069596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rat-die_30
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 41
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7260ce804ca3f1780800000000000000
+      internalID: -8710178540673563097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      rat-die_0: 519240606578048475
+      rat-die_1: 8271671344910887029
+      rat-die_10: -5157646210477641770
+      rat-die_11: -1200002511244890982
+      rat-die_12: 8173967111988841447
+      rat-die_13: -1530661531715437914
+      rat-die_14: -1073246793592584372
+      rat-die_15: -1230107513577346610
+      rat-die_16: 7755895194030863589
+      rat-die_17: 7243143483757825137
+      rat-die_18: 8845105997413030955
+      rat-die_19: -1367152387492993772
+      rat-die_2: -5488732086828000051
+      rat-die_20: 8468676339221144146
+      rat-die_21: -6681456033722266989
+      rat-die_22: 8364966482685957074
+      rat-die_23: -8908653552192024514
+      rat-die_24: 352455274513688474
+      rat-die_25: 2013349089602510067
+      rat-die_26: -286596272926958215
+      rat-die_27: -6211359420230506913
+      rat-die_28: -6090017228526060001
+      rat-die_29: -1064452646893069596
+      rat-die_3: -321141361254121553
+      rat-die_30: -8710178540673563097
+      rat-die_4: 6595548923556610849
+      rat-die_5: -7255427074036505817
+      rat-die_6: 2018269862124719521
+      rat-die_7: 2308527575776862634
+      rat-die_8: -9185590417728860255
+      rat-die_9: -9001260273189680634
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
