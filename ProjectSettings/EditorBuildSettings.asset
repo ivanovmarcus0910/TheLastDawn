@@ -12,5 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Jungle.unity
     guid: 2a3587c3be3ec0842bcea36ad06c80c2
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 210a08696e7009f478c1034961cc45b5, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
