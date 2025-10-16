@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class EnemyBase : MonoBehaviour
     public LootTable lootTable;
     public Transform player;
     public LayerMask groundLayer;
+    // <--- THÊM DÒNG NÀY: Sự kiện báo hiệu quái vật đã chết
+    public event Action onDeath;
 
     protected Animator animator;
     protected Rigidbody2D rb;
@@ -33,9 +36,10 @@ public class EnemyBase : MonoBehaviour
 
         currentHealth = data.maxHealth;
     }
-
+    
     protected virtual void Update()
     {
+        
         if (isDead || isHurt) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
@@ -135,7 +139,7 @@ public class EnemyBase : MonoBehaviour
 
         rb.linearVelocity = Vector2.zero;
         animator.SetTrigger("Die");
-
+        onDeath?.Invoke();
         DropLoot();
 
         Destroy(gameObject, 1.5f);
@@ -146,7 +150,7 @@ public class EnemyBase : MonoBehaviour
 
         foreach (var loot in lootTable.lootItems)
         {
-            float roll = Random.value; // 0 → 1
+            float roll = UnityEngine.Random.value; // 0 → 1
             if (roll <= loot.dropChance)
             {
                 Instantiate(
