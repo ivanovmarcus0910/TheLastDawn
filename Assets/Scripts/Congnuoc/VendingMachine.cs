@@ -14,7 +14,6 @@ public class VendingMachine : MonoBehaviour
     public ItemData[] itemsForSale;             // Danh sách item bán
     public Transform itemGridParent;            // Nơi spawn item cells
     public GameObject itemCellPrefab;           // Prefab ô item
-    public TextMeshProUGUI itemEffectText;      // Text hiển thị effect khi chọn item
 
     private bool playerInRange = false;
 
@@ -69,43 +68,55 @@ public class VendingMachine : MonoBehaviour
             if (icon != null) icon.sprite = item.icon;
 
             // Gán text (tên + giá)
-            TextMeshProUGUI text = cell.transform.Find("Text")?.GetComponent<TextMeshProUGUI>();
-            if (text != null) text.text = $"{item.itemName} - ${item.price}";
+            TextMeshProUGUI itemName = cell.transform.Find("ItemName")?.GetComponent<TextMeshProUGUI>();
+            if (itemName != null) itemName.text = item.itemName;
+
+            TextMeshProUGUI price = cell.transform.Find("Price")?.GetComponent<TextMeshProUGUI>();
+            if (price != null) price.text = item.price.ToString() + " $";
+
+            // Gán EffectText (ẩn mặc định)
+            GameObject effectObj = cell.transform.Find("EffectText")?.gameObject;
+            if (effectObj != null)
+            {
+                effectObj.SetActive(false);
+                TextMeshProUGUI effectText = effectObj.GetComponent<TextMeshProUGUI>();
+                if (effectText != null)
+                    effectText.text = string.IsNullOrEmpty(item.effect) ? "" : item.effect;
+            }
 
             // Gán nút Buy
             Button buyBtn = cell.transform.Find("BuyButton")?.GetComponent<Button>();
             if (buyBtn != null)
                 buyBtn.onClick.AddListener(() => BuyItem(item));
 
-            // Click icon để hiện effect
+            // Click icon để hiện / ẩn Effect
             if (icon != null)
             {
                 Button iconBtn = icon.GetComponent<Button>();
-                if (iconBtn != null)
-                    iconBtn.onClick.AddListener(() => ShowItemEffect(item));
+                if (iconBtn != null && effectObj != null)
+                {
+                    iconBtn.onClick.AddListener(() =>
+                    {
+                        bool active = effectObj.activeSelf;
+                        effectObj.SetActive(!active); // Toggle hiển thị
+                    });
+                }
             }
         }
     }
 
-    private void ShowItemEffect(ItemData item)
-    {
-        if (itemEffectText != null)
-            itemEffectText.text = string.IsNullOrEmpty(item.effect) ? "" : item.effect;
-    }
-
     private void BuyItem(ItemData item)
     {
-        // Tích hợp với Inventory sau này
-        //if (playerInventory == null) return;
-        //if (playerInventory.money >= item.price)
-        //{
-        //    playerInventory.AddItem(item);
-        //    playerInventory.money -= item.price;
-        //    Debug.Log("Mua " + item.itemName + " thành công!");
-        //}
-        //else
-        //{
-        //    Debug.Log("Không đủ tiền mua " + item.itemName);
+        // Tích hợp với Inventory sau này 
+        //if (playerInventory == null) return; 
+        //if (playerInventory.money >= item.price) 
+        //{ // playerInventory.AddItem(item); 
+        // playerInventory.money -= item.price; 
+        // Debug.Log("Mua " + item.itemName + " thành công!"); 
+        //} 
+        //else 
+        //{ 
+        // Debug.Log("Không đủ tiền mua " + item.itemName); 
         //}
     }
 }
