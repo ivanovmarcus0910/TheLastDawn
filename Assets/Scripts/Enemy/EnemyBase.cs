@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections; // cần cho IEnumerator
-using TMPro;
-using UnityEngine.UI;
+using System;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -10,9 +8,8 @@ public class EnemyBase : MonoBehaviour
     public LootTable lootTable;
     public Transform player;
     public LayerMask groundLayer;
-
-    [Header("Health Bar")]
-    public HealthBar healthBar; // Gắn prefab health bar (con của enemy)
+    // <--- THÊM DÒNG NÀY: Sự kiện báo hiệu quái vật đã chết
+    public event Action onDeath;
 
     protected Animator animator;
     protected Rigidbody2D rb;
@@ -24,9 +21,6 @@ public class EnemyBase : MonoBehaviour
     protected int currentDirection = -1;
     protected float halfWidth;
     private float nextAttackTime = 0f;
-
-    private float lastTimeDamaged;      // Thời điểm bị đánh gần nhất
-    private Coroutine regenCoroutine;   // Dùng để dừng hồi máu nếu bị đánh lại
 
     protected virtual void Start()
     {
@@ -41,17 +35,11 @@ public class EnemyBase : MonoBehaviour
             halfWidth = box.size.x / 2f * transform.localScale.x;
 
         currentHealth = data.maxHealth;
-        lastTimeDamaged = Time.time;
-
-        // Khởi tạo health bar ngay lúc đầu
-        if (healthBar != null)
-        {
-            healthBar.UpdateBar(currentHealth, data.maxHealth);
-        }
     }
-
+    
     protected virtual void Update()
     {
+        
         if (isDead || isHurt) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
@@ -63,12 +51,6 @@ public class EnemyBase : MonoBehaviour
         else
         {
             Patrol();
-        }
-
-        // Cập nhật hướng của thanh máu (luôn đối diện camera)
-        if (healthBar != null)
-        {
-            healthBar.transform.forward = Camera.main.transform.forward;
         }
     }
 
@@ -127,29 +109,13 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    // ============================
-    //  TAKE DAMAGE + HEALTH BAR
-    // ============================
     public virtual void TakeDamage(int damage)
     {
         if (isDead) return;
 
         currentHealth -= damage;
-        currentHealth = Mathf.Max(currentHealth, 0);
         animator.SetTrigger("Hurt");
         isHurt = true;
-
-        if (healthBar != null)
-            StartCoroutine(UpdateHealthBarSmooth(currentHealth, data.maxHealth));
-
-        lastTimeDamaged = Time.time;
-
-        // Nếu đang hồi máu thì dừng
-        if (regenCoroutine != null)
-        {
-            StopCoroutine(regenCoroutine);
-            regenCoroutine = null;
-        }
 
         if (currentHealth <= 0)
         {
@@ -158,28 +124,7 @@ public class EnemyBase : MonoBehaviour
         else
         {
             Invoke(nameof(RecoverFromHurt), 0.3f);
-            regenCoroutine = StartCoroutine(RegenHealthAfterDelay());
         }
-    }
-
-    private IEnumerator UpdateHealthBarSmooth(int targetValue, int maxValue)
-    {
-        float startFill = healthBar.fillBar.fillAmount;
-        float targetFill = (float)targetValue / maxValue;
-        float t = 0f;
-        float duration = 0.2f; // tốc độ mượt
-
-        while (t < duration)
-        {
-            t += Time.deltaTime;
-            float lerpValue = Mathf.Lerp(startFill, targetFill, t / duration);
-            healthBar.fillBar.fillAmount = lerpValue;
-            healthBar.valueText.text = $"{Mathf.RoundToInt(lerpValue * maxValue)} / {maxValue}";
-            yield return null;
-        }
-
-        // đảm bảo cập nhật chính xác cuối cùng
-        healthBar.UpdateBar(targetValue, maxValue);
     }
 
     void RecoverFromHurt()
@@ -194,51 +139,18 @@ public class EnemyBase : MonoBehaviour
 
         rb.linearVelocity = Vector2.zero;
         animator.SetTrigger("Die");
-
-        // Ẩn thanh máu khi chết
-        if (healthBar != null)
-            healthBar.gameObject.SetActive(false);
-
+        onDeath?.Invoke();
         DropLoot();
 
         Destroy(gameObject, 1.5f);
     }
-
-    // ============================
-    //  HỒI MÁU SAU 5 GIÂY KHÔNG BỊ ĐÁNH
-    // ============================
-    private IEnumerator RegenHealthAfterDelay()
-    {
-        yield return new WaitForSeconds(5f);
-
-        while (currentHealth < data.maxHealth)
-        {
-            // Nếu bị đánh lại thì dừng hồi
-            if (Time.time - lastTimeDamaged < 5f)
-                yield break;
-
-            int regenAmount = Mathf.CeilToInt(data.maxHealth * 0.1f);
-            currentHealth = Mathf.Min(currentHealth + regenAmount, data.maxHealth);
-
-            if (healthBar != null)
-                StartCoroutine(UpdateHealthBarSmooth(currentHealth, data.maxHealth));
-
-            yield return new WaitForSeconds(1f);
-        }
-
-        regenCoroutine = null;
-    }
-
-    // ============================
-    //  DROP LOOT
-    // ============================
     void DropLoot()
     {
         if (lootTable == null || lootTable.lootItems.Length == 0) return;
 
         foreach (var loot in lootTable.lootItems)
         {
-            float roll = Random.value;
+            float roll = UnityEngine.Random.value; // 0 → 1
             if (roll <= loot.dropChance)
             {
                 Instantiate(
