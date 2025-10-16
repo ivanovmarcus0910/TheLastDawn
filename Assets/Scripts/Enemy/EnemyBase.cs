@@ -2,17 +2,18 @@
 using System.Collections; // cần cho IEnumerator
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class EnemyBase : MonoBehaviour
 {
     [Header("Dữ liệu quái")]
-    public EnemyData data; // Gán asset ScriptableObject ở đây
+    public EnemyData data;
     public LootTable lootTable;
     public Transform player;
     public LayerMask groundLayer;
 
     [Header("Health Bar")]
-    public HealthBar healthBar; // Gắn prefab health bar (con của enemy)
+    public HealthBar healthBar;
 
     protected Animator animator;
     protected Rigidbody2D rb;
@@ -25,6 +26,7 @@ public class EnemyBase : MonoBehaviour
     protected float halfWidth;
     private float nextAttackTime = 0f;
 
+    public Action onDeath;
     private float lastTimeDamaged;      // Thời điểm bị đánh gần nhất
     private Coroutine regenCoroutine;   // Dùng để dừng hồi máu nếu bị đánh lại
 
@@ -199,6 +201,7 @@ public class EnemyBase : MonoBehaviour
         if (healthBar != null)
             healthBar.gameObject.SetActive(false);
 
+        onDeath?.Invoke(); // Kích hoạt sự kiện chết quái
         DropLoot();
 
         Destroy(gameObject, 1.5f);
@@ -238,7 +241,7 @@ public class EnemyBase : MonoBehaviour
 
         foreach (var loot in lootTable.lootItems)
         {
-            float roll = Random.value;
+            float roll = UnityEngine.Random.value;
             if (roll <= loot.dropChance)
             {
                 Instantiate(

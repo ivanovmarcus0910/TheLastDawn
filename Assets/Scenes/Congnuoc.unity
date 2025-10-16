@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 12045206}
   - component: {fileID: 12045207}
   - component: {fileID: 12045208}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: ground3_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 8513633469102134664, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -335,7 +335,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -493852701020653034, guid: bb607ea9dda07c14dac707144218618e, type: 3}
@@ -701,7 +701,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 4983353047083296969, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 248423591}
   - component: {fileID: 248423593}
   - component: {fileID: 248423592}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Framebar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 382023944}
   - component: {fileID: 382023945}
   - component: {fileID: 382023946}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ground5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1024,7 +1024,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 7161820882308026965, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -1095,7 +1095,7 @@ GameObject:
   - component: {fileID: 450221233}
   - component: {fileID: 450221234}
   - component: {fileID: 450221235}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: ground3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,7 +1161,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 8513633469102134664, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -1372,7 +1372,7 @@ GameObject:
   - component: {fileID: 627563501}
   - component: {fileID: 627563502}
   - component: {fileID: 627563503}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: ground3_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1438,7 +1438,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 8513633469102134664, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -1620,7 +1620,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 219632975
+  m_SortingLayerID: 904800165
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &679750568
@@ -1658,6 +1658,14 @@ PrefabInstance:
     - target: {fileID: 1537011665674289733, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848667306433054597, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
+      propertyPath: m_SortingLayer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848667306433054597, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1878720665
       objectReference: {fileID: 0}
     - target: {fileID: 2895556646149144777, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1805,7 +1813,7 @@ GameObject:
   - component: {fileID: 872889521}
   - component: {fileID: 872889522}
   - component: {fileID: 872889523}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ground4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1871,7 +1879,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 1546704698229420813, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -1942,7 +1950,7 @@ GameObject:
   - component: {fileID: 988392254}
   - component: {fileID: 988392256}
   - component: {fileID: 988392255}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Fillbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2017,7 +2025,7 @@ GameObject:
   - component: {fileID: 1071871937}
   - component: {fileID: 1071871936}
   - component: {fileID: 1071871938}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ground1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2068,7 +2076,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 7940244020050419612, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -2341,7 +2349,7 @@ GameObject:
   - component: {fileID: 1205341365}
   - component: {fileID: 1205341367}
   - component: {fileID: 1205341366}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2477,7 +2485,7 @@ GameObject:
   - component: {fileID: 1277199135}
   - component: {fileID: 1277199134}
   - component: {fileID: 1277199136}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: ground2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2528,7 +2536,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 1546704698229420813, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -2834,7 +2842,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -559716985
+  m_SortingLayerID: -1484079779
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -59465768163485900, guid: 5b8042039ccdda9439bde39ab52d474b, type: 3}
@@ -3102,7 +3110,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1207329617
+  m_SortingLayerID: 1878720665
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 4983353047083296969, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -3238,7 +3246,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1313640679
+  m_SortingLayerID: -1944272775
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -4871069925059264333, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -3421,7 +3429,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1313640679
+  m_SortingLayerID: -1944272775
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -4871069925059264333, guid: 9531874120a89cd4c8e6fa22937fee8d, type: 3}
@@ -3461,7 +3469,7 @@ GameObject:
   - component: {fileID: 1892332284}
   - component: {fileID: 1892332286}
   - component: {fileID: 1892332285}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3615,7 +3623,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -559716985
+  m_SortingLayerID: -1484079779
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2701913898823746960, guid: 8b0d5d2e1b63eb94b83fc39fc6013bd5, type: 3}
@@ -3652,9 +3660,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1980857527}
     m_Modifications:
+    - target: {fileID: 1102974267773375524, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
+      propertyPath: m_SortingLayer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1102974267773375524, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1878720665
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825564298095929521, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3038708566977243351, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
       propertyPath: m_Name
       value: Rat
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470621865680846128, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6058478071229116817, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
       propertyPath: m_Pivot.x
@@ -3754,7 +3778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8603843738434309430, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
       propertyPath: m_SortingLayerID
-      value: -1207329617
+      value: 1878720665
       objectReference: {fileID: 0}
     - target: {fileID: 8603843738434309430, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -3768,6 +3792,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1892332285}
+    - target: {fileID: 8607137126378781564, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

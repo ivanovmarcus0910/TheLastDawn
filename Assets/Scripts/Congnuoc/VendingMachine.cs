@@ -98,7 +98,7 @@ public class VendingMachine : MonoBehaviour
                     iconBtn.onClick.AddListener(() =>
                     {
                         bool active = effectObj.activeSelf;
-                        effectObj.SetActive(!active); // Toggle hiển thị
+                        effectObj.SetActive(!active);
                     });
                 }
             }
