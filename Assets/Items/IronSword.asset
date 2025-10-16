@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Iron Sword
   price: 100
-  icon: {fileID: 0}
+  icon: {fileID: -5532167850910174466, guid: d42a56623a45a1240b3029fe2c4da1f1, type: 3}
   itemPrefab: {fileID: 0}
-  effect: 
+  effect: + 10 atk
   canBeSold: 1

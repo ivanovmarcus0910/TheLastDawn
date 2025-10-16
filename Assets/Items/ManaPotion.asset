@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Mana Potion
   price: 50
-  icon: {fileID: 0}
+  icon: {fileID: 7231954552348151105, guid: 9bb4a57f68fd99f4abeb33b4f4cc26e5, type: 3}
   itemPrefab: {fileID: 0}
   effect: + 20 mana
   canBeSold: 1
