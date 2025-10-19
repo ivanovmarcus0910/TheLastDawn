@@ -91,4 +91,5 @@ public class EnemySpawnerPerSlot : MonoBehaviour
         currentEnemies[slotIndex] = null;
         respawnTimers[slotIndex] = slots[slotIndex].respawnDelay; // chờ đúng delay của slot
     }
+
 }

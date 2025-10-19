@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cda65cd87e364e64c8d970e372446073, type: 3}
-  m_Name: Iron-sword
+  m_Name: ScorpionBone_Data
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  icon: {fileID: 0}
-  itemPrefab: {fileID: 0}
+  itemName: "M\u1EA3nh x\u01B0\u01A1ng b\u1ECD c\u1EA1p"
+  icon: {fileID: -5145080106692022437, guid: 6e436d529580b8746b3c9b4ec68d78a5, type: 3}
+  itemPrefab: {fileID: 4263426281734616106, guid: 9472372973efafe48bfdf0d8f73b819e, type: 3}

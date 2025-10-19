@@ -4,16 +4,18 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Undefined
   - Bullet
+  - VendingMachine
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - Ground
-  - Player
+  - 
+  - 
   - 
   - 
   - 
@@ -43,25 +45,25 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: 1
-    uniqueID: 3735250311
+    uniqueID: 2810887517
     locked: 0
   - name: 2
-    uniqueID: 2981326617
+    uniqueID: 2350694521
     locked: 0
   - name: 3
-    uniqueID: 2488498721
+    uniqueID: 1838796217
     locked: 0
   - name: 4
-    uniqueID: 2442455243
+    uniqueID: 2271898275
     locked: 0
   - name: 5
-    uniqueID: 1856615895
+    uniqueID: 1801262227
     locked: 0
   - name: player
-    uniqueID: 3087637679
+    uniqueID: 1878720665
     locked: 0
-  - name: weapon
-    uniqueID: 3633026371
+  - name: ui
+    uniqueID: 904800165
     locked: 0
   m_RenderingLayers:
   - Default
