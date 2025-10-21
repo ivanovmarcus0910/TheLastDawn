@@ -158,7 +158,7 @@ public class PlayerBase : MonoBehaviour
 
         currentHealth -= damageTaken;
         currentHealth = Mathf.Clamp(currentHealth, 0, data.maxHealth);
-
+        Debug.Log("Player nhận " + damageTaken + " sát thương! Máu còn lại: " + currentHealth + "/" + data.maxHealth);
         if (playerHealthBar != null)
             playerHealthBar.UpdateBar(currentHealth, data.maxHealth);
 

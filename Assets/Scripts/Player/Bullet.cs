@@ -4,7 +4,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 5f;
     private Rigidbody2D rb;
-    public int damage = 10;
+    public int damage = 25;
     // Hàm setup để nhận hướng bắn từ Player
     public void Setup(Vector2 direction)
     {
