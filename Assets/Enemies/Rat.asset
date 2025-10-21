@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   moveSpeed: 0.6
   maxHealth: 50
-  attackDamage: 1
+  attackDamage: 5
   detectRange: 0.2
   groundCheckDistance: 0.5
   attackCooldown: 1

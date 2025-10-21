@@ -90,7 +90,7 @@ public class EnemyBase : MonoBehaviour
         Invoke(nameof(StopAttack), 0.4f); // Animation kết thúc
     }
 
-    void StopAttack()
+    protected void StopAttack()
     {
         isAttacking = false;
         animator.SetBool("isAttacking", false);
@@ -132,7 +132,7 @@ public class EnemyBase : MonoBehaviour
     // ============================
     //  TAKE DAMAGE + HEALTH BAR
     // ============================
-    public virtual void TakeDamage(int damage)
+    protected virtual void TakeDamage(int damage)
     {
         if (isDead) return;
 
@@ -164,7 +164,7 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    private IEnumerator UpdateHealthBarSmooth(int targetValue, int maxValue)
+    protected IEnumerator UpdateHealthBarSmooth(int targetValue, int maxValue)
     {
         float startFill = healthBar.fillBar.fillAmount;
         float targetFill = (float)targetValue / maxValue;
@@ -210,7 +210,7 @@ public class EnemyBase : MonoBehaviour
     // ============================
     //  HỒI MÁU SAU 5 GIÂY KHÔNG BỊ ĐÁNH
     // ============================
-    private IEnumerator RegenHealthAfterDelay()
+    protected IEnumerator RegenHealthAfterDelay()
     {
         yield return new WaitForSeconds(5f);
 

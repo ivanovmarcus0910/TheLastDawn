@@ -207,7 +207,8 @@ MonoBehaviour:
   player: {fileID: 0}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  healthBar: {fileID: 0}
 --- !u!114 &5550048862004761085
 MonoBehaviour:
   m_ObjectHideFlags: 0
