@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d95c9f87c42874c8ab582dccbb372a, type: 3}
   m_Name: PlayerAmong
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  maxHealth: 100
+  maxHealth: 150
   maxMana: 50
   moveSpeed: 2
   defense: 0
-  baseDamage: 5
+  baseDamage: 10
   jumpForce: 2.5
