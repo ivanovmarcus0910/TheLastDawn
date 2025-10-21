@@ -54,6 +54,15 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        // --- THÊM DÒNG KIỂM TRA NÀY ---
+        // Nếu Player không tồn tại HOẶC Player đã bị tắt (chết), thì chỉ đi tuần tra
+        if (player == null || !player.gameObject.activeInHierarchy)
+        {
+            Patrol();
+            return; // Dừng hàm Update ở đây
+        }
+        // ---------------------------------
+
         if (isDead || isHurt) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
@@ -84,10 +93,19 @@ public class EnemyBase : MonoBehaviour
         FacePlayer();
 
         // Gây sát thương cho player (nếu có script PlayerHealth)
-        // player.GetComponent<PlayerHealth>()?.TakeDamage(data.attackDamage);
+       // player.GetComponent<PlayerBase>()?.TakeDamage(data.attackDamage);
 
         nextAttackTime = Time.time + data.attackCooldown;
         Invoke(nameof(StopAttack), 0.4f); // Animation kết thúc
+    }
+    // Hàm này sẽ được gọi TỪ ANIMATION EVENT
+    public void DealDamageToPlayer()
+    {
+        // Kiểm tra lại khoảng cách lần nữa cho chắc chắn
+        if (player != null && Vector2.Distance(transform.position, player.position) <= data.detectRange) // Nên dùng attackRange nhỏ hơn detectRange
+        {
+            player.GetComponent<PlayerBase>()?.TakeDamage(data.attackDamage);
+        }
     }
 
     protected void StopAttack()

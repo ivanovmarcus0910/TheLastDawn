@@ -3,36 +3,45 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
+    [Header("Bắn")]
     public GameObject bulletPrefab;
     public Transform firePoint;
 
-    // Hàm này được gọi bởi WeaponManager
+    [Header("Âm thanh")]
+    public AudioSource sfxSource;   // Kéo AudioSource vào (cùng Player/Gun)
+    public AudioClip shootSfx;      // Kéo file âm thanh bắn vào
+
+    void Awake()
+    {
+        // Nếu quên gán, tự lấy AudioSource trên cùng GameObject (nếu có)
+        if (sfxSource == null) TryGetComponent(out sfxSource);
+    }
+
+    // Hàm này được gọi bởi WeaponManager (đã kiểm soát fireRate bên ngoài)
     public void PerformShoot()
     {
-        // 1. Tạo viên đạn VÀ LƯU LẠI một tham chiếu đến nó
+        // 1) Tạo đạn
         GameObject bulletObject = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
-        // 2. Lấy component script "Bullet" từ viên đạn vừa tạo
+        // 2) Lấy script Bullet
         Bullet bulletScript = bulletObject.GetComponent<Bullet>();
 
-        // 3. Kiểm tra xem script có tồn tại không để tránh lỗi
+        // 3) Thiết lập hướng bắn
         if (bulletScript != null)
         {
-            // 4. Xác định hướng bắn (dựa vào hướng mặt của Player)
-            Vector2 shootDirection = transform.right; // Mặc định là bên phải
+            Vector2 shootDirection = transform.right; // mặc định quay phải
+            if (transform.localScale.x < 0) shootDirection = -transform.right;
 
-            // Nếu Player đang quay mặt sang trái (scale.x < 0)
-            if (transform.localScale.x < 0)
-            {
-                shootDirection = -transform.right; // Đổi hướng thành bên trái
-            }
-
-            // 5. Gọi hàm Setup() và truyền hướng bắn vào cho viên đạn
             bulletScript.Setup(shootDirection);
+
+            // 4) Phát âm thanh (non-blocking, không ảnh hưởng fireRate)
+            if (sfxSource != null && shootSfx != null)
+                sfxSource.PlayOneShot(shootSfx);
         }
         else
         {
             Debug.LogError("Prefab của đạn thiếu script 'Bullet'!");
+            Destroy(bulletObject);
         }
     }
 }
