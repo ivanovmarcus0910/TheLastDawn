@@ -3649,11 +3649,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1102974267773375524, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
       propertyPath: m_SortingLayer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1102974267773375524, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
       propertyPath: m_SortingLayerID
       value: 1878720665
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825564298095929521, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
+      propertyPath: m_Name
+      value: Canvas_Healthbar
       objectReference: {fileID: 0}
     - target: {fileID: 2825564298095929521, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
       propertyPath: m_Layer
