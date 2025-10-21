@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CraftRecipe
   ingredients:
   - item: {fileID: 11400000, guid: 691c79070738353469d1e7be57278011, type: 2}
-    amount: 2
+    amount: 0
   - item: {fileID: 11400000, guid: 2b8f830a7ff2699408b9a182c8bb7cdb, type: 2}
-    amount: 1
+    amount: 0
   - item: {fileID: 11400000, guid: 3144761d09d1a5d49b8292e708f8d219, type: 2}
-    amount: 3
+    amount: 0
   result: {fileID: 11400000, guid: a6ad53d3c2151e042a0ec406149b00d7, type: 2}
   resultAmount: 1

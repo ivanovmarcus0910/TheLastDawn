@@ -22,14 +22,14 @@ public class EnemyBase : MonoBehaviour
     protected bool isAttacking = false;
     protected bool isDead = false;
     protected bool isHurt = false;
-    protected int currentDirection = -1;
+    public int currentDirection = -1;
     protected float halfWidth;
     private float nextAttackTime = 0f;
 
     public Action onDeath;
     private float lastTimeDamaged;      // Thời điểm bị đánh gần nhất
     private Coroutine regenCoroutine;   // Dùng để dừng hồi máu nếu bị đánh lại
-
+    public bool isFacingRightByDefault = true;
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -117,22 +117,47 @@ public class EnemyBase : MonoBehaviour
 
     protected void FacePlayer()
     {
-        if (player.position.x > transform.position.x)
+        // Xác định xem Player đang ở bên phải hay không
+        bool playerIsOnTheRight = (player.position.x > transform.position.x);
+
+        if (isFacingRightByDefault)
         {
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            currentDirection = 1;
+            // --- LOGIC CHUẨN (DÀNH CHO SPRITE GỐC QUAY PHẢI) ---
+            if (playerIsOnTheRight)
+            {
+                // Player ở bên Phải -> Quay mặt Phải (scale dương)
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                currentDirection = 1;
+            }
+            else
+            {
+                // Player ở bên Trái -> Quay mặt Trái (scale âm)
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                currentDirection = -1;
+            }
         }
         else
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            currentDirection = -1;
+            // --- LOGIC NGƯỢC (DÀNH CHO SPRITE GỐC QUAY TRÁI) ---
+            if (playerIsOnTheRight)
+            {
+                // Player ở bên Phải -> Quay mặt Phải (scale âm)
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                currentDirection = 1;
+            }
+            else
+            {
+                // Player ở bên Trái -> Quay mặt Trái (scale dương)
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                currentDirection = -1;
+            }
         }
     }
 
     // ============================
     //  TAKE DAMAGE + HEALTH BAR
     // ============================
-    protected virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (isDead) return;
 
