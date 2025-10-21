@@ -59,6 +59,9 @@ TagManager:
   - name: 5
     uniqueID: 1801262227
     locked: 0
+  - name: 6
+    uniqueID: 1447674267
+    locked: 0
   - name: player
     uniqueID: 1878720665
     locked: 0
