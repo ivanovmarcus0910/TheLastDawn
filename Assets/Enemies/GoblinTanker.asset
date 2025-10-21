@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyName: Enemy
   sprite: {fileID: 0}
   moveSpeed: 0.5
-  maxHealth: 250
-  attackDamage: 25
+  maxHealth: 120
+  attackDamage: 10
   detectRange: 0.5
   groundCheckDistance: 0.5
-  attackCooldown: 1
+  attackCooldown: 0.25
