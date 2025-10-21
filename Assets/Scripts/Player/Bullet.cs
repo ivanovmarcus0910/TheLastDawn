@@ -4,7 +4,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 5f;
     private Rigidbody2D rb;
-
+    public int damage = 10;
     // Hàm setup để nhận hướng bắn từ Player
     public void Setup(Vector2 direction)
     {
@@ -29,7 +29,16 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
         print("Huy : "+hitInfo.name);
-        // Hủy khi va chạm với vật thể khác
+        EnemyBase enemy = hitInfo.GetComponent<EnemyBase>();
+
+        // 2. Nếu đúng là quái vật (enemy != null)
+        if (enemy != null)
+        {
+            // 3. Gọi hàm TakeDamage của nó và truyền sát thương vào
+            enemy.TakeDamage(damage);
+        }
+
+        // 4. Luôn luôn hủy viên đạn sau khi va chạm với bất cứ thứ gì
         Destroy(gameObject);
     }
 }
