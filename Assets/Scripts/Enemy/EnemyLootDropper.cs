@@ -3,7 +3,7 @@ using System;
 
 public class EnemyLootDropper : MonoBehaviour
 {
-    public LootTable lootTable; // LootTable cho loại quái vật này
+    public LootTable lootTable; 
     private EnemyBase enemyBase;
 
 
@@ -44,19 +44,18 @@ public class EnemyLootDropper : MonoBehaviour
 
         if (totalWeight <= 0) return; 
 
-        // 2. Quay số Random (Roll the dice)
+        // 2. Quay số Random 
         float randomPoint = UnityEngine.Random.value * totalWeight; 
 
-        // 3. Chọn Vật phẩm duy nhất (Single Weighted Selection)
+        // 3. Chọn Vật phẩm duy nhất 
         foreach (var loot in lootTable.lootItems)
         {
-            // Nếu điểm Random < Trọng lượng của vật phẩm hiện tại, chọn nó
+            // Nếu điểm Random < Trọng lượng của vật phẩm hiện tại
             if (randomPoint < loot.dropChance)
             {
                 // Kiểm tra lỗi Prefab NULL
                 if (loot.item == null || loot.item.itemPrefab == null)
                 {
-                    Debug.LogError("❌ PREFAB ERROR: Item Prefab cua " + loot.item.itemName + " dang la NULL.");
                     // Thay vì return, tiếp tục vòng lặp để kiểm tra các vật phẩm khác
                     randomPoint -= loot.dropChance;
                     continue;
@@ -80,7 +79,7 @@ public class EnemyLootDropper : MonoBehaviour
                     itemWorld.SetItemData(loot.item);
                     itemWorld.quantity = 1;
                     
-                    // Thêm lực đẩy nhẹ (đã sửa lỗi cú pháp)
+                    // Thêm lực đẩy nhẹ 
                     Rigidbody2D itemRb = droppedObject.GetComponent<Rigidbody2D>();
                     if (itemRb != null)
                     {
@@ -88,7 +87,7 @@ public class EnemyLootDropper : MonoBehaviour
                     }
                 }
                 
-                // Log và Thoát - CHỈ RỚT 1 VẬT PHẨM
+                // Log và Thoát 
                 Debug.Log($"✅ DROP SUCCESS: Da chon va tao ra {loot.item.itemName}.");
                 
                 // Ngừng lắng nghe sự kiện
@@ -96,17 +95,13 @@ public class EnemyLootDropper : MonoBehaviour
                 {
                     enemyBase.onDeath -= DropLoot;
                 }
-                return; // Thoát khỏi hàm
+                return;
             }
 
             // Chuyển sang vật phẩm tiếp theo
             randomPoint -= loot.dropChance;
         }
-
-        // Log nếu lỗi random hiếm gặp xảy ra (Không rớt gì cả)
-        Debug.Log("⚠️ LOOT FAIL: Random Roll khong ra vat pham nao trong lan nay.");
         
-        // Ngừng lắng nghe sự kiện
         if (enemyBase != null)
         {
             enemyBase.onDeath -= DropLoot;
