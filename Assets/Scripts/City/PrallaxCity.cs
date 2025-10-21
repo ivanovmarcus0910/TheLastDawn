@@ -1,22 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Paralax : MonoBehaviour
+public class Parallax : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private float length, startpos;
-    public GameObject cam;
-    public float parallaxEffect;
+    private float startPosX;
+    private Transform cam;
+
+    [Range(0f, 1f)]
+    public float parallaxEffect; // 0 = không di chuyển, 1 = di chuyển như foreground
 
     void Start()
     {
-        startpos = transform.position.x;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        cam = Camera.main.transform;
+        startPosX = transform.position.x;
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
-        float dist = (cam.transform.position.x * parallaxEffect);
-
-        transform.position = new Vector3(startpos + dist, transform.position.y, transform.position.z);
+        float distX = (cam.position.x - startPosX) * parallaxEffect;
+        transform.position = new Vector3(startPosX + distX, transform.position.y, transform.position.z);
     }
 }
