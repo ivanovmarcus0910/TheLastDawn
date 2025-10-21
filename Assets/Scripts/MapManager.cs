@@ -21,7 +21,7 @@ public class MapManager : MonoBehaviour
 
     [Header("Refs")]
     public Transform player;
-    public Playermove2 playerScript;         // có SetBounds(SpriteRenderer)
+    public PlayerBase playerScript;         // có SetBounds(SpriteRenderer)
     public CameraScript cameraFollow;   // có SetBounds(SpriteRenderer)
 
     void Start()

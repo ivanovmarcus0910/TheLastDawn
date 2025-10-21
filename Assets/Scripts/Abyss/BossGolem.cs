@@ -159,7 +159,7 @@ public class BossGolem : EnemyBase
         }
     }
 
-    protected override void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         if (isDead || isHealing || isChangingState) return; // Không bị sát thương khi đang heal/changeState
 
