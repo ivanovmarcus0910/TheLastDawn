@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 public class LoginManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -65,11 +66,22 @@ public class LoginManager : MonoBehaviour
             }
             // Firebase user has been created.
             FirebaseUser newUser = task.Result.User;
-            Debug.LogFormat("Firebase user created successfully: {0} ({1})",
-               newUser.DisplayName, newUser.UserId);
-            User userInGame = new User("", new List<ItemData>(), new List<int>(), ScriptableObject.CreateInstance<PlayerData>(), 0);
-            firebaseDBManager.WriteDB("Users/"+newUser.UserId, userInGame.ToString());
-            SceneManager.LoadScene("StartMenu");
+            try
+            {
+                Debug.Log("firebaseDBManager = " + (firebaseDBManager == null ? "null" : "ok"));
+                Debug.Log("newUser = " + (newUser == null ? "null" : "ok"));
+                Debug.Log("userId = " + (newUser?.UserId ?? "null"));
+
+                User userInGame = new User("", new List<ItemData>(), new List<int>(), ScriptableObject.CreateInstance<PlayerData>(), 0);
+                firebaseDBManager.WriteDB(newUser.UserId, userInGame.ToString());
+                Debug.LogFormat("Start Game");
+
+                SceneManager.LoadScene("StartMenu");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error creating user data: " + e.Message);
+            }
         });
     }
 
