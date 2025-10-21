@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 public class ReactorInteraction : MonoBehaviour
 {
     public CraftRecipe recipe;
@@ -28,7 +29,7 @@ public class ReactorInteraction : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && Keyboard.current.eKey.wasPressedThisFrame)
         {
             ReactorUIManager.Instance.ShowUI(recipe);
             ReactorUIManager.Instance.hintText.gameObject.SetActive(false);

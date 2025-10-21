@@ -16,7 +16,8 @@ public class ReactorUIManager : MonoBehaviour
     public Image progressFill;
     public Transform resultSlot; // chính là "Result" node
     public TextMeshProUGUI hintText;
-
+    [SerializeField]
+    public RecylableInventoryManager inventoryManager;
 
     [Header("Reactor Settings")]
     public CraftRecipe currentRecipe;
@@ -60,8 +61,8 @@ public class ReactorUIManager : MonoBehaviour
         resultText.text = $"→ {recipe.result.itemName}";
 
         // Gán sự kiện nút Combine
-        combineButton.onClick.RemoveAllListeners();
-        //combineButton.onClick.AddListener(OnClickCombine);
+        //combineButton.onClick.RemoveAllListeners();
+        combineButton.onClick.AddListener(OnClickCombine);
     }
 
     public void HideUI()
@@ -69,51 +70,57 @@ public class ReactorUIManager : MonoBehaviour
         panel.SetActive(false);
     }
 
-    //public void OnClickCombine()
-    //{
-    //    if (isCrafting) return;
-    //    StartCoroutine(CraftRoutine());
-    //}
+    public void OnClickCombine()
+    {
+        print("Entered");
 
-    //private IEnumerator CraftRoutine()
-    //{
-    //    // Kiểm tra đủ nguyên liệu
-    //    bool canCraft = true;
-    //    foreach (var ing in currentRecipe.ingredients)
-    //    {
-    //        if (!InventorySystem.Instance.HasItem(ing.item, ing.amount))
-    //        {
-    //            canCraft = false;
-    //            break;
-    //        }
-    //    }
+        if (isCrafting) return;
+        print("Entered");
 
-    //    if (!canCraft)
-    //    {
-    //        resultText.text = "⚠️ Not enough materials!";
-    //        yield break;
-    //    }
+        StartCoroutine(CraftRoutine());
+    }
 
-    //    // Hiệu ứng chế tạo
-    //    isCrafting = true;
-    //    resultText.text = "Processing...";
-    //    float t = 0;
-    //    while (t < 2f)
-    //    {
-    //        t += Time.deltaTime;
-    //        progressFill.fillAmount = t / 2f;
-    //        yield return null;
-    //    }
+    private IEnumerator CraftRoutine()
+    {
+        // Kiểm tra đủ nguyên liệu
+        bool canCraft = true;
+        foreach (var ing in currentRecipe.ingredients)
+        {
+            if (inventoryManager.getQuantity(ing.item)<ing.amount)
+            {
+                canCraft = false;
+                break;
+            }
+        }
+        var resultText = resultSlot.Find("ResultText").GetComponent<TextMeshProUGUI>();
 
-    //    // Trừ nguyên liệu
-    //    //foreach (var ing in currentRecipe.ingredients)
-    //    //    InventorySystem.Instance.RemoveItem(ing.item, ing.amount);
+        if (!canCraft)
+        {
 
-    //    // Thêm kết quả
-    //    //InventorySystem.Instance.AddItem(currentRecipe.result, currentRecipe.resultAmount);
+            resultText.text = "⚠️ Not enough materials!";
+            yield break;
+        }
 
-    //    progressFill.fillAmount = 1f;
-    //    resultText.text = $"✅ Created: {currentRecipe.result.itemName}";
-    //    isCrafting = false;
-    //}
+        // Hiệu ứng chế tạo
+        isCrafting = true;
+        resultText.text = "Processing...";
+        float t = 0;
+        while (t < 2f)
+        {
+            t += Time.deltaTime;
+            progressFill.fillAmount = t / 2f;
+            yield return null;
+        }
+
+        // Trừ nguyên liệu
+        foreach (var ing in currentRecipe.ingredients)
+            inventoryManager.decreaseQuantity(ing.item, ing.amount);
+
+        //Thêm kết quả
+        inventoryManager.AddInventoryItem(currentRecipe.result);
+
+        progressFill.fillAmount = 1f;
+        resultText.text = $"✅ Created: {currentRecipe.result.itemName}";
+        isCrafting = false;
+    }
 }

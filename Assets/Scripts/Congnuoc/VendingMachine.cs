@@ -16,7 +16,8 @@ public class VendingMachine : MonoBehaviour
     public GameObject itemCellPrefab;           // Prefab ô item
 
     private bool playerInRange = false;
-
+    [SerializeField]
+    public RecylableInventoryManager inventoryManager; // Quản lý kho đồ của player
     private void Start()
     {
         if (player == null)
@@ -107,16 +108,14 @@ public class VendingMachine : MonoBehaviour
 
     private void BuyItem(ItemData item)
     {
-        // Tích hợp với Inventory sau này 
-        //if (playerInventory == null) return; 
-        //if (playerInventory.money >= item.price) 
-        //{ // playerInventory.AddItem(item); 
-        // playerInventory.money -= item.price; 
-        // Debug.Log("Mua " + item.itemName + " thành công!"); 
-        //} 
-        //else 
-        //{ 
-        // Debug.Log("Không đủ tiền mua " + item.itemName); 
-        //}
+        if (inventoryManager == null) return;
+        if (inventoryManager.hasItem(item))
+        {
+            inventoryManager.increaseQuantity(item); // Tăng số lượng
+        }
+        else
+        {
+                       inventoryManager.AddInventoryItem(item); // Thêm mới
+        }    
     }
 }
