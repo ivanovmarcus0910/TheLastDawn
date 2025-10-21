@@ -2,34 +2,45 @@
 
 public class PetFollower : MonoBehaviour
 {
-    public Transform target;
-    public float followDistance = 1.5f;
-    public float moveSpeed = 3f;
-    public float smoothTime = 0.1f;
+    public Transform target;             // Player cần theo
+    public float followDistance = 0.3f;  // Khoảng cách dừng lại
+    public float moveSpeed = 2f;         // Tốc độ di chuyển
 
-    Vector3 vel = Vector3.zero;
-    Animator anim;
+    private Animator anim;
+    private SpriteRenderer sr;
 
-    void Start() { anim = GetComponent<Animator>(); }
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+    }
 
     void Update()
     {
         if (target == null) return;
-        float d = Vector2.Distance(transform.position, target.position);
 
-        if (d > followDistance)
+        // Tính khoảng cách giữa chó và player
+        float distance = Vector2.Distance(transform.position, target.position);
+
+        // Nếu xa hơn followDistance -> di chuyển về phía player
+        if (distance > followDistance)
         {
-            Vector3 aim = target.position + Vector3.left * Mathf.Sign(target.localScale.x) * followDistance;
-            transform.position = Vector3.SmoothDamp(transform.position, aim, ref vel, smoothTime, moveSpeed);
+            // Hướng di chuyển (từ chó → player)
+            Vector3 direction = (target.position - transform.position).normalized;
 
-            // quay theo hướng di chuyển
-            float dir = (target.position.x - transform.position.x);
-            transform.localScale = new Vector3(dir >= 0 ? 1 : -1, 1, 1);
+            // Di chuyển theo hướng đó
+            transform.position += direction * moveSpeed * Time.deltaTime;
 
+            // Lật sprite theo hướng di chuyển, không đổi scale
+            if (sr != null)
+                sr.flipX = direction.x < 0;
+
+            // Bật animation đi bộ
             anim?.SetBool("isWalking", true);
         }
         else
         {
+            // Khi đủ gần -> dừng
             anim?.SetBool("isWalking", false);
         }
     }

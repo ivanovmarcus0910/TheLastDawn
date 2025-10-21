@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DogCageController : MonoBehaviour
 {
@@ -16,8 +17,9 @@ public class DogCageController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            print("ontringger");
             playerInRange = true;
-            hintUI.ShowHint("Press E to rescue");
+            //hintUI.ShowHint("Press E to rescue");
         }
     }
 
@@ -26,13 +28,13 @@ public class DogCageController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            hintUI.HideHint();
+            //hintUI.HideHint();
         }
     }
 
     void Update()
     {
-        if (playerInRange && !isUnlocked && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && !isUnlocked && Keyboard.current.eKey.wasPressedThisFrame)
         {
             UnlockCage();
         }
@@ -40,8 +42,9 @@ public class DogCageController : MonoBehaviour
 
     void UnlockCage()
     {
+        print("Enter E");
         isUnlocked = true;
-        hintUI.HideHint();
+        //hintUI.HideHint();
 
         // 🔓 Mở lồng
         if (cageClosed != null) cageClosed.SetActive(false);
@@ -57,5 +60,8 @@ public class DogCageController : MonoBehaviour
 
         // Tách chó khỏi lồng để nó có thể đi theo
         dog.transform.SetParent(null);
+    //    Vector3 originalScale = dog.transform.lossyScale;
+    //    dog.transform.SetParent(null);
+    //    dog.transform.localScale = originalScale;
     }
 }
