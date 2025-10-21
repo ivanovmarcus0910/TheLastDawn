@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Enemy
   sprite: {fileID: 0}
-  moveSpeed: 0.6
+  moveSpeed: 0.4
   maxHealth: 500
   attackDamage: 50
   detectRange: 0.2
