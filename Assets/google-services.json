@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "972843315121",
+    "firebase_url": "https://thelastdawn-ff644-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "thelastdawn-ff644",
+    "storage_bucket": "thelastdawn-ff644.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972843315121:android:e0bf51318608fba5931790",
+        "android_client_info": {
+          "package_name": "com.flexibledev.thelastdawn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC72zOloQBgU3TsIEqFASBQDCTHgRIcTP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
