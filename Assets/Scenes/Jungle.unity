@@ -1454,8 +1454,8 @@ Transform:
   m_GameObject: {fileID: 144467108}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.411, y: -1.0154, z: 0}
-  m_LocalScale: {x: 0.30584195, y: 0.26157218, z: 1}
+  m_LocalPosition: {x: 0.411, y: -0.9587, z: 0}
+  m_LocalScale: {x: 0.30584195, y: 0.33387074, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1948301757}
@@ -2757,6 +2757,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2481470525228904163, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1206135006}
+    - targetCorrespondingSourceObject: {fileID: 2481470525228904163, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1206135007}
     - targetCorrespondingSourceObject: {fileID: 2307445975331158206, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1038977293}
@@ -3598,6 +3601,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &405822448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2519829270340556782, guid: f7429b263b05b33458e814432e917da0, type: 3}
+  m_PrefabInstance: {fileID: 457693639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1080f4dfc7ec9b48a8824a12f1eb652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RecylableInventoryManager
 --- !u!1 &410900021
 GameObject:
   m_ObjectHideFlags: 0
@@ -5806,7 +5820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977f12e61976eba448627c3df69a608f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyLootDropper
-  lootTable: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: 163852a510f9ca747b9f573d071da8fd, type: 2}
 --- !u!1 &602495572
 GameObject:
   m_ObjectHideFlags: 0
@@ -12530,6 +12544,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1206135007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818765331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9825f1f0878473348b2d1e021f32ecaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  inventoryManage: {fileID: 405822448}
 --- !u!1 &1219931170
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072737e1556689b46b0a04acc03e8419, type: 3}
   m_Name: Goblin_Item
   m_EditorClassIdentifier: Assembly-CSharp::LootTable
-  lootItems: []
+  lootItems:
+  - item: {fileID: 11400000, guid: eb43f12039937ef489dfb2284050415d, type: 2}
+    dropChance: 1
