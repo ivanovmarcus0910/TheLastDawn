@@ -565,13 +565,14 @@ GameObject:
   - component: {fileID: 318542067}
   - component: {fileID: 318542069}
   - component: {fileID: 318542068}
+  - component: {fileID: 318542070}
   m_Layer: 5
   m_Name: HintUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &318542067
 RectTransform:
   m_ObjectHideFlags: 0
@@ -588,7 +589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 172, y: -36}
+  m_AnchoredPosition: {x: 410, y: -99}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &318542068
@@ -676,7 +677,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 14.731506, y: 0, z: 0, w: 4.910507}
+  m_margin: {x: 14.731506, y: 0, z: 0, w: -3.9303436}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -690,6 +691,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318542066}
   m_CullTransparentMesh: 1
+--- !u!114 &318542070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318542066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad3c22bffba74a4197c930c93715d03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HintUI
+  hintText: {fileID: 318542068}
 --- !u!1 &322053341
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +801,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2239536760185351279, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1206904089}
+    - targetCorrespondingSourceObject: {fileID: 2239536760185351279, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1096805567}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2481470525228904163, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       insertIndex: -1
@@ -1858,6 +1875,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Paralax
   parallaxEffect: 0.5
+--- !u!1 &1096805566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096805567}
+  m_Layer: 7
+  m_Name: Teleport
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1096805567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096805566}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.253, y: -0.179, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1704440241}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1117400301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,6 +2240,10 @@ PrefabInstance:
     - target: {fileID: 8053575302724473632, guid: 6da6f93bd089e8a4f9f3ea30ad70cb37, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 39.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339924737900399165, guid: 6da6f93bd089e8a4f9f3ea30ad70cb37, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2754,7 +2806,10 @@ MonoBehaviour:
   cageClosed: {fileID: 1804985016}
   cageOpen: {fileID: 1608644191}
   player: {fileID: 1704440241}
-  hintUI: {fileID: 0}
+  hintUI: {fileID: 318542070}
+  inventoryManager: {fileID: 1323577468}
+  keyItem: {fileID: 11400000, guid: da742e7893341c5448ff8b9250f349f8, type: 2}
+  petTeleportPoint: {fileID: 1096805567}
 --- !u!61 &1576482293
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3413,6 +3468,10 @@ PrefabInstance:
     - target: {fileID: 8053575302724473632, guid: 6da6f93bd089e8a4f9f3ea30ad70cb37, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 35.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339924737900399165, guid: 6da6f93bd089e8a4f9f3ea30ad70cb37, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
