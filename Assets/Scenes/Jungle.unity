@@ -15448,6 +15448,7 @@ GameObject:
   - component: {fileID: 1447074476}
   - component: {fileID: 1447074478}
   - component: {fileID: 1447074477}
+  - component: {fileID: 1447074479}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Untagged
@@ -15551,6 +15552,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1447074479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447074475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f12e61976eba448627c3df69a608f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyLootDropper
+  lootTable: {fileID: 11400000, guid: cc1e127a08dca7e4497f798fb4a84f0c, type: 2}
 --- !u!1 &1471480440
 GameObject:
   m_ObjectHideFlags: 0
@@ -17545,6 +17559,7 @@ GameObject:
   - component: {fileID: 1614521239}
   - component: {fileID: 1614521238}
   - component: {fileID: 1614521237}
+  - component: {fileID: 1614521242}
   m_Layer: 0
   m_Name: Troll
   m_TagString: Untagged
@@ -17742,6 +17757,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1614521242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614521235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977f12e61976eba448627c3df69a608f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyLootDropper
+  lootTable: {fileID: 11400000, guid: c458a005cfb505346a036656183e947c, type: 2}
 --- !u!1 &1628706946
 GameObject:
   m_ObjectHideFlags: 0
