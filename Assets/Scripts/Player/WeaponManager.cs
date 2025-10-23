@@ -1,6 +1,6 @@
-﻿// File: WeaponManager.cs
+﻿
 using UnityEngine;
-using UnityEngine.InputSystem; // Thêm dòng này để dùng Input System mới
+using UnityEngine.InputSystem;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class WeaponManager : MonoBehaviour
     public GameObject swordObject;
 
     [Header("Weapon Scripts")]
-    // Sửa lại đúng kiểu dữ liệu của script
+   
     public PlayerShooting playerShootingScript;
     public PlayerSwordAttack playerSwordAttackScript;
 
@@ -34,7 +34,7 @@ public class WeaponManager : MonoBehaviour
                 SwitchToGun();
         }
 
-        // 2. TẤN CÔNG (Dùng Input System mới)
+        
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             if (isGunEquipped)

@@ -1764,6 +1764,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 982718566846909345, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2086364913646104864, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -1996,6 +2000,10 @@ PrefabInstance:
     - target: {fileID: 8053575302724473632, guid: 6da6f93bd089e8a4f9f3ea30ad70cb37, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -58.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339924737900399165, guid: 6da6f93bd089e8a4f9f3ea30ad70cb37, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
