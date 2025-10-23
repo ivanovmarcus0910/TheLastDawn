@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Key_loot
   m_EditorClassIdentifier: Assembly-CSharp::LootTable
   lootItems:
-  - item: {fileID: 11400000, guid: a6ad53d3c2151e042a0ec406149b00d7, type: 2}
+  - item: {fileID: 11400000, guid: da742e7893341c5448ff8b9250f349f8, type: 2}
     dropChance: 1
