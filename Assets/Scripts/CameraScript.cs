@@ -36,5 +36,7 @@ public class CameraScript : MonoBehaviour
         maxX = b.max.x - camHalfW;
         minY = b.min.y + camHalfH;
         maxY = b.max.y - camHalfH;
+        print("Đã setBound trong Camera" + bg.name);
+
     }
 }

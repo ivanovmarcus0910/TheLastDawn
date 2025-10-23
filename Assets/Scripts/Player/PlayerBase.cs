@@ -92,10 +92,15 @@ public class PlayerBase : MonoBehaviour
     {
         // Đọc input di chuyển
         if (moveAction != null)
+        {
             moveInput = moveAction.ReadValue<Vector2>();
+            print("Move Input: " + moveInput);
+        }
         else
+        {
+            print("Move Action chưa được thiết lập!");
             moveInput = Vector2.zero; // Không có input thì đứng yên
-
+        }
         // Lật nhân vật (Flip)
         if (Mathf.Abs(moveInput.x) > 0.01f)
         {
@@ -213,6 +218,7 @@ public class PlayerBase : MonoBehaviour
         {
             rb.position = p;
         }
+        print("Đã setBound trong player"+bg.name);
 
     }
 
