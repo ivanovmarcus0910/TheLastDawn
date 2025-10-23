@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda65cd87e364e64c8d970e372446073, type: 3}
+  m_Name: Tinh_the_nho
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: Tinh_the_nho
+  price: 0
+  icon: {fileID: 1160892896407325403, guid: 11eb10e9cf44d8f4b8f2518f76c6b46e, type: 3}
+  itemPrefab: {fileID: 4263426281734616106, guid: 9472372973efafe48bfdf0d8f73b819e, type: 3}
+  effect: 
+  canBeSold: 1
