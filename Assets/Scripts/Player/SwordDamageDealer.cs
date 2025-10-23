@@ -2,9 +2,9 @@
 
 public class SwordDamageDealer : MonoBehaviour
 {
-    // ---> CHỈNH SÁT THƯƠNG Ở ĐÂY (TRONG INSPECTOR) <---
+ 
     public int swordDamage = 25;
-    // --------------------------------------------------
+    
 
     private PlayerBase playerBase; // Dùng để lấy sát thương cơ bản của Player
 
@@ -21,10 +21,10 @@ public class SwordDamageDealer : MonoBehaviour
     // Hàm này sẽ tự động được gọi khi Hitbox (là Trigger) va chạm với Collider khác
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Kiểm tra xem có va chạm với quái vật không (dùng EnemyBase)
+       
         EnemyBase enemy = other.GetComponent<EnemyBase>();
 
-        if (enemy != null) // Nếu đúng là quái vật
+        if (enemy != null) 
         {
             // Tính toán tổng sát thương = Sát thương của kiếm + Sát thương cơ bản của Player
             int totalDamage = this.swordDamage;
