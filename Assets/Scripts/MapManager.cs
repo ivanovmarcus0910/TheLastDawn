@@ -47,33 +47,54 @@ public class MapManager : MonoBehaviour
 
         if (exitSide == GateSide.Left)
         {
-            targetIndex = maps[currentIndex].leftNeighbor;      // map đích ở bên trái
-            if (targetIndex == -1) return;                      // không có map trái
-            targetSpawn = maps[targetIndex].rightSpawn;         // vào từ phải của map đích
+
+            targetIndex = maps[currentIndex].leftNeighbor;
+            print($"Travel Left from {currentIndex} to {targetIndex}");
+
+            if (targetIndex == -1) return;
+            targetSpawn = maps[targetIndex].rightSpawn;
         }
-        else // Right
+        else
         {
-            targetIndex = maps[currentIndex].rightNeighbor;     // map đích ở bên phải
-            if (targetIndex == -1) return;                      // không có map phải
-            targetSpawn = maps[targetIndex].leftSpawn;          // vào từ trái của map đích
+            targetIndex = maps[currentIndex].rightNeighbor;
+            print($"Travel Right from {currentIndex} to {targetIndex}");
+
+            if (targetIndex == -1) return;
+            targetSpawn = maps[targetIndex].leftSpawn;
         }
 
+        // 1️⃣ Bật map mới trước
+        maps[targetIndex].mapRoot.SetActive(true);
+
+        maps[currentIndex].mapRoot.SetActive(false);
+
+        var rb = player.GetComponent<Rigidbody2D>();
+        if (rb)
+        {
+            rb.simulated = false;         // tắt vật lý 1 frame
+            rb.linearVelocity = Vector2.zero;   // dừng mọi lực (an toàn hơn linearVelocity)
+        }
+
+        player.position = targetSpawn.position; // dịch thẳng qua vị trí mới
+
+        if (rb)
+        {
+            rb.simulated = true;          // bật lại physics
+        }
+
+        // 3️⃣ Cập nhật bounds cho player & camera
         var bg = maps[targetIndex].background;
         if (playerScript && bg) playerScript.SetBounds(bg);
         if (cameraFollow && bg) cameraFollow.SetBounds(bg);
-        print("Đã set target qua map moi"+targetIndex);
 
-        // Tắt map cũ, bật map mới
-        maps[currentIndex].mapRoot.SetActive(false);
-        maps[targetIndex].mapRoot.SetActive(true);
-
-        // Teleport player sang spawn của map đích
-        var rb = player.GetComponent<Rigidbody2D>();
-        if (rb) { rb.linearVelocity = Vector2.zero; rb.position = targetSpawn.position; }
-        else { player.position = targetSpawn.position; }
-        // Cập nhật chỉ số hiện tại + bounds
+        // 4️⃣ Cập nhật index & input map
         currentIndex = targetIndex;
+        var map = playerScript.inputActions.FindActionMap("Player", true);
+        map.Enable();
+
+        Debug.Log($"✅ Traveled to map: {maps[targetIndex].name}");
     }
 
- 
+
+
 }

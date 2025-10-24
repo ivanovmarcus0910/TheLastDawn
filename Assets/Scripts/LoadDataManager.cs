@@ -1,4 +1,4 @@
-using Firebase;
+﻿using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
@@ -16,7 +16,7 @@ public class LoadDataManager : MonoBehaviour
         FirebaseApp app = FirebaseApp.DefaultInstance;
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
         firebaseUser = FirebaseAuth.DefaultInstance.CurrentUser;
-        
+       
     }
 
     public void GetUserInGame()
@@ -25,6 +25,7 @@ public class LoadDataManager : MonoBehaviour
         {
             if (task.IsCompleted)
             {
+                print("Đã lấy dữ liệu người chơi từ Firebase");
                 DataSnapshot snapshot = task.Result;
                 userInGame = JsonConvert.DeserializeObject<User>(snapshot.Value.ToString());
             }

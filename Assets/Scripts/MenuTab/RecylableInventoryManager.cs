@@ -13,7 +13,6 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
     [SerializeField]
     private int _dataLength;
     public GameObject menuGO;
-    private int id = 0;
     private List<ItemData> itemDataList = new List<ItemData>();
     private List<int> itemQuantityList = new List<int>();
     private void Awake()
