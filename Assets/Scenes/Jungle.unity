@@ -18140,6 +18140,10 @@ PrefabInstance:
       propertyPath: groundLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8607137126378781564, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
+      propertyPath: isFacingRightByDefault
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -18622,7 +18626,7 @@ MonoBehaviour:
     m_Bits: 8
   healthBar: {fileID: 1099470338}
   currentDirection: -1
-  isFacingRightByDefault: 1
+  isFacingRightByDefault: 0
 --- !u!95 &1614521240
 Animator:
   serializedVersion: 7
