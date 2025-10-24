@@ -27,8 +27,8 @@ public class EnemyBase : MonoBehaviour
     private float nextAttackTime = 0f;
 
     public Action onDeath;
-    private float lastTimeDamaged;      // Thời điểm bị đánh gần nhất
-    private Coroutine regenCoroutine;   // Dùng để dừng hồi máu nếu bị đánh lại
+    private float lastTimeDamaged;      
+    private Coroutine regenCoroutine;  
     public bool isFacingRightByDefault = true;
     protected virtual void Start()
     {
@@ -45,7 +45,6 @@ public class EnemyBase : MonoBehaviour
         currentHealth = data.maxHealth;
         lastTimeDamaged = Time.time;
 
-        // Khởi tạo health bar ngay lúc đầu
         if (healthBar != null)
         {
             healthBar.UpdateBar(currentHealth, data.maxHealth);
@@ -54,12 +53,10 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        // --- THÊM DÒNG KIỂM TRA NÀY ---
-        // Nếu Player không tồn tại HOẶC Player đã bị tắt (chết), thì chỉ đi tuần tra
         if (player == null || !player.gameObject.activeInHierarchy)
         {
             Patrol();
-            return; // Dừng hàm Update ở đây
+            return;
         }
         // ---------------------------------
 
@@ -76,7 +73,6 @@ public class EnemyBase : MonoBehaviour
             Patrol();
         }
 
-        // Cập nhật hướng của thanh máu (luôn đối diện camera)
         if (healthBar != null)
         {
             healthBar.transform.forward = Camera.main.transform.forward;
@@ -92,16 +88,11 @@ public class EnemyBase : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         FacePlayer();
 
-        // Gây sát thương cho player (nếu có script PlayerHealth)
-       // player.GetComponent<PlayerBase>()?.TakeDamage(data.attackDamage);
-
         nextAttackTime = Time.time + data.attackCooldown;
-        Invoke(nameof(StopAttack), 0.4f); // Animation kết thúc
+        Invoke(nameof(StopAttack), 0.4f);
     }
-    // Hàm này sẽ được gọi TỪ ANIMATION EVENT
     public void DealDamageToPlayer()
     {
-        // Kiểm tra lại khoảng cách lần nữa cho chắc chắn
         if (player != null && Vector2.Distance(transform.position, player.position) <= data.detectRange) // Nên dùng attackRange nhỏ hơn detectRange
         {
             player.GetComponent<PlayerBase>()?.TakeDamage(data.attackDamage);
@@ -135,46 +126,36 @@ public class EnemyBase : MonoBehaviour
 
     protected void FacePlayer()
     {
-        // Xác định xem Player đang ở bên phải hay không
         bool playerIsOnTheRight = (player.position.x > transform.position.x);
 
         if (isFacingRightByDefault)
         {
-            // --- LOGIC CHUẨN (DÀNH CHO SPRITE GỐC QUAY PHẢI) ---
             if (playerIsOnTheRight)
             {
-                // Player ở bên Phải -> Quay mặt Phải (scale dương)
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 currentDirection = 1;
             }
             else
             {
-                // Player ở bên Trái -> Quay mặt Trái (scale âm)
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 currentDirection = -1;
             }
         }
         else
         {
-            // --- LOGIC NGƯỢC (DÀNH CHO SPRITE GỐC QUAY TRÁI) ---
             if (playerIsOnTheRight)
             {
-                // Player ở bên Phải -> Quay mặt Phải (scale âm)
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 currentDirection = 1;
             }
             else
             {
-                // Player ở bên Trái -> Quay mặt Trái (scale dương)
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
                 currentDirection = -1;
             }
         }
     }
 
-    // ============================
-    //  TAKE DAMAGE + HEALTH BAR
-    // ============================
     public virtual void TakeDamage(int damage)
     {
         if (isDead) return;
@@ -189,7 +170,6 @@ public class EnemyBase : MonoBehaviour
 
         lastTimeDamaged = Time.time;
 
-        // Nếu đang hồi máu thì dừng
         if (regenCoroutine != null)
         {
             StopCoroutine(regenCoroutine);
@@ -212,7 +192,7 @@ public class EnemyBase : MonoBehaviour
         float startFill = healthBar.fillBar.fillAmount;
         float targetFill = (float)targetValue / maxValue;
         float t = 0f;
-        float duration = 0.2f; // tốc độ mượt
+        float duration = 0.2f;
 
         while (t < duration)
         {
@@ -223,7 +203,6 @@ public class EnemyBase : MonoBehaviour
             yield return null;
         }
 
-        // đảm bảo cập nhật chính xác cuối cùng
         healthBar.UpdateBar(targetValue, maxValue);
     }
 
@@ -240,26 +219,21 @@ public class EnemyBase : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         animator.SetTrigger("Die");
 
-        // Ẩn thanh máu khi chết
         if (healthBar != null)
             healthBar.gameObject.SetActive(false);
 
-        onDeath?.Invoke(); // Kích hoạt sự kiện chết quái
+        onDeath?.Invoke();
         DropLoot();
 
         Destroy(gameObject, 1.5f);
     }
 
-    // ============================
-    //  HỒI MÁU SAU 5 GIÂY KHÔNG BỊ ĐÁNH
-    // ============================
     protected IEnumerator RegenHealthAfterDelay()
     {
         yield return new WaitForSeconds(5f);
 
         while (currentHealth < data.maxHealth)
         {
-            // Nếu bị đánh lại thì dừng hồi
             if (Time.time - lastTimeDamaged < 5f)
                 yield break;
 
@@ -275,9 +249,6 @@ public class EnemyBase : MonoBehaviour
         regenCoroutine = null;
     }
 
-    // ============================
-    //  DROP LOOT
-    // ============================
     void DropLoot()
     {
         if (lootTable == null || lootTable.lootItems.Length == 0) return;
