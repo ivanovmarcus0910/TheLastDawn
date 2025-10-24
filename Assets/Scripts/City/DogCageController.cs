@@ -9,9 +9,9 @@ public class DogCageController : MonoBehaviour
     public GameObject cageOpen;              // Sprite lồng mở
     public Transform player;                 // Player reference
     public HintUI hintUI;                    // Hiển thị UI gợi ý
-    public RecylableInventoryManager inventoryManager; // 🔑 Tham chiếu tới Inventory
-    public ItemData keyItem;                 // 🔑 Item cần có để mở lồng
-    public Transform petTeleportPoint;  // 🧭 điểm teleport gần player
+    public RecylableInventoryManager inventoryManager; //  Tham chiếu tới Inventory
+    public ItemData keyItem;                 //  Item cần có để mở lồng
+    public Transform petTeleportPoint;  //  điểm teleport gần player
 
 
     private bool isUnlocked = false;
@@ -50,16 +50,16 @@ public class DogCageController : MonoBehaviour
 
     void TryUnlockCage()
     {
-        // ✅ Kiểm tra Inventory có KeyItem chưa
+        //  Kiểm tra Inventory có KeyItem chưa
         if (inventoryManager == null )
         {
-            Debug.LogWarning("⚠️ InventoryManager hoặc KeyItem chưa được gán!");
+            Debug.LogWarning(" InventoryManager hoặc KeyItem chưa được gán!");
             return;
         }
 
         if (!inventoryManager.hasItem(keyItem))
         {
-            Debug.Log("🔒 Bạn chưa có chìa khóa!");
+            Debug.Log("Bạn chưa có chìa khóa!");
             hintUI?.ShowHint("You need a key to unlock this cage");
             return;
         }
@@ -70,19 +70,19 @@ public class DogCageController : MonoBehaviour
 
     void UnlockCage()
     {
-        Debug.Log("🔓 Cage unlocked!");
+        Debug.Log(" Cage unlocked!");
         isUnlocked = true;
         hintUI?.HideHint();
 
-        // 🔓 Mở lồng
+        //  Mở lồng
         if (cageClosed != null) cageClosed.SetActive(false);
         if (cageOpen != null) cageOpen.SetActive(true);
 
-        // 🐶 Animation Happy
+        //  Animation Happy
         Animator anim = dog.GetComponent<Animator>();
         anim?.SetTrigger("Rescued");
 
-        // 🦴 Thêm script follow
+        //  Thêm script follow
         PetFollower follow = dog.AddComponent<PetFollower>();
         follow.target = player;
         follow.teleportPoint = petTeleportPoint;
@@ -90,7 +90,7 @@ public class DogCageController : MonoBehaviour
 
         dog.transform.SetParent(null);
 
-        // (Tuỳ chọn) Trừ 1 key sau khi sử dụng
+        //  Trừ 1 key sau khi sử dụng
         inventoryManager.decreaseQuantity(keyItem, 1);
     }
 }

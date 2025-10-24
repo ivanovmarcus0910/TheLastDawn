@@ -5,10 +5,10 @@ public class PetFollower : MonoBehaviour
     [Header("Follow Settings")]
     public Transform target;             // Player
     public float followDistance = 0.4f;  // Khoảng cách lý tưởng
-    public float moveSpeed = 2.5f;       // Tốc độ di chuyển
+    public float moveSpeed = 2f;       // Tốc độ di chuyển
     public float jumpForce = 2f;         // Lực nhảy vật cản thấp
-    public float teleportDistance = 6f;  // Khoảng cách tối đa để teleport
-    public Transform teleportPoint;      // Điểm teleport (thường dưới chân player)
+    public float teleportDistance = 5f;  // Khoảng cách tối đa để teleport
+    public Transform teleportPoint;      // Điểm teleport 
 
     [Header("Detection")]
     public float groundCheckDistance = 0.2f;
@@ -26,7 +26,6 @@ public class PetFollower : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
-        // ✅ Tự động lấy layer Ground theo tên (khỏi cần gán thủ công)
         groundLayer = LayerMask.GetMask("Ground");
 
         if (groundLayer == 0)
@@ -41,14 +40,14 @@ public class PetFollower : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, target.position);
 
-        // 🌉 TELEPORT nếu quá xa hoặc rơi khỏi mặt đất quá lâu
+        //  TELEPORT nếu quá xa hoặc rơi khỏi mặt đất quá lâu
         if (distance > teleportDistance)
         {
             TeleportToPlayer();
             return;
         }
 
-        // 🐾 Nếu xa hơn followDistance thì tiến về Player
+        //  Nếu xa hơn followDistance thì tiến về Player
         if (distance > followDistance)
         {
             MoveTowardsPlayer();
@@ -72,7 +71,7 @@ public class PetFollower : MonoBehaviour
 
         anim?.SetBool("isWalking", true);
 
-        // 🔍 Kiểm tra vật cản nhỏ phía trước
+        //  Kiểm tra vật cản nhỏ phía trước
         RaycastHit2D obstacle = Physics2D.Raycast(transform.position, Vector2.right * Mathf.Sign(direction.x), obstacleCheckDistance, groundLayer);
         if (obstacle.collider != null && isGrounded)
         {
@@ -110,16 +109,16 @@ public class PetFollower : MonoBehaviour
 
         transform.position = newPos;
         rb.linearVelocity = Vector2.zero;
-        anim?.SetTrigger("Teleport");
+       // anim?.SetTrigger("Teleport");
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        // Debug ray hiển thị trong editor
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
+    //private void OnDrawGizmosSelected()
+    //{
+    //    // Debug ray hiển thị trong editor
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * obstacleCheckDistance);
-    }
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(transform.position, transform.position + Vector3.right * obstacleCheckDistance);
+    //}
 }
