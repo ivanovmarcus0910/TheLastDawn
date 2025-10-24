@@ -3,28 +3,24 @@ using UnityEngine;
 
 public class HintUI : MonoBehaviour
 {
-    [Header("UI Reference")]
     public TextMeshProUGUI hintText;
 
     void Start()
     {
-        HideHint();
+        if (hintText != null)
+            hintText.gameObject.SetActive(false);
     }
 
     public void ShowHint(string message)
     {
-        if (hintText != null)
-        {
-            hintText.gameObject.SetActive(true);
-            hintText.text = message;
-        }
+        if (hintText == null) return;
+        hintText.text = message;
+        hintText.gameObject.SetActive(true);
     }
 
     public void HideHint()
     {
-        if (hintText != null)
-        {
-            hintText.gameObject.SetActive(false);
-        }
+        if (hintText == null) return;
+        hintText.gameObject.SetActive(false);
     }
 }

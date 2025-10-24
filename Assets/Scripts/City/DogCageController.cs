@@ -4,11 +4,15 @@ using UnityEngine.InputSystem;
 public class DogCageController : MonoBehaviour
 {
     [Header("References")]
-    public GameObject dog;            // Con chó trong lồng
-    public GameObject cageClosed;     // Sprite lồng đóng
-    public GameObject cageOpen;       // Sprite lồng mở
-    public Transform player;          // Player reference
-    public HintUI hintUI;             // Tham chiếu tới UI hiển thị Hint Text
+    public GameObject dog;                   // Con chó trong lồng
+    public GameObject cageClosed;            // Sprite lồng đóng
+    public GameObject cageOpen;              // Sprite lồng mở
+    public Transform player;                 // Player reference
+    public HintUI hintUI;                    // Hiển thị UI gợi ý
+    public RecylableInventoryManager inventoryManager; // 🔑 Tham chiếu tới Inventory
+    public ItemData keyItem;                 // 🔑 Item cần có để mở lồng
+    public Transform petTeleportPoint;  // 🧭 điểm teleport gần player
+
 
     private bool isUnlocked = false;
     private bool playerInRange = false;
@@ -17,9 +21,13 @@ public class DogCageController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            print("ontringger");
             playerInRange = true;
-            //hintUI.ShowHint("Press E to rescue");
+
+            // Nếu có khóa trong túi thì hiển thị gợi ý mở lồng
+            if (inventoryManager != null && inventoryManager.hasItem(keyItem))
+                hintUI?.ShowHint("Press E to rescue");
+            else
+                hintUI?.ShowHint("You need a key to unlock this cage");
         }
     }
 
@@ -28,7 +36,7 @@ public class DogCageController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            //hintUI.HideHint();
+            hintUI?.HideHint();
         }
     }
 
@@ -36,32 +44,53 @@ public class DogCageController : MonoBehaviour
     {
         if (playerInRange && !isUnlocked && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            UnlockCage();
+            TryUnlockCage();
         }
+    }
+
+    void TryUnlockCage()
+    {
+        // ✅ Kiểm tra Inventory có KeyItem chưa
+        if (inventoryManager == null )
+        {
+            Debug.LogWarning("⚠️ InventoryManager hoặc KeyItem chưa được gán!");
+            return;
+        }
+
+        if (!inventoryManager.hasItem(keyItem))
+        {
+            Debug.Log("🔒 Bạn chưa có chìa khóa!");
+            hintUI?.ShowHint("You need a key to unlock this cage");
+            return;
+        }
+
+        // Nếu có key thì mở lồng
+        UnlockCage();
     }
 
     void UnlockCage()
     {
-        print("Enter E");
+        Debug.Log("🔓 Cage unlocked!");
         isUnlocked = true;
-        //hintUI.HideHint();
+        hintUI?.HideHint();
 
         // 🔓 Mở lồng
         if (cageClosed != null) cageClosed.SetActive(false);
         if (cageOpen != null) cageOpen.SetActive(true);
 
-        // 🐶 Kích hoạt animation Happy
+        // 🐶 Animation Happy
         Animator anim = dog.GetComponent<Animator>();
-        anim.SetTrigger("Rescued");
+        anim?.SetTrigger("Rescued");
 
         // 🦴 Thêm script follow
         PetFollower follow = dog.AddComponent<PetFollower>();
         follow.target = player;
+        follow.teleportPoint = petTeleportPoint;
 
-        // Tách chó khỏi lồng để nó có thể đi theo
+
         dog.transform.SetParent(null);
-    //    Vector3 originalScale = dog.transform.lossyScale;
-    //    dog.transform.SetParent(null);
-    //    dog.transform.localScale = originalScale;
+
+        // (Tuỳ chọn) Trừ 1 key sau khi sử dụng
+        inventoryManager.decreaseQuantity(keyItem, 1);
     }
 }
