@@ -7,7 +7,7 @@ public class PetFollower : MonoBehaviour
     public float followDistance = 0.4f;  // Khoảng cách lý tưởng
     public float moveSpeed = 2f;       // Tốc độ di chuyển
     public float jumpForce = 2f;         // Lực nhảy vật cản thấp
-    public float teleportDistance = 6f;  // Khoảng cách tối đa để teleport
+    public float teleportDistance = 5f;  // Khoảng cách tối đa để teleport
     public Transform teleportPoint;      // Điểm teleport 
 
     [Header("Detection")]
