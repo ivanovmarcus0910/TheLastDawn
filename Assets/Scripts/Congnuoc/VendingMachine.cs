@@ -6,18 +6,18 @@ using UnityEngine.InputSystem;
 public class VendingMachine : MonoBehaviour
 {
     [Header("Settings")]
-    public float interactRange = 0.5f;          // Khoảng cách tương tác
-    public GameObject vendingUI;                // UI Panel chứa danh sách mua/bán
-    public Transform player;                    // Player transform
+    public float interactRange = 0.5f;          
+    public GameObject vendingUI;             
+    public Transform player;                   
 
     [Header("Items for Sale")]
-    public ItemData[] itemsForSale;             // Danh sách item bán
-    public Transform itemGridParent;            // Nơi spawn item cells
-    public GameObject itemCellPrefab;           // Prefab ô item
+    public ItemData[] itemsForSale;             
+    public Transform itemGridParent;            
+    public GameObject itemCellPrefab;          
 
     private bool playerInRange = false;
     [SerializeField]
-    public RecylableInventoryManager inventoryManager; // Quản lý kho đồ của player
+    public RecylableInventoryManager inventoryManager;
     private void Start()
     {
         if (player == null)
@@ -33,16 +33,13 @@ public class VendingMachine : MonoBehaviour
     {
         if (player == null) return;
 
-        // Kiểm tra khoảng cách player
         float distance = Vector2.Distance(transform.position, player.position);
         playerInRange = distance <= interactRange;
 
-        // Nếu player ra ngoài range, tắt UI
         if (!playerInRange && vendingUI.activeSelf)
             vendingUI.SetActive(false);
     }
 
-    // Callback Input System
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (!playerInRange) return;
@@ -53,7 +50,6 @@ public class VendingMachine : MonoBehaviour
         }
     }
 
-    // Spawn Item Cells theo Grid Layout
     private void SpawnItemCells()
     {
         if (itemGridParent == null || itemCellPrefab == null) return;
@@ -64,18 +60,15 @@ public class VendingMachine : MonoBehaviour
 
             GameObject cell = Instantiate(itemCellPrefab, itemGridParent);
 
-            // Gán icon
             Image icon = cell.transform.Find("Icon")?.GetComponent<Image>();
             if (icon != null) icon.sprite = item.icon;
 
-            // Gán text (tên + giá)
             TextMeshProUGUI itemName = cell.transform.Find("ItemName")?.GetComponent<TextMeshProUGUI>();
             if (itemName != null) itemName.text = item.itemName;
 
             TextMeshProUGUI price = cell.transform.Find("Price")?.GetComponent<TextMeshProUGUI>();
             if (price != null) price.text = item.price.ToString() + " $";
 
-            // Gán EffectText (ẩn mặc định)
             GameObject effectObj = cell.transform.Find("EffectText")?.gameObject;
             if (effectObj != null)
             {
@@ -85,12 +78,10 @@ public class VendingMachine : MonoBehaviour
                     effectText.text = string.IsNullOrEmpty(item.effect) ? "" : item.effect;
             }
 
-            // Gán nút Buy
             Button buyBtn = cell.transform.Find("BuyButton")?.GetComponent<Button>();
             if (buyBtn != null)
                 buyBtn.onClick.AddListener(() => BuyItem(item));
 
-            // Click icon để hiện / ẩn Effect
             if (icon != null)
             {
                 Button iconBtn = icon.GetComponent<Button>();
@@ -111,11 +102,11 @@ public class VendingMachine : MonoBehaviour
         if (inventoryManager == null) return;
         if (inventoryManager.hasItem(item))
         {
-            inventoryManager.increaseQuantity(item); // Tăng số lượng
+            inventoryManager.increaseQuantity(item);
         }
         else
         {
-                       inventoryManager.AddInventoryItem(item); // Thêm mới
+            inventoryManager.AddInventoryItem(item); 
         }    
     }
 }

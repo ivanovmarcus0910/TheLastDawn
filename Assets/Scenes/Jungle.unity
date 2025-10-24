@@ -12769,6 +12769,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1099470338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7388169651487877357, guid: 6da6f93bd089e8a4f9f3ea30ad70cb37, type: 3}
+  m_PrefabInstance: {fileID: 1650610755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c6c1cd6bc610a44be51f956ca943e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBar
 --- !u!1 &1111612635
 GameObject:
   m_ObjectHideFlags: 0
@@ -18241,6 +18252,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 672494477}
     m_Modifications:
+    - target: {fileID: 19376770883720522, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
+      propertyPath: m_Mass
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1102974267773375524, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
       propertyPath: m_SortingLayer
       value: 8
@@ -18380,6 +18395,10 @@ PrefabInstance:
     - target: {fileID: 8607137126378781564, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607137126378781564, guid: 9480f6432b19c1e46aef613e09d66548, type: 3}
+      propertyPath: isFacingRightByDefault
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18782,7 +18801,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -18861,9 +18880,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  healthBar: {fileID: 567137964457699343, guid: d452000ea2d8075439e36af16c45015f, type: 3}
+  healthBar: {fileID: 1099470338}
   currentDirection: -1
-  isFacingRightByDefault: 1
+  isFacingRightByDefault: 0
 --- !u!95 &1614521240
 Animator:
   serializedVersion: 7
