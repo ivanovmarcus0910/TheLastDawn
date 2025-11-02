@@ -117,7 +117,15 @@ public class ReactorUIManager : MonoBehaviour
             inventoryManager.decreaseQuantity(ing.item, ing.amount);
 
         //Thêm kết quả
-        inventoryManager.AddInventoryItem(currentRecipe.result);
+        //inventoryManager.AddInventoryItem(currentRecipe.result);
+        if (inventoryManager.hasItem(currentRecipe.result))
+        {
+            inventoryManager.increaseQuantity(currentRecipe.result);
+        }
+        else
+        {
+            inventoryManager.AddInventoryItem(currentRecipe.result);
+        }
 
         progressFill.fillAmount = 1f;
         resultText.text = $"✅ Created: {currentRecipe.result.itemName}";

@@ -17,6 +17,6 @@ MonoBehaviour:
   moveSpeed: 0.6
   maxHealth: 3
   attackDamage: 1
-  detectRange: 0.2
+  detectRange: 0.5
   groundCheckDistance: 0.5
   attackCooldown: 1
