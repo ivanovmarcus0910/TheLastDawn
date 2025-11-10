@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12f818a0a4c6ff478b8b95b5ae2ef3b, type: 3}
+  m_Name: KnightSword_Data
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponName: KnightSword
+  icon: {fileID: 0}
+  weaponType: 0
+  weaponPrefab: {fileID: 3242622326795715104, guid: 79f7c94458ac6b84a90abd58542374d0, type: 3}
+  weaponDamage: 20
+  fireRate: 0
+  bulletPrefab: {fileID: 0}

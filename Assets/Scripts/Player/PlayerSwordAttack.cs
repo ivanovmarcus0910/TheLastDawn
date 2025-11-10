@@ -11,7 +11,7 @@ public class PlayerSwordAttack : MonoBehaviour
     public AudioClip slashSound;          // Kéo file âm thanh chém vào đây
     private AudioSource audioSource;      // Nội bộ để phát tiếng
 
-    void Start()
+    void Awake() // <-- THAY Start() BẰNG Awake()
     {
         // Lấy Animator
         swordAnimator = GetComponent<Animator>();
