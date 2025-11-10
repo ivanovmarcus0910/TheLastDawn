@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda65cd87e364e64c8d970e372446073, type: 3}
+  m_Name: DemonTinhth_Data
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: "Tinh th\u1EC3 ho\u1EA3 tinh"
+  price: 0
+  icon: {fileID: -7930466074684633178, guid: 919217168934be54c88aa9fa890ae7a3, type: 3}
+  itemPrefab: {fileID: 4263426281734616106, guid: 9472372973efafe48bfdf0d8f73b819e, type: 3}
+  effect: 
+  canBeSold: 1
