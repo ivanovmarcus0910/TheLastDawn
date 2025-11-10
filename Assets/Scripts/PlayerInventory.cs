@@ -26,5 +26,6 @@ public class PlayerInventory : MonoBehaviour
             inventoryManage.AddInventoryItem(item); // Thêm mới
         }
 
+        GameEventHub.ItemCollected(item.name, Mathf.Max(1, count));
     }
 }

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6833fb87253574e9fbf7ab5c63e08c, type: 3}
+  m_Name: Quest_Desert_Main_Bones
+  m_EditorClassIdentifier: Assembly-CSharp::QuestDefinition
+  questId: 1b0db2f9ca8547f982378e712e838b10
+  title: "B\xED m\u1EADt X\u01B0\u01A1ng Tr\u1EAFng"
+  description: "Kh\u1EA3o s\xE1t \u1ED1c \u0111\u1EA3o, thu th\u1EADp x\u01B0\u01A1ng
+    v\xE0 ti\xEAu di\u1EC7t b\u1ECD c\u1EA1p."
+  scope: 1
+  mapId: Desert
+  autoAcceptOnMapEnter: 1
+  autoTurnIn: 0
+  repeatable: 0
+  timeLimitSeconds: 0
+  nextQuestOnComplete: {fileID: 0}
+  objectives:
+  - {fileID: 11400000, guid: 6e171172d68816e48b9e2d67befc3382, type: 2}
+  - {fileID: 11400000, guid: 0082121b334db7c40b996774ab5d23c7, type: 2}
+  - {fileID: 11400000, guid: 72d3dcfc80cbafa4aa31286b0121fd8e, type: 2}
+  rewardExperience: 0
+  rewardItems: []
