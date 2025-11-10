@@ -4,14 +4,12 @@ using UnityEngine.UI;
 
 public class TabManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     [Header("Buttons")]
     public Button btnNhiemVu;
     public Button btnTuiDo;
     public Button btnKiNang;
     public Button btnCaiDat;
     public Button btnClose;
-
 
     [Header("Panels (CanvasGroup)")]
     public CanvasGroup panelNhiemVu;
@@ -21,17 +19,65 @@ public class TabManager : MonoBehaviour
 
     [Header("Menu CanvasGroup")]
     public CanvasGroup mainMenuGroup;
+
+    private bool isMenuOpen = false;
+    private bool isFading = false;
+    private Coroutine fadeRoutine;
+
     private void Start()
     {
-        // Gắn sự kiện bấm nút
-        btnNhiemVu.onClick.AddListener(() => ShowPanel(panelNhiemVu));
-        btnTuiDo.onClick.AddListener(() => ShowPanel(panelTuiDo));
-        btnKiNang.onClick.AddListener(() => ShowPanel(panelKiNang));
-        btnCaiDat.onClick.AddListener(() => ShowPanel(panelCaiDat));
-        btnClose.onClick.AddListener(HideAll);
+        if (btnNhiemVu != null) btnNhiemVu.onClick.AddListener(() => ShowPanel(panelNhiemVu));
+        if (btnTuiDo != null) btnTuiDo.onClick.AddListener(() => ShowPanel(panelTuiDo));
+        if (btnKiNang != null) btnKiNang.onClick.AddListener(() => ShowPanel(panelKiNang));
+        if (btnCaiDat != null) btnCaiDat.onClick.AddListener(() => ShowPanel(panelCaiDat));
+        if (btnClose != null) btnClose.onClick.AddListener(() => SetMenuState(false));
 
-        // Ẩn hết panel lúc đầu trừ túi đồ (hoặc panel mặc định)
-        ShowPanel(panelTuiDo);
+        SetMenuState(false, true);  // Đóng ngay đầu game
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ToggleMenu();
+        }
+    }
+
+    public void ToggleMenu()
+    {
+        if (isFading) return;   // tránh spam fade
+        SetMenuState(!isMenuOpen);
+    }
+
+    public void SetMenuState(bool open, bool skipFade = false)
+    {
+        // Cập nhật ngay lập tức trạng thái menu (để Toggle không bị sai)
+        isMenuOpen = open;
+
+        if (mainMenuGroup != null)
+        {
+            mainMenuGroup.interactable = open;
+            mainMenuGroup.blocksRaycasts = open;
+
+            float targetAlpha = open ? 1 : 0;
+
+            if (skipFade)
+            {
+                if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+                mainMenuGroup.alpha = targetAlpha;
+            }
+            else
+            {
+                if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+                fadeRoutine = StartCoroutine(Fade(mainMenuGroup, targetAlpha));
+            }
+        }
+
+        // hiển thị panel mặc định khi mở menu
+        if (open)
+            ShowPanel(panelTuiDo);
+        else
+            ShowPanel(null);
     }
 
     private void ShowPanel(CanvasGroup activePanel)
@@ -40,29 +86,30 @@ public class TabManager : MonoBehaviour
 
         foreach (var panel in panels)
         {
-            bool isActive = (panel == activePanel);
-            panel.alpha = isActive ? 1 : 0;
-            panel.interactable = isActive;
-            panel.blocksRaycasts = isActive;
+            if (panel == null) continue;
+
+            bool show = (panel == activePanel);
+            panel.alpha = show ? 1f : 0f;
+            panel.interactable = show;
+            panel.blocksRaycasts = show;
         }
     }
-    public void HideAll()
-    {
-        // Ẩn toàn bộ panel
-        StartCoroutine(Fade(mainMenuGroup, 0));
-        mainMenuGroup.interactable = false;
-        mainMenuGroup.blocksRaycasts = false;
-    }
+
     private IEnumerator Fade(CanvasGroup group, float targetAlpha, float duration = 0.2f)
     {
+        isFading = true;
+
         float start = group.alpha;
-        float time = 0f;
-        while (time < duration)
+        float t = 0f;
+
+        while (t < duration)
         {
-            group.alpha = Mathf.Lerp(start, targetAlpha, time / duration);
-            time += Time.deltaTime;
+            group.alpha = Mathf.Lerp(start, targetAlpha, t / duration);
+            t += Time.deltaTime;
             yield return null;
         }
+
         group.alpha = targetAlpha;
+        isFading = false;
     }
 }
