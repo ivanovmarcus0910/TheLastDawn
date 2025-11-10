@@ -19,16 +19,16 @@ public class EnemyBase : MonoBehaviour
     protected Rigidbody2D rb;
 
     protected int currentHealth;
-    protected bool isAttacking = false;
-    protected bool isDead = false;
-    protected bool isHurt = false;
+    public bool isAttacking = false;
+    public bool isDead = false;
+    public bool isHurt = false;
     public int currentDirection = -1;
     protected float halfWidth;
-    private float nextAttackTime = 0f;
+    protected float nextAttackTime = 0f;
 
     public Action onDeath;
-    private float lastTimeDamaged;      
-    private Coroutine regenCoroutine;  
+    protected float lastTimeDamaged;      
+    protected Coroutine regenCoroutine;  
     public bool isFacingRightByDefault = true;
     protected virtual void Start()
     {
@@ -79,7 +79,7 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    protected void HandleAttack()
+    protected virtual void HandleAttack()
     {
         if (Time.time < nextAttackTime) return;
 
