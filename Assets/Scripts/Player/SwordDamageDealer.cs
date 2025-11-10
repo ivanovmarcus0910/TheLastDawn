@@ -2,41 +2,27 @@
 
 public class SwordDamageDealer : MonoBehaviour
 {
- 
-    public int swordDamage = 25;
-    
+    // Không còn sát thương cố định ở đây
+    private int currentWeaponDamage;
+    private PlayerBase playerBase;
 
-    private PlayerBase playerBase; // Dùng để lấy sát thương cơ bản của Player
-
-    void Awake()
+    // Hàm MỚI: WeaponManager sẽ gọi hàm này
+    public void Initialize(int weaponDamage, PlayerBase player)
     {
-        // Tìm component PlayerBase ở GameObject cha gần nhất (Player)
-        playerBase = GetComponentInParent<PlayerBase>();
-        if (playerBase == null)
-        {
-            Debug.LogError("SwordDamageDealer không tìm thấy PlayerBase ở trên!");
-        }
+        this.currentWeaponDamage = weaponDamage;
+        this.playerBase = player;
     }
 
-    // Hàm này sẽ tự động được gọi khi Hitbox (là Trigger) va chạm với Collider khác
     void OnTriggerEnter2D(Collider2D other)
     {
-       
+        Debug.Log("Va chạm Trigger với: " + other.name);
         EnemyBase enemy = other.GetComponent<EnemyBase>();
-
-        if (enemy != null) 
+        if (enemy != null && playerBase != null && playerBase.data != null)
         {
-            // Tính toán tổng sát thương = Sát thương của kiếm + Sát thương cơ bản của Player
-            int totalDamage = this.swordDamage;
-            if (playerBase != null && playerBase.data != null)
-            {
-                totalDamage += playerBase.data.baseDamage;
-            }
-
-            // Gọi hàm TakeDamage của quái vật để gây sát thương
+            // Dùng sát thương đã được "nạp"
+            int totalDamage = this.currentWeaponDamage + playerBase.data.baseDamage;
             enemy.TakeDamage(totalDamage);
-
-            Debug.Log($"Kiếm gây {totalDamage} sát thương lên {enemy.name}"); // In ra để kiểm tra
+            Debug.Log($"Kiếm gây {totalDamage} sát thương lên {enemy.name}");
         }
     }
 }
