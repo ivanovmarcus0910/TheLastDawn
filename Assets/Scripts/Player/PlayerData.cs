@@ -8,8 +8,13 @@ public class PlayerData : ScriptableObject
     public int maxMana = 50;
     public float moveSpeed = 5f;
     public int defense = 0;
-    public int baseDamage = 5; // <--- THÊM DÒNG NÀY
+    public int baseDamage = 5; 
 
     [Header("Chỉ số Nhảy")]
     public float jumpForce = 10f;
+    public string ToString()
+    {
+        return ($"Player Data Scriptable : {maxHealth} : {maxMana} : {moveSpeed} : {defense} : {baseDamage} : {jumpForce}");
+    }
+
 }

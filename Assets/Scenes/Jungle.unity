@@ -697,7 +697,7 @@ SpriteRenderer:
   m_Size: {x: 1.93, y: 1.17}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &64400643
@@ -1121,13 +1121,14 @@ GameObject:
   m_Component:
   - component: {fileID: 70548615}
   - component: {fileID: 70548614}
+  - component: {fileID: 70548616}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &70548614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,6 +1141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 022a3d787d73eff4e8abcda1124584d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadDataManager
+  playerScript: {fileID: 1206134990}
+  mapManager: {fileID: 678607614}
 --- !u!4 &70548615
 Transform:
   m_ObjectHideFlags: 0
@@ -1149,12 +1152,24 @@ Transform:
   m_GameObject: {fileID: 70548613}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.76266, y: -0.27701, z: 0}
+  m_LocalPosition: {x: -24.91, y: 5.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &70548616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70548613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a15661f245fe441839fcbcaf182d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FirebaseDBManager
 --- !u!1 &76051281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,6 +2925,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2481470525228904163, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1206135007}
+    - targetCorrespondingSourceObject: {fileID: 2481470525228904163, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1206135008}
     - targetCorrespondingSourceObject: {fileID: 2307445975331158206, guid: a1e61e0508327c441b2e08d3e076a2b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1038977293}
@@ -3851,7 +3869,7 @@ SpriteRenderer:
   m_Size: {x: 3.87, y: 2.51}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &405822448 stripped
@@ -6616,7 +6634,7 @@ SpriteRenderer:
   m_Size: {x: 1.87, y: 1.39}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &613174750
@@ -13560,6 +13578,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
   inventoryManage: {fileID: 405822448}
+--- !u!114 &1206135008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818765331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022a3d787d73eff4e8abcda1124584d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadDataManager
+  playerScript: {fileID: 1206134990}
+  mapManager: {fileID: 678607614}
 --- !u!1 &1219931170
 GameObject:
   m_ObjectHideFlags: 0
@@ -18642,7 +18674,7 @@ SpriteRenderer:
   m_Size: {x: 1.53, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1580224896

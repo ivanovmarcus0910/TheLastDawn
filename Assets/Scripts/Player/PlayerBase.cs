@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.DTO;
+using UnityEngine;
 using UnityEngine.InputSystem;
-
+ 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerBase : MonoBehaviour
 {
     [Header("Hồ sơ Nhân vật")]
     public PlayerData data; // Kéo file PlayerData.asset vào đây
+    private LoadDataManager loadDataManager;
 
     [Header("UI")]
     public HealthBar playerHealthBar;
@@ -36,12 +38,14 @@ public class PlayerBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
+        loadDataManager = GetComponent<LoadDataManager>();
+
         RecalcHalfSize();
     }
 
     void Start()
     {
-        // --- DATA ---
+       
         if (data == null)
         {
             Debug.LogError("⚠️ Chưa gán PlayerData cho PlayerBase!");
@@ -67,11 +71,11 @@ public class PlayerBase : MonoBehaviour
             jumpAction = map.FindAction("Jump", true);
 
             jumpAction.performed += _ => Jump();
-            Debug.Log($"✅ Action Map Enabled: {map.enabled}");
+            //Debug.Log($"✅ Action Map Enabled: {map.enabled}");
             moveAction.Enable();
             jumpAction.Enable();
 
-            Debug.Log("✅ Input Actions Loaded: Move & Jump");
+            //Debug.Log("✅ Input Actions Loaded: Move & Jump");
         }
         catch (System.Exception e)
         {
@@ -84,7 +88,14 @@ public class PlayerBase : MonoBehaviour
         moveAction?.Enable();
         jumpAction?.Enable();
     }
-
+    public void UpdatePlayerData(PlayerData data)
+    {
+        this.data = data;
+    }
+    public PlayerData GetPlayerData()
+    {
+        return data;
+    }
     void OnDisable()
     {
         moveAction?.Disable();
@@ -103,7 +114,7 @@ public class PlayerBase : MonoBehaviour
         if (moveAction != null)
         {
             moveInput = moveAction.ReadValue<Vector2>();
-            Debug.Log($"Move Input: {moveInput}");
+            //Debug.Log($"Move Input: {moveInput}");
         }
         //else moveInput = Vector2.zero;
 
@@ -164,7 +175,7 @@ public class PlayerBase : MonoBehaviour
         int damageTaken = Mathf.Max(1, damageAmount - data.defense);
         currentHealth = Mathf.Clamp(currentHealth - damageTaken, 0, data.maxHealth);
 
-        Debug.Log($"💥 Player nhận {damageTaken} sát thương! Máu còn lại: {currentHealth}/{data.maxHealth}");
+        //Debug.Log($"💥 Player nhận {damageTaken} sát thương! Máu còn lại: {currentHealth}/{data.maxHealth}");
         playerHealthBar?.UpdateBar(currentHealth, data.maxHealth);
 
         if (currentHealth <= 0) Die();
