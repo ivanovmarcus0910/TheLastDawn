@@ -8,7 +8,8 @@ public class PlayerData : ScriptableObject
     public int maxMana = 50;
     public float moveSpeed = 3f;
     public int defense = 0;
-    public int baseDamage = 5; 
+    public int baseDamage = 5;
+    public int exp=0;
 
     [Header("Chỉ số Nhảy")]
     public float jumpForce = 5f;

@@ -48,7 +48,6 @@ public class BirdChild : MonoBehaviour
 
         // 2) Lấy script Bullet
         Bullet bulletScript = bulletObject.GetComponent<Bullet>();
-
         // 3) Thiết lập hướng bắn
         if (bulletScript != null  )
         {

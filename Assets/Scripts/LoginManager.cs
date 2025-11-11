@@ -81,7 +81,7 @@ public class LoginManager : MonoBehaviour
                 List<ItemDataDTO> itemDatas = new List<ItemDataDTO>();
                 itemDatas.Add(ItemDataDTO.FromItemData(itemData));
                 List<int> itemQuantiy = new List<int>() {1}; 
-                User userInGame = new User(email, itemDatas, itemQuantiy, defaultDataDTO, 0);
+                User userInGame = new User(email, itemDatas, itemQuantiy, defaultDataDTO, 0, 5);
 
                 // 🔹 Serialize đúng JSON format
                 string json = JsonConvert.SerializeObject(userInGame);

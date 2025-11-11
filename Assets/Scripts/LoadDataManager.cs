@@ -120,7 +120,13 @@ public class LoadDataManager : MonoBehaviour
                 }
                 else
                     Debug.LogWarning("��️ inventoryManager chưa được gán trong Inspector!");
-
+                if (mapManager != null)
+                {
+                    mapManager.ChangeCurrentMap(userInGame.currentMapIndex);
+                    Debug.Log("✅ Di chuyển đến map đã lưu.");
+                }
+                else
+                    Debug.LogWarning("⚠️ mapManager chưa được gán trong Inspector!");
             }
             catch (Exception e)
             {
@@ -164,7 +170,8 @@ public class LoadDataManager : MonoBehaviour
             userInGame.playerData = playerDTO;
             userInGame.itemDataList = itemDataDTOList;
             userInGame.itemQuantityList = inventoryManager.GetItemQuantityList();
-           
+            print("Current Index"+mapManager.currentIndex);
+            userInGame.currentMapIndex = mapManager.currentIndex;
             print("Data Player khi lưu "+playerData.ToString());
             // 🔥 Ghi lại lên Firebase
             string json = JsonConvert.SerializeObject(userInGame);

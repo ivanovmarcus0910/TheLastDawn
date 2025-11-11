@@ -18,6 +18,7 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
     private void Awake()
     {
         recyclableScrollRect.DataSource = this;
+        DontDestroyOnLoad(this.gameObject);
     }
     public int GetItemCount()
     {
