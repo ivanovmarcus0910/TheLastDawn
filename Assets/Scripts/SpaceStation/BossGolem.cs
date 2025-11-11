@@ -19,7 +19,7 @@ public class BossGolem : EnemyBase
 
     [Header("Leash Settings")]
     public float maxLeashRange = 50f; // Tầm Golem từ bỏ và quay về
-    private bool isAggroed = false; // Trạng thái "đã bị kích động"
+    public bool isAggroed = false; // Trạng thái "đã bị kích động"
     private Vector3 originalPosition; // Vị trí ban đầu
     private float originalGravityScale;
 
@@ -57,6 +57,15 @@ public class BossGolem : EnemyBase
     protected override void Update()
     {
         if (isDead || isHurt || isHealing || isChangingState) return;
+        if (player == null || !player.gameObject.activeSelf)
+        {
+            if (isAggroed)
+            {
+                ResetToOrigin();
+            }
+
+            return;
+        }
 
         HandleManaRegen();
 
@@ -99,10 +108,10 @@ public class BossGolem : EnemyBase
             }
         }
 
-        if (healthBar != null)
-        {
-            healthBar.transform.forward = Camera.main.transform.forward;
-        }
+        //if (healthBar != null)
+        //{
+        //    healthBar.transform.forward = Camera.main.transform.forward;
+        //}
     }
 
     protected override void Patrol()
@@ -297,12 +306,28 @@ public class BossGolem : EnemyBase
 
     protected override void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         if (spaceshipEnergy != null)
         {
             spaceshipEnergy.CollectGolemCore();
         }
         rb.gravityScale = originalGravityScale;
         isAggroed = false;
-        base.Die();
+
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        GetComponent<Collider2D>().enabled = false;
+
+        animator.SetTrigger("Die");
+
+        if (healthBar != null)
+            healthBar.gameObject.SetActive(false);
+
+        onDeath?.Invoke();
+        DropLoot();
+
+        Destroy(gameObject, 3.0f);
     }
 }
