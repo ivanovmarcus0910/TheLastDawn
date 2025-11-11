@@ -108,7 +108,7 @@ public class PlayerBase : MonoBehaviour
         if (moveAction != null)
         {
             moveInput = moveAction.ReadValue<Vector2>();
-            Debug.Log($"Move Input: {moveInput}");
+            //Debug.Log($"Move Input: {moveInput}");
         }
         //else moveInput = Vector2.zero;
 
