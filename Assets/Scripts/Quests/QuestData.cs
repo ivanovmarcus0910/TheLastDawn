@@ -26,6 +26,5 @@ public class QuestData : ScriptableObject
     public ItemData rewardItem; 
     public int rewardItemAmount;
 
-    [Header("Nối đuôi")]
-    public QuestData nextQuest;     
+  
 }
