@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Manh_da_cung
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Manh_da_cung
-  price: 0
+  price: 20
   icon: {fileID: 1490946728298400123, guid: 11eb10e9cf44d8f4b8f2518f76c6b46e, type: 3}
   itemPrefab: {fileID: 4263426281734616106, guid: 9472372973efafe48bfdf0d8f73b819e, type: 3}
   effect: 

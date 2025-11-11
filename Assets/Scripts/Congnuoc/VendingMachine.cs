@@ -8,12 +8,14 @@ public class VendingMachine : MonoBehaviour
     [Header("Settings")]
     public float interactRange = 0.5f;          
     public GameObject vendingUI;             
-    public Transform player;                   
+    public Transform player;
+    public TextMeshPro message;
 
     [Header("Items for Sale")]
     public ItemData[] itemsForSale;             
     public Transform itemGridParent;            
-    public GameObject itemCellPrefab;          
+    public GameObject itemCellPrefab;   
+    public PlayerBase playerBase;   
 
     private bool playerInRange = false;
     [SerializeField]
@@ -99,14 +101,22 @@ public class VendingMachine : MonoBehaviour
 
     private void BuyItem(ItemData item)
     {
-        if (inventoryManager == null) return;
-        if (inventoryManager.hasItem(item))
+        if (playerBase.data.sic > item.price)
         {
-            inventoryManager.increaseQuantity(item);
+            playerBase.data.sic -= item.price;
+            if (inventoryManager == null) return;
+            if (inventoryManager.hasItem(item))
+            {
+                inventoryManager.increaseQuantity(item);
+            }
+            else
+            {
+                inventoryManager.AddInventoryItem(item);
+            }
         }
         else
         {
-            inventoryManager.AddInventoryItem(item); 
-        }    
+            message.text= "Not enough money!";
+        }
     }
 }
