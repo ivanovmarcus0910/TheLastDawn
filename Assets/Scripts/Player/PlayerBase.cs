@@ -8,6 +8,7 @@ public class PlayerBase : MonoBehaviour
     [Header("Hồ sơ Nhân vật")]
     public PlayerData data; // Kéo file PlayerData.asset vào đây
     private LoadDataManager loadDataManager;
+    private TaiNguyenManager taiNguyenManager;
     public Transform posInstance;
     public GameObject birdPrefabs;
     public GameObject BirdItem;
@@ -45,6 +46,7 @@ public class PlayerBase : MonoBehaviour
         anim = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
         loadDataManager = GetComponent<LoadDataManager>();
+        taiNguyenManager = GetComponent<TaiNguyenManager>();
 
         RecalcHalfSize();
     }
@@ -101,6 +103,7 @@ public class PlayerBase : MonoBehaviour
         this.data = data;
         currentHealth = data.maxHealth;
         playerHealthBar?.UpdateBar(currentHealth, data.maxHealth);
+        taiNguyenManager.UpdateUI(data.sic, data.exp);
     }
     public PlayerData GetPlayerData()
     {
