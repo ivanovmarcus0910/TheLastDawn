@@ -45,7 +45,7 @@ public class NewQuestDisplay : MonoBehaviour
             rewardText.text = $"Thưởng: {quest.rewardExp} EXP";
             if (quest.rewardItem != null)
             {
-                rewardText.text += $"\n- {quest.rewardItemAmount}x {quest.rewardItem.itemName}";
+                rewardText.text += $"\n- {quest.rewardItemAmount} x {quest.rewardItem.itemName}";
             }
         }
         else

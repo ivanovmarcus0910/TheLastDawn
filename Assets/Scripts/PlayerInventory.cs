@@ -16,14 +16,17 @@ public class PlayerInventory : MonoBehaviour
             return;
         }
 
-        // Logic lưu trữ 
-        if (inventoryManage.hasItem(item))
+        for (int i = 0; i < count; i++)
         {
-            inventoryManage.increaseQuantity(item); // Tăng số lượng
-        }
-        else
-        {
-            inventoryManage.AddInventoryItem(item); // Thêm mới
+            // Logic lưu trữ (Giữ nguyên code của bạn)
+            if (inventoryManage.hasItem(item))
+            {
+                inventoryManage.increaseQuantity(item); // Sẽ được gọi 'count' lần
+            }
+            else
+            {
+                inventoryManage.AddInventoryItem(item); // Sẽ được gọi 1 lần
+            }
         }
 
         if (QuestManager.Instance != null)

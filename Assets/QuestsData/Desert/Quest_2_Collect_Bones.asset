@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Quest_2_Collect_Bones
   m_EditorClassIdentifier: Assembly-CSharp::QuestData
   questID: 1
-  title: "Thu th\u1EADp X\u01B0\u01A1ng"
-  description: 
+  title: "M\u1EA3nh Gh\xE9p M\xE0u Tr\u0103ng"
+  description: "Thu th\u1EADp X\u01B0\u01A1ng Tr\u1EAFng"
   objectiveType: 1
   targetAmount: 2
   targetID: "M\u1EA3nh x\u01B0\u01A1ng b\u1ECD c\u1EA1p"

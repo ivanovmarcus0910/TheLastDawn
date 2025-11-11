@@ -68,7 +68,6 @@ public class QuestManager : MonoBehaviour
         Debug.Log($"Đã nhận nhiệm vụ mới: {_currentActiveQuest.title}");
     }
 
-    // Hàm này không thay đổi, vì 'type' và 'id' (tên quái) vẫn như cũ
     public void UpdateQuestProgress(ObjectiveType type, string id, int amount = 1)
     {
         if (_currentActiveQuest == null || _currentQuestProgress.isCompleted)
