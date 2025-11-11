@@ -6,6 +6,7 @@ public class BirdChild : MonoBehaviour
     [Header("Bắn")]
     public GameObject bulletPrefab;
     public Transform firePoint;
+   
 
     [Header("Cài đặt bắn")]
     public float fireRate = 5f; // Số viên đạn bắn ra mỗi giây
@@ -14,8 +15,12 @@ public class BirdChild : MonoBehaviour
     [Header("Animation")]
     public Animator animator; // Kéo Animator của chim vào đây
 
-  
+    private Transform playerTransform;
 
+    void Start()
+    {
+        playerTransform = transform.parent; // vì BirdChild là con của Player
+    }
     void Update()
     {
         // Kiểm tra chuột trái (Input System)
@@ -39,18 +44,19 @@ public class BirdChild : MonoBehaviour
         }
 
         // 1) Tạo đạn
-        GameObject bulletObject = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletObject = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
         // 2) Lấy script Bullet
         Bullet bulletScript = bulletObject.GetComponent<Bullet>();
 
         // 3) Thiết lập hướng bắn
-        if (bulletScript != null)
+        if (bulletScript != null  )
         {
-            Vector2 shootDirection = transform.right;
-            if (transform.localScale.x < 0) shootDirection = -transform.right;
+            Vector2 shootDirection = Vector2.right;
+            if (playerTransform != null && playerTransform.localScale.x < 0)
+                shootDirection = Vector2.left;
 
-            bulletScript.Setup(shootDirection);
+            bulletScript.Setup(shootDirection, 2);
         }
         else
         {
