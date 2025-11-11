@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using TMPro; 
-
+using TMPro;
+using System.Linq; 
 
 [RequireComponent(typeof(CanvasGroup))]
 public class NewQuestDisplay : MonoBehaviour
@@ -15,42 +15,80 @@ public class NewQuestDisplay : MonoBehaviour
 
     void Awake()
     {
-  
         _canvasGroup = GetComponent<CanvasGroup>();
     }
 
+
     void Update()
     {
-       
+
         if (_canvasGroup.alpha == 0 || QuestManager.Instance == null)
         {
-            return; 
+            return;
         }
 
         
-        QuestData quest = QuestManager.Instance.GetCurrentActiveQuest();
-        QuestProgress progress = QuestManager.Instance.GetCurrentQuestProgress();
+        var allPlayerQuests = QuestManager.Instance.GetPlayerQuests();
 
         
-        if (quest != null && progress != null)
+        QuestProgress activeProgress = allPlayerQuests.FirstOrDefault(q => !q.isCompleted);
+
+        QuestData questToShow = null;
+        QuestProgress progressToShow = null;
+
+        if (activeProgress != null)
         {
            
-            titleText.text = quest.title;
-            descriptionText.text = quest.description;
-
-            
-            objectiveText.text = $"- {quest.targetID}: {progress.currentAmount} / {quest.targetAmount}";
-
-            
-            rewardText.text = $"Thưởng: {quest.rewardExp} EXP";
-            if (quest.rewardItem != null)
-            {
-                rewardText.text += $"\n- {quest.rewardItemAmount} x {quest.rewardItem.itemName}";
-            }
+            questToShow = QuestManager.Instance.GetQuestData(activeProgress.questID);
+            progressToShow = activeProgress;
         }
         else
         {
            
+            QuestProgress completedProgress = allPlayerQuests.FirstOrDefault(q => q.isCompleted);
+            if (completedProgress != null)
+            {
+                questToShow = QuestManager.Instance.GetQuestData(completedProgress.questID);
+                progressToShow = completedProgress;
+            }
+        }
+
+        
+        if (questToShow != null && progressToShow != null)
+        {
+            
+            if (progressToShow.isCompleted)
+            {
+                titleText.text = questToShow.title + " (ĐÃ HOÀN THÀNH)";
+            }
+            else
+            {
+                titleText.text = questToShow.title;
+            }
+
+            descriptionText.text = questToShow.description;
+
+            
+            if (!progressToShow.isCompleted)
+            {
+                objectiveText.text = $"- {questToShow.targetID}: {progressToShow.currentAmount} / {questToShow.targetAmount}";
+            }
+            else
+            {
+                objectiveText.text = "Đã xong mục tiêu!";
+            }
+
+            
+            rewardText.text = $"Thưởng: {questToShow.rewardExp} EXP";
+            if (questToShow.rewardItem != null)
+            {
+                
+                rewardText.text += $"\n- {questToShow.rewardItemAmount} x {questToShow.rewardItem.itemName}";
+            }
+        }
+        else
+        {
+            
             titleText.text = "Không có nhiệm vụ";
             descriptionText.text = "Hãy khám phá thế giới để nhận nhiệm vụ mới.";
             objectiveText.text = "";
