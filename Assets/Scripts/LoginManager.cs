@@ -29,20 +29,18 @@ public class LoginManager : MonoBehaviour
     public GameObject registerForm;
 
     private FirebaseAuth auth;
-    private FirebaseDBManager firebaseDBManager;
-
+    public FirebaseDBManager firebaseDBManager;
+    //item mặc định để tránh null
+    public ItemData itemData;
     private IEnumerator Start()
     {
         auth = FirebaseAuth.DefaultInstance;
-        firebaseDBManager = FirebaseDBManager.Instance ?? FindObjectOfType<FirebaseDBManager>();
-
-        // 🕐 Chờ Firebase sẵn sàng
-        while (firebaseDBManager == null)
+        while (FirebaseDBManager.Instance == null)
         {
             Debug.Log("⏳ Đợi FirebaseDBManager...");
             yield return null;
-            firebaseDBManager = FirebaseDBManager.Instance;
         }
+        firebaseDBManager = FirebaseDBManager.Instance;
 
         Debug.Log("✅ Firebase Auth & DB ready!");
 
@@ -80,7 +78,10 @@ public class LoginManager : MonoBehaviour
                 // Tạo dữ liệu mặc định
                 PlayerData defaultData = ScriptableObject.CreateInstance<PlayerData>();
                 PlayerDataDTO defaultDataDTO = PlayerDataDTO.FromPlayerData(defaultData);
-                User userInGame = new User(email, new List<ItemData>(), new List<int>(), defaultDataDTO, 0);
+                List<ItemDataDTO> itemDatas = new List<ItemDataDTO>();
+                itemDatas.Add(ItemDataDTO.FromItemData(itemData));
+                List<int> itemQuantiy = new List<int>() {1}; 
+                User userInGame = new User(email, itemDatas, itemQuantiy, defaultDataDTO, 0);
 
                 // 🔹 Serialize đúng JSON format
                 string json = JsonConvert.SerializeObject(userInGame);

@@ -1221,6 +1221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadDataManager
   playerScript: {fileID: 1206134990}
+  inventoryManager: {fileID: 0}
   mapManager: {fileID: 678607614}
 --- !u!4 &70548615
 Transform:
@@ -14089,6 +14090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadDataManager
   playerScript: {fileID: 1206134990}
+  inventoryManager: {fileID: 1534072912}
   mapManager: {fileID: 678607614}
 --- !u!1 &1215346289
 GameObject:

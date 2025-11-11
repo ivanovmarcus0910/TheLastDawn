@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: Key
   price: 0
   icon: {fileID: 3857025938162540658, guid: 33a8b19557f47574c855729b95bc789d, type: 3}
+  spriteSheetName: Key_sprite
   itemPrefab: {fileID: 4263426281734616106, guid: 9472372973efafe48bfdf0d8f73b819e, type: 3}
   effect: 
   canBeSold: 1
