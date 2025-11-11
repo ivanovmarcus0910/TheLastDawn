@@ -162,17 +162,10 @@ public class LoadDataManager : MonoBehaviour
                 itemDataDTOList.Add(ItemDataDTO.FromItemData(itemData));
             }
             userInGame.playerData = playerDTO;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
-=======
->>>>>>> Stashed changes
             userInGame.itemDataList = itemDataDTOList;
             userInGame.itemQuantityList = inventoryManager.GetItemQuantityList();
            
             print("Data Player khi lưu "+playerData.ToString());
->>>>>>> Stashed changes
             // 🔥 Ghi lại lên Firebase
             string json = JsonConvert.SerializeObject(userInGame);
             firebaseDBManager.WriteDB(firebaseUser.UserId, json);
