@@ -1,45 +1,73 @@
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem; // Đã có
+using UnityEngine.UI;
+
 public class Robot : MonoBehaviour
 {
+    // Các biến Public
     public NPCDialogue dialogueData;
     public GameObject dialoguePanel;
     public TMP_Text dialogueText, nameText;
-    public Image portraitImage; // ?� th�m d?u ch?m ph?y b? thi?u
+    public Image portraitImage;
 
+    // Các biến Private
     private int dialogueIndex;
     private bool isTyping, isDialogueActive;
 
+    // Biến mới để theo dõi trạng thái Player trong phạm vi
+    private bool isPlayerInRange = false;
 
-    private void OnTriggerStay2D(Collider2D other)
+    // ==========================================================
+    // LOGIC PHẠM VI (TRIGGER)
+    // ==========================================================
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // 1. Ki?m tra xem ??i t??ng va ch?m c� ph?i l� Player kh�ng
         if (other.CompareTag("Player"))
         {
-            // 2. Ki?m tra xem ng??i ch?i c� nh?n ph�m T??ng t�c (E) kh�ng
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                if (dialogueData == null)
-                    return;
+            isPlayerInRange = true;
+        }
+    }
 
-                if (isDialogueActive)
-                {
-                    // H?i tho?i ?ang ho?t ??ng: Chuy?n d�ng ho?c Skip Typing
-                    NextLine();
-                }
-                else
-                {
-                    // H?i tho?i ch?a ho?t ??ng: B?t ??u h?i tho?i
-                    StartDialogue();
-                }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
+        }
+    }
+
+    // ==========================================================
+    // LOGIC INPUT (Kiểm tra nhấn phím E)
+    // ==========================================================
+    private void Update()
+    {
+        // Chỉ kiểm tra phím E nếu Player đang trong phạm vi
+        if (isPlayerInRange && Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            if (dialogueData == null)
+                return;
+
+            if (isDialogueActive)
+            {
+                // Hội thoại đang mở -> Chuyển dòng hoặc Skip Typing
+                NextLine();
+            }
+            else
+            {
+                // Hội thoại chưa mở -> Bắt đầu hội thoại
+                StartDialogue();
             }
         }
     }
 
-        void StartDialogue()
+    // ==========================================================
+    // LOGIC HỘI THOẠI (Giữ nguyên)
+    // ==========================================================
+
+    private void StartDialogue()
     {
         isDialogueActive = true;
         dialogueIndex = 0;
@@ -49,21 +77,19 @@ public class Robot : MonoBehaviour
 
         dialoguePanel.SetActive(true);
 
-        TypeLine();
+        StartCoroutine(TypeLine());
     }
 
-    void NextLine()
+    private void NextLine()
     {
         if (isTyping)
         {
-            // Skip typing animation and show the full line
             StopAllCoroutines();
             dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
             isTyping = false;
         }
         else if (++dialogueIndex < dialogueData.dialogueLines.Length)
         {
-            // If another line, type next line
             StartCoroutine(TypeLine());
         }
         else
@@ -91,19 +117,12 @@ public class Robot : MonoBehaviour
             NextLine();
         }
     }
+
     public void EndDialogue()
     {
-        // D?ng m?i hi?u ?ng g� ch? ?ang ch?y
         StopAllCoroutines();
-
-        // ??t tr?ng th�i h?i tho?i v? false
         isDialogueActive = false;
-
-        // X�a n?i dung hi?n th?
         dialogueText.SetText("");
-
-        // ?n panel h?i tho?i
         dialoguePanel.SetActive(false);
-
     }
 }

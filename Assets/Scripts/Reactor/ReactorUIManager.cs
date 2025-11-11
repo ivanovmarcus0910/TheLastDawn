@@ -164,7 +164,7 @@ public class ReactorUIManager : MonoBehaviour
         isCrafting = false;
     }
     public void OnClickBack()
-    {
+    {   
         // Ẩn UI chi tiết recipe
        // panel.SetActive(false);
 

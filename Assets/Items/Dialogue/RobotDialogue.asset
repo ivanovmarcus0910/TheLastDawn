@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21947d9f2d5cea041bf07ca7816d37e3, type: 3}
   m_Name: RobotDialogue
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
-  npcName: 
-  npcPortrait: {fileID: 0}
-  dialogueLines: []
-  autoProgressLines: 
+  npcName: Robot
+  npcPortrait: {fileID: 2118223333165189086, guid: 17484218574642546850cb904e516472, type: 3}
+  dialogueLines:
+  - hello
+  - Kahnhs
+  - "hu\xE2n"
+  autoProgressLines: 010101
   autoProgressDelay: 1.5
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
