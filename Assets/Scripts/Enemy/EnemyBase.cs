@@ -30,10 +30,12 @@ public class EnemyBase : MonoBehaviour
     protected float lastTimeDamaged;      
     protected Coroutine regenCoroutine;  
     public bool isFacingRightByDefault = true;
+    private Vector3 spawnPosition;
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        spawnPosition = transform.position;
 
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -217,6 +219,8 @@ public class EnemyBase : MonoBehaviour
         isDead = true;
 
         rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        GetComponent<Collider2D>().enabled = false;
         animator.SetTrigger("Die");
 
         if (healthBar != null)
@@ -225,7 +229,55 @@ public class EnemyBase : MonoBehaviour
         onDeath?.Invoke();
         DropLoot();
 
-        Destroy(gameObject, 1.5f);
+        StartCoroutine(HandleRespawn(1.5f, 5.0f));
+    }
+
+    protected IEnumerator HandleRespawn(float deathAnimDuration, float respawnDelay)
+    {
+        yield return new WaitForSeconds(deathAnimDuration);
+        gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(respawnDelay);
+        ResetEnemy();
+    }
+
+    protected virtual void ResetEnemy()
+    {
+        transform.position = spawnPosition;
+
+        isDead = false;
+        isHurt = false;
+        isAttacking = false;
+        currentHealth = data.maxHealth;
+        lastTimeDamaged = Time.time;
+        if (regenCoroutine != null)
+        {
+            StopCoroutine(regenCoroutine);
+            regenCoroutine = null;
+        }
+
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Collider2D>().enabled = true;
+
+        if (healthBar != null)
+        {
+            healthBar.gameObject.SetActive(true);
+            healthBar.UpdateBar(currentHealth, data.maxHealth);
+        }
+
+        currentDirection = -1;
+        float absScaleX = Mathf.Abs(transform.localScale.x);
+
+        if (isFacingRightByDefault)
+        {
+            transform.localScale = new Vector3(-absScaleX, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(absScaleX, transform.localScale.y, transform.localScale.z);
+        }
+
+        gameObject.SetActive(true);
     }
 
     protected IEnumerator RegenHealthAfterDelay()
@@ -249,7 +301,7 @@ public class EnemyBase : MonoBehaviour
         regenCoroutine = null;
     }
 
-    void DropLoot()
+    protected void DropLoot()
     {
         if (lootTable == null || lootTable.lootItems.Length == 0) return;
 

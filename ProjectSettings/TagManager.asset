@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - VendingMachine
   - Ground
+  - BirdItem
   layers:
   - Default
   - TransparentFX

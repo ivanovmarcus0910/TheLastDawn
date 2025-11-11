@@ -7,6 +7,7 @@ public class DogCageController : MonoBehaviour
     public GameObject dog;                   // Con chó trong lồng
     public GameObject cageClosed;            // Sprite lồng đóng
     public GameObject cageOpen;              // Sprite lồng mở
+    public GameObject birdItem;
     public Transform player;                 // Player reference
     public HintUI hintUI;                    // Hiển thị UI gợi ý
     public RecylableInventoryManager inventoryManager; //  Tham chiếu tới Inventory
@@ -60,6 +61,8 @@ public class DogCageController : MonoBehaviour
         if (!inventoryManager.hasItem(keyItem))
         {
             Debug.Log("Bạn chưa có chìa khóa!");
+            MessageNPC.Instance.Show("Bạn đã chế tạo thành công Iron Sword!");
+
             hintUI?.ShowHint("You need a key to unlock this cage");
             return;
         }
@@ -89,6 +92,10 @@ public class DogCageController : MonoBehaviour
 
 
         dog.transform.SetParent(null);
+        //dog.transform.SetParent(player); 
+        //Destroy(birdItem, 1f);
+
+
 
         //  Trừ 1 key sau khi sử dụng
         inventoryManager.decreaseQuantity(keyItem, 1);

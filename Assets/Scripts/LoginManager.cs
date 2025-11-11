@@ -1,4 +1,4 @@
-using Firebase.Auth;
+﻿using Firebase.Auth;
 using Firebase.Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,9 +6,11 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using Assets.Scripts.DTO;
+using Newtonsoft.Json;
+
 public class LoginManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     [Header("Register")]
     public InputField ipRegisterEmail;
     public InputField ipRegisterPassword;
@@ -27,24 +29,26 @@ public class LoginManager : MonoBehaviour
     public GameObject registerForm;
 
     private FirebaseAuth auth;
-
-    private FirebaseDBManager firebaseDBManager;
-
-    private void Start()
+    public FirebaseDBManager firebaseDBManager;
+    //item mặc định để tránh null
+    public ItemData itemData;
+    private IEnumerator Start()
     {
-
         auth = FirebaseAuth.DefaultInstance;
-        Debug.Log("Firebase Auth Initialized");
+        while (FirebaseDBManager.Instance == null)
+        {
+            Debug.Log("⏳ Đợi FirebaseDBManager...");
+            yield return null;
+        }
+        firebaseDBManager = FirebaseDBManager.Instance;
 
+        Debug.Log("✅ Firebase Auth & DB ready!");
+
+        // Gán sự kiện nút
         buttonRegister.onClick.AddListener(RegisterAccount);
         buttonLogin.onClick.AddListener(LoginAccount);
-        Debug.Log("Button Setting");
-
         buttonMoveToRegister.onClick.AddListener(SwitchForm);
         buttonMoveToSignIn.onClick.AddListener(SwitchForm);
-        Debug.Log("Switch Button");
-
-        firebaseDBManager = GetComponent<FirebaseDBManager>();
     }
 
     public void RegisterAccount()
@@ -52,6 +56,7 @@ public class LoginManager : MonoBehaviour
         Debug.Log("RegisterAccount called");
         string email = ipRegisterEmail.text;
         string password = ipRegisterPassword.text;
+
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
@@ -64,23 +69,30 @@ public class LoginManager : MonoBehaviour
                 Debug.LogError("RegisterAccount encountered an error: " + task.Exception);
                 return;
             }
-            // Firebase user has been created.
+
             FirebaseUser newUser = task.Result.User;
             try
             {
-                Debug.Log("firebaseDBManager = " + (firebaseDBManager == null ? "null" : "ok"));
-                Debug.Log("newUser = " + (newUser == null ? "null" : "ok"));
-                Debug.Log("userId = " + (newUser?.UserId ?? "null"));
+                Debug.Log($"✅ New Firebase user: {newUser?.UserId}");
 
-                User userInGame = new User("", new List<ItemData>(), new List<int>(), ScriptableObject.CreateInstance<PlayerData>(), 0);
-                firebaseDBManager.WriteDB(newUser.UserId, userInGame.ToString());
-                Debug.LogFormat("Start Game");
+                // Tạo dữ liệu mặc định
+                PlayerData defaultData = ScriptableObject.CreateInstance<PlayerData>();
+                PlayerDataDTO defaultDataDTO = PlayerDataDTO.FromPlayerData(defaultData);
+                List<ItemDataDTO> itemDatas = new List<ItemDataDTO>();
+                itemDatas.Add(ItemDataDTO.FromItemData(itemData));
+                List<int> itemQuantiy = new List<int>() {1}; 
+                User userInGame = new User(email, itemDatas, itemQuantiy, defaultDataDTO, 0);
 
+                // 🔹 Serialize đúng JSON format
+                string json = JsonConvert.SerializeObject(userInGame);
+                firebaseDBManager.WriteDB(newUser.UserId, json);
+
+                Debug.Log("✅ User data saved to Firebase!");
                 SceneManager.LoadScene("StartMenu");
             }
             catch (Exception e)
             {
-                Debug.LogError("Error creating user data: " + e.Message);
+                Debug.LogError("❌ Error creating user data: " + e.Message);
             }
         });
     }
@@ -90,6 +102,7 @@ public class LoginManager : MonoBehaviour
         Debug.Log("LoginAccount called");
         string email = ipLoginEmail.text;
         string password = ipLoginPassword.text;
+
         auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
@@ -102,16 +115,16 @@ public class LoginManager : MonoBehaviour
                 Debug.LogError("LoginAccount encountered an error: " + task.Exception);
                 return;
             }
-            // Firebase user has been created.
+
             FirebaseUser user = task.Result.User;
-            Debug.LogFormat("User signed in successfully: {0} ({1})",
-                user.DisplayName, user.UserId);
+            Debug.Log($"✅ Login success: {user.Email} ({user.UserId})");
+
             SceneManager.LoadScene("StartMenu");
         });
     }
+
     public void SwitchForm()
     {
-        Debug.Log("SwitchForm called");
         loginForm.SetActive(!loginForm.activeSelf);
         registerForm.SetActive(!registerForm.activeSelf);
     }
