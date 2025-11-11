@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ce1e379baa3b84db05551bc38f8cfa, type: 3}
+  m_Name: Quest_3_Kill_Troll
+  m_EditorClassIdentifier: Assembly-CSharp::QuestData
+  questID: 2
+  title: "Troll hang \u0111\xE1"
+  description: "Ti\xEAu di\u1EC7t qu\xE1i v\u1EADt Troll"
+  objectiveType: 0
+  targetAmount: 2
+  targetID: Troll
+  rewardExp: 100
+  rewardItem: {fileID: 11400000, guid: eb43f12039937ef489dfb2284050415d, type: 2}
+  rewardItemAmount: 1

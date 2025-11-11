@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3050c342405232549b164fdd717ab1f9, type: 3}
   m_Name: Troll
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Enemy
+  enemyName: Troll
   sprite: {fileID: 0}
   moveSpeed: 0.4
   maxHealth: 200
