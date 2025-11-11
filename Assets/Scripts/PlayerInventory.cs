@@ -26,6 +26,10 @@ public class PlayerInventory : MonoBehaviour
             inventoryManage.AddInventoryItem(item); // Thêm mới
         }
 
-        GameEventHub.ItemCollected(item.name, Mathf.Max(1, count));
+        if (QuestManager.Instance != null)
+        {
+            
+            QuestManager.Instance.UpdateQuestProgress(ObjectiveType.Collect, item.itemName, count);
+        }
     }
 }

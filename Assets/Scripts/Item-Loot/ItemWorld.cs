@@ -24,15 +24,21 @@ public class ItemWorld : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision) 
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerInventory inventory = collision.gameObject.GetComponent<PlayerInventory>();
-
             if (inventory != null)
             {
-                Debug.Log("✅ SUCCESS: Player da nhặt vat pham.");
+                // === THÊM ĐOẠN NÀY ĐỂ BÁO CÁO QUEST ===
+                if (QuestManager.Instance != null && itemData != null)
+                {
+                    // Báo cho QuestManager biết 1 item đã được nhặt
+                    // (Chúng ta dùng itemData.itemName hoặc itemData.name)
+                    QuestManager.Instance.UpdateQuestProgress(ObjectiveType.Collect, itemData.itemName, quantity);
+                }
+                // =====================================
 
                 inventory.AddItem(itemData, quantity);
                 Destroy(gameObject);
