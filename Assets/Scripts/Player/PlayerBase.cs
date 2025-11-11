@@ -95,10 +95,12 @@ public class PlayerBase : MonoBehaviour
     public void UpdatePlayerData(PlayerData data)
     {
         this.data = data;
+        currentHealth = data.maxHealth;
+        playerHealthBar?.UpdateBar(currentHealth, data.maxHealth);
     }
     public PlayerData GetPlayerData()
     {
-        return data;
+        return this.data;
     }
     void OnDisable()
     {
