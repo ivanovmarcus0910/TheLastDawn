@@ -93,7 +93,7 @@ public class DogCageController : MonoBehaviour
 
         dog.transform.SetParent(null);
         //dog.transform.SetParent(player); 
-        Destroy(birdItem, 1f);
+        //Destroy(birdItem, 1f);
 
 
 

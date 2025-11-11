@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Cinemachine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -6,6 +7,10 @@ public class PlayerBase : MonoBehaviour
 {
     [Header("Hồ sơ Nhân vật")]
     public PlayerData data; // Kéo file PlayerData.asset vào đây
+    public Transform posInstance;
+    public GameObject birdPrefabs;
+    public GameObject BirdItem;
+    private GameObject CageOpen;
 
     [Header("UI")]
     public HealthBar playerHealthBar;
@@ -234,6 +239,19 @@ public class PlayerBase : MonoBehaviour
             rb.position = new Vector2(clampedX, clampedY);
             if (clampedX != p.x) rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             if (clampedY != p.y) rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject obj = GameObject.Find("CageOpen");
+        if (collision.CompareTag("BirdItem") && obj != null)
+        {
+            Vector3 posIn = posInstance.transform.position;
+            Debug.Log(posIn);
+            Destroy(BirdItem);
+            GameObject birdChild = Instantiate(birdPrefabs,posIn, Quaternion.identity);
+            birdChild.transform.SetParent(transform);
+
         }
     }
 }
