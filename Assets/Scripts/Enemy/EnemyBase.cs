@@ -17,6 +17,7 @@ public class EnemyBase : MonoBehaviour
 
     protected Animator animator;
     protected Rigidbody2D rb;
+    protected SpriteRenderer spriteRenderer;
 
     protected int currentHealth;
     public bool isAttacking = false;
@@ -35,6 +36,7 @@ public class EnemyBase : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         spawnPosition = transform.position;
 
         if (player == null)
@@ -235,8 +237,9 @@ public class EnemyBase : MonoBehaviour
     protected IEnumerator HandleRespawn(float deathAnimDuration, float respawnDelay)
     {
         yield return new WaitForSeconds(deathAnimDuration);
-        gameObject.SetActive(false);
 
+        spriteRenderer.enabled = false;
+        animator.enabled = false;
         yield return new WaitForSeconds(respawnDelay);
         ResetEnemy();
     }
@@ -277,7 +280,13 @@ public class EnemyBase : MonoBehaviour
             transform.localScale = new Vector3(absScaleX, transform.localScale.y, transform.localScale.z);
         }
 
-        gameObject.SetActive(true);
+        spriteRenderer.enabled = true;
+        animator.enabled = true;
+
+        animator.Play("move");
+        animator.SetBool("isAttacking", false);
+        animator.ResetTrigger("Hurt");
+        animator.ResetTrigger("Die");
     }
 
     protected IEnumerator RegenHealthAfterDelay()
