@@ -15,7 +15,7 @@ MonoBehaviour:
   questId: adbae28a2cea4e7aa7660ef89f9ddf6a
   title: "D\u1ECDn d\u1EB9p B\xE3i c\xE1t"
   description: 
-  scope: 1
+  scope: 0
   mapId: Desert
   autoAcceptOnMapEnter: 0
   autoTurnIn: 1
