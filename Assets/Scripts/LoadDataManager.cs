@@ -163,8 +163,11 @@ public class LoadDataManager : MonoBehaviour
             }
             userInGame.playerData = playerDTO;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 =======
+=======
+>>>>>>> Stashed changes
             userInGame.itemDataList = itemDataDTOList;
             userInGame.itemQuantityList = inventoryManager.GetItemQuantityList();
            
