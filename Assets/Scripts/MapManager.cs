@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GateSide { Left, Right }
 
@@ -73,6 +74,13 @@ public class MapManager : MonoBehaviour
             print($"Travel Right from {currentIndex} to {targetIndex}");
 
             if (targetIndex == -1) return;
+            if (targetIndex == 6)
+            {
+                ChuyenScene();
+                return;
+                Debug.Log("Bạn đã đến khu vực bí mật!");
+                
+            }
             targetSpawn = maps[targetIndex].leftSpawn;
         }
 
@@ -107,7 +115,11 @@ public class MapManager : MonoBehaviour
 
         Debug.Log($"✅ Traveled to map: {maps[targetIndex].name}");
     }
+    public void ChuyenScene()
+    {
+        SceneManager.LoadScene("SpaceStation");
 
+    }
 
 
 }

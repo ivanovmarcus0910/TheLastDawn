@@ -7897,7 +7897,7 @@ MonoBehaviour:
     leftSpawn: {fileID: 1442103270}
     rightSpawn: {fileID: 1530644652}
     leftNeighbor: 4
-    rightNeighbor: -1
+    rightNeighbor: 6
   currentIndex: 0
   player: {fileID: 1206134998}
   playerScript: {fileID: 1206134990}

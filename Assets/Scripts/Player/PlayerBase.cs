@@ -88,6 +88,8 @@ public class PlayerBase : MonoBehaviour
             Debug.LogError($"❌ Input setup error: {e.Message}");
             enabled = false;
         }
+        DontDestroyOnLoad(gameObject);
+       
     }
     void OnEnable()
     {
