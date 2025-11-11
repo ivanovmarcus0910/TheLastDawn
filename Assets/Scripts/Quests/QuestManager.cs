@@ -97,9 +97,6 @@ public class QuestManager : MonoBehaviour
             playerInventory.AddItem(quest.rewardItem, quest.rewardItemAmount);
         }
       
-
-
-       
         int completedQuestIndex = allQuests.FindIndex(q => q.questID == questID);
 
         
@@ -118,13 +115,8 @@ public class QuestManager : MonoBehaviour
             Debug.Log("Đã hoàn thành tất cả nhiệm vụ trong chuỗi!");
            
         }
-       
-
 
     }
-
-   
-
     public List<QuestProgress> GetPlayerQuests()
     {
         return playerQuestProgress.Values.ToList();
