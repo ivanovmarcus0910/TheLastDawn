@@ -142,6 +142,7 @@ public class LoadDataManager : MonoBehaviour
             // Cập nhật vào user hiện tại
             userInGame.playerData = playerDTO;
 
+            print("Data Player khi lưu "+playerData.ToString());
             // 🔥 Ghi lại lên Firebase
             string json = JsonConvert.SerializeObject(userInGame);
             firebaseDBManager.WriteDB(firebaseUser.UserId, json);
