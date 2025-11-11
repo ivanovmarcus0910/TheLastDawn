@@ -11,7 +11,6 @@ public class PlayerBase : MonoBehaviour
     public Transform posInstance;
     public GameObject birdPrefabs;
     public GameObject BirdItem;
-    private GameObject CageOpen;
 
     [Header("UI")]
     public HealthBar playerHealthBar;
@@ -19,6 +18,9 @@ public class PlayerBase : MonoBehaviour
 
     [Header("Input")]
     public InputActionAsset inputActions; // Kéo file .inputactions (phải có "Player" map)
+
+    [Header("Teleport & Die Settings")]
+    public MapManager mapManager;
 
     // === CÁC BIẾN NỘI BỘ ===
     private int currentHealth;
@@ -187,11 +189,16 @@ public class PlayerBase : MonoBehaviour
         if (currentHealth <= 0) Die();
     }
 
-    void Die()
+    public void Die()
     {
-        Debug.LogError("💀 GAME OVER - Player đã bị tiêu diệt!");
-        gameObject.SetActive(false);
+        mapManager.ChangeCurrentMap(5);
+        //rb.linearVelocity = Vector2.zero;
+        int healthTenth = Mathf.Max(1, Mathf.RoundToInt(data.maxHealth * 0.1f));
+        currentHealth = healthTenth;
+        // Cập nhật thanh máu
+        playerHealthBar?.UpdateBar(currentHealth, data.maxHealth);
     }
+
 
     // === MANA ===
     public bool UseMana(int manaCost)
