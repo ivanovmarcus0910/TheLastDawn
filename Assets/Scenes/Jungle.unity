@@ -16568,10 +16568,10 @@ MonoBehaviour:
   dog: {fileID: 167967671}
   cageClosed: {fileID: 725581406}
   cageOpen: {fileID: 2044789044}
-  birdItem: {fileID: 0}
+  birdItem: {fileID: 1986857852}
   player: {fileID: 1206134998}
   hintUI: {fileID: 1483609846}
-  inventoryManager: {fileID: 0}
+  inventoryManager: {fileID: 1534072912}
   keyItem: {fileID: 11400000, guid: da742e7893341c5448ff8b9250f349f8, type: 2}
   petTeleportPoint: {fileID: 0}
 --- !u!1001 &1386232924
