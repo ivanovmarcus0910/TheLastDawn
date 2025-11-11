@@ -1,74 +1,147 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class WeaponManager : MonoBehaviour
 {
-    [Header("Weapon GameObjects")]
-    public GameObject gunObject;
-    public GameObject swordObject;
+    [Header("Tham chiếu Hệ thống")]
+    // Kéo EquipmentManager (trên Player) vào đây
+    public EquipmentManager equipmentManager;
+    // Kéo PlayerBase (trên Player) vào đây
+    public PlayerBase playerBase;
 
-    [Header("Weapon Scripts")]
-   
-    public PlayerShooting playerShootingScript;
-    public PlayerSwordAttack playerSwordAttackScript;
+    [Header("Vị trí Gắn Vũ khí")]
+    // Kéo GameObject rỗng 'WeaponHoldPoint' vào đây
+    public Transform weaponHoldPoint;
 
-    [Header("Shooting Settings")]
-    public float fireRate = 5f; // Số viên đạn bắn ra mỗi giây (1f = 1 viên/giây)
-    private float nextFireTime = 0f; // Thời điểm được phép bắn viên tiếp theo
-    private bool isGunEquipped = true;
+    // Biến nội bộ để lưu trữ vũ khí
+    private GameObject currentWeaponObject; // Vũ khí đang cầm trên tay
+    private PlayerShooting currentShootingScript;
+    private PlayerSwordAttack currentSwordAttackScript;
+    private WeaponData currentWeaponData; // Lưu data của vũ khí đang cầm
+
+    private bool isSlot1Active = true; // Bắt đầu bằng vũ khí ở slot 1
+    private float nextFireTime = 0f;
 
     void Start()
     {
-        SwitchToGun();
+        // Tự động lấy component nếu chưa gán
+        if (equipmentManager == null)
+            equipmentManager = GetComponent<EquipmentManager>();
+        if (playerBase == null)
+            playerBase = GetComponent<PlayerBase>();
+
+        // Đăng ký lắng nghe sự kiện: Khi nào trang bị thay đổi, gọi hàm UpdateEquippedWeapon()
+        if (equipmentManager != null)
+        {
+            equipmentManager.OnEquipmentChanged += UpdateEquippedWeapon;
+            // Cập nhật vũ khí ngay khi bắt đầu game
+            UpdateEquippedWeapon();
+        }
+        else
+        {
+            Debug.LogError("WeaponManager không tìm thấy EquipmentManager!");
+        }
     }
 
+    // Hủy đăng ký khi đối tượng bị hủy
+    void OnDestroy()
+    {
+        if (equipmentManager != null)
+            equipmentManager.OnEquipmentChanged -= UpdateEquippedWeapon;
+    }
+
+    // Hàm được gọi mỗi khi trang bị thay đổi
+    void UpdateEquippedWeapon()
+    {
+        // Lấy data của vũ khí đang active (Slot 1 hoặc 2)
+        WeaponData dataToEquip = isSlot1Active ? equipmentManager.WeaponSlot1 : equipmentManager.WeaponSlot2;
+
+        // Gọi hàm con để trang bị
+        EquipWeapon(dataToEquip);
+    }
+
+    // Hàm con để tạo/hủy vũ khí
+    // Hàm con để tạo/hủy vũ khí (ĐÃ SỬA LỖI)
+    void EquipWeapon(WeaponData data)
+    {
+        // 1. Hủy vũ khí cũ
+        if (currentWeaponObject != null) Destroy(currentWeaponObject);
+        currentShootingScript = null;
+        currentSwordAttackScript = null;
+        currentWeaponData = null;
+
+        // 2. Nếu slot không có gì (data = null), thì dừng lại
+        if (data == null)
+        {
+            Debug.Log("Slot vũ khí đang trống.");
+            return;
+        }
+
+        // 3. Lưu data và tạo vũ khí mới từ Prefab
+        currentWeaponData = data;
+        currentWeaponObject = Instantiate(data.weaponPrefab, weaponHoldPoint);
+
+        // 4. Lấy script và "nạp" thông tin
+        if (data.weaponType == WeaponType.Gun)
+        {
+            currentShootingScript = currentWeaponObject.GetComponentInChildren<PlayerShooting>();
+            if (currentShootingScript != null)
+                currentShootingScript.Initialize(data, playerBase);
+            else
+                Debug.LogError("Prefab súng thiếu script PlayerShooting!");
+        }
+        else if (data.weaponType == WeaponType.Sword)
+        {
+            currentSwordAttackScript = currentWeaponObject.GetComponentInChildren<PlayerSwordAttack>();
+            if (currentSwordAttackScript != null)
+            {
+                // --- DÒNG SỬA LỖI QUAN TRỌNG ---
+                // Tìm SwordDamageDealer từ GameObject vũ khí, không phải từ script khác
+                SwordDamageDealer damageDealer = currentWeaponObject.GetComponentInChildren<SwordDamageDealer>();
+                // ---------------------------------
+
+                if (damageDealer != null)
+                    damageDealer.Initialize(data.weaponDamage, playerBase);
+                else
+                    Debug.LogError("Prefab kiếm (SwordSprite) thiếu script SwordDamageDealer!");
+            }
+            else
+                Debug.LogError("Prefab kiếm (SwordPivot) thiếu script PlayerSwordAttack!");
+        }
+    }
+
+    // Hàm Update chính để nhận Input
     void Update()
     {
-        // 1. ĐỔI VŨ KHÍ (Dùng Input System mới)
+        // 1. ĐỔI VŨ KHÍ (Phím G)
         if (Keyboard.current != null && Keyboard.current.gKey.wasPressedThisFrame)
         {
-            if (isGunEquipped)
-                SwitchToSword();
-            else
-                SwitchToGun();
+            // Kiểm tra xem có 2 vũ khí để đổi không
+            if (equipmentManager.WeaponSlot1 != null && equipmentManager.WeaponSlot2 != null)
+            {
+                isSlot1Active = !isSlot1Active; // Đổi qua lại giữa true và false
+                UpdateEquippedWeapon(); // Cập nhật lại vũ khí trên tay
+            }
         }
 
-        
+        // 2. TẤN CÔNG (Chuột trái)
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
-            if (isGunEquipped)
+            // Nếu đang cầm súng (có thể là slot 1 hoặc 2)
+            if (currentShootingScript != null)
             {
-                // --- THÊM ĐIỀU KIỆN KIỂM TRA COOLDOWN ---
                 if (Time.time >= nextFireTime)
                 {
-                    // Đã đến lúc được bắn
-                    playerShootingScript.PerformShoot(); // Bắn
-
-                    // Đặt lại thời gian hồi chiêu cho lần bắn kế tiếp
-                    nextFireTime = Time.time + 1f / fireRate;
+                    currentShootingScript.PerformShoot();
+                    if (currentWeaponData.fireRate > 0)
+                        nextFireTime = Time.time + 1f / currentWeaponData.fireRate;
                 }
-                // ----------------------------------------
             }
-            else
+            // Nếu đang cầm kiếm (có thể là slot 1 hoặc 2)
+            else if (currentSwordAttackScript != null)
             {
-                // Logic chém kiếm không cần cooldown ở đây (có thể thêm nếu muốn)
-                playerSwordAttackScript.PerformAttack();
+                currentSwordAttackScript.PerformAttack();
             }
         }
-    }
-
-    void SwitchToGun()
-    {
-        gunObject.SetActive(true);
-        swordObject.SetActive(false);
-        isGunEquipped = true;
-    }
-
-    void SwitchToSword()
-    {
-        gunObject.SetActive(false);
-        swordObject.SetActive(true);
-        isGunEquipped = false;
     }
 }
