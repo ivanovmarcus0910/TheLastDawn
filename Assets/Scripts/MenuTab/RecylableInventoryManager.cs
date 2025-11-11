@@ -21,6 +21,7 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
     }
     public int GetItemCount()
     {
+        print(itemDataList.ToString());
         return itemDataList.Count;
     }
 
@@ -39,7 +40,7 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
-        
+
     }
 
     void Update()
@@ -84,13 +85,13 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
             id++;
         }
         recyclableScrollRect.ReloadData();
-    
+
     }
 
     public int getQuantity(ItemData item)
     {
         int index = 0;
-        while (index<itemDataList.Count)
+        while (index < itemDataList.Count)
         {
             if (itemDataList[index] == item)
             {
@@ -99,7 +100,7 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
             index++;
         }
         return 0;
-    }  
+    }
     public bool decreaseQuantity(ItemData item, int quantity)
     {
         int id = 0;
@@ -114,5 +115,19 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
         }
         recyclableScrollRect.ReloadData();
         return false;
+    }
+    public void UpdateDataInventory(List<ItemData> newItemDataList, List<int> newItemQuantityList)
+    {
+        this.itemDataList = newItemDataList;
+        this.itemQuantityList = newItemQuantityList;
+        recyclableScrollRect.ReloadData();
+    }
+    public List<ItemData> GetItemDataList()
+    {
+        return itemDataList;
+    }
+    public List<int> GetItemQuantityList()
+    {
+        return itemQuantityList;
     }
 }

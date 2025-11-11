@@ -10,7 +10,7 @@ public class User
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public string Name { get; set; }
-    public List<ItemData> itemDataList { get; set; }
+    public List<ItemDataDTO> itemDataList { get; set; }
     public List<int> itemQuantityList { get; set; }
     public PlayerDataDTO playerData { get; set; }
     public int SiC { get; set; }
@@ -19,7 +19,7 @@ public class User
     {
     }
 
-    public User(string name, List<ItemData> itemDataList, List<int> itemQuantityList, PlayerDataDTO playerData, int siC)
+    public User(string name, List<ItemDataDTO> itemDataList, List<int> itemQuantityList, PlayerDataDTO playerData, int siC)
     {
         this.Name = name;
         this.itemDataList = itemDataList;

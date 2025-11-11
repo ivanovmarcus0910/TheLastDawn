@@ -15,6 +15,7 @@ public class LoadDataManager : MonoBehaviour
     public static User userInGame;
 
     public PlayerBase playerScript;
+    public RecylableInventoryManager inventoryManager;
     public MapManager mapManager;
 
     private FirebaseDBManager firebaseDBManager;
@@ -87,7 +88,8 @@ public class LoadDataManager : MonoBehaviour
 
                 Debug.Log($"✅ User loaded: {userInGame.Name}");
                 Debug.Log($"🎮 PlayerData null? {(userInGame.playerData == null ? "YES" : "NO")}");
-
+                //Debug.Log("Item Data Listt" + userInGame.itemDataList.Count);
+                //Debug.Log("Item Quantity Listt" + userInGame.itemQuantityList.Count);
                 if (userInGame.playerData == null)
                 {
                     Debug.LogWarning("⚠️ playerData trống — dùng dữ liệu mặc định.");
@@ -105,6 +107,19 @@ public class LoadDataManager : MonoBehaviour
                 }
                 else
                     Debug.LogWarning("⚠️ playerScript chưa được gán trong Inspector!");
+                if (inventoryManager != null)
+                {
+                    List <ItemData> itemDataList = new List<ItemData>();
+                    if (userInGame.itemDataList!=null)
+                    foreach (ItemDataDTO x in userInGame.itemDataList)
+                    {
+                        itemDataList.Add(x.ToItemData());
+                    }
+                    inventoryManager.UpdateDataInventory(itemDataList, userInGame.itemQuantityList);
+                    Debug.Log("✅ Inventory đã được tải.");
+                }
+                else
+                    Debug.LogWarning("��️ inventoryManager chưa được gán trong Inspector!");
 
             }
             catch (Exception e)
@@ -140,8 +155,16 @@ public class LoadDataManager : MonoBehaviour
             PlayerDataDTO playerDTO = PlayerDataDTO.FromPlayerData(playerData);
 
             // Cập nhật vào user hiện tại
+            List<ItemDataDTO> itemDataDTOList = new List<ItemDataDTO>();
+            if (inventoryManager.GetItemDataList() !=null)
+            foreach (ItemData itemData in inventoryManager.GetItemDataList())
+            {
+                itemDataDTOList.Add(ItemDataDTO.FromItemData(itemData));
+            }
             userInGame.playerData = playerDTO;
-
+            userInGame.itemDataList = itemDataDTOList;
+            userInGame.itemQuantityList = inventoryManager.GetItemQuantityList();
+           
             print("Data Player khi lưu "+playerData.ToString());
             // 🔥 Ghi lại lên Firebase
             string json = JsonConvert.SerializeObject(userInGame);
