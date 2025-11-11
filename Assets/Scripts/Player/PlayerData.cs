@@ -9,13 +9,14 @@ public class PlayerData : ScriptableObject
     public float moveSpeed = 3f;
     public int defense = 0;
     public int baseDamage = 5;
-    public int exp=0;
+    public int exp=50;
+    public int sic = 50;
 
     [Header("Chỉ số Nhảy")]
     public float jumpForce = 5f;
     public string ToString()
     {
-        return ($"Player Data Scriptable : {maxHealth} : {maxMana} : {moveSpeed} : {defense} : {baseDamage} : {jumpForce}");
+        return ($"Player Data Scriptable : {maxHealth} : {maxMana} : {moveSpeed} : {defense} : {baseDamage} : {jumpForce} : {exp} : {sic}");
     }
 
 }
