@@ -1,3 +1,4 @@
+using Assets.Scripts.DTO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
@@ -11,14 +12,14 @@ public class User
     public string Name { get; set; }
     public List<ItemData> itemDataList { get; set; }
     public List<int> itemQuantityList { get; set; }
-    public PlayerData playerData { get; set; }
+    public PlayerDataDTO playerData { get; set; }
     public int SiC { get; set; }
 
     public User()
     {
     }
 
-    public User(string name, List<ItemData> itemDataList, List<int> itemQuantityList, PlayerData playerData, int siC)
+    public User(string name, List<ItemData> itemDataList, List<int> itemQuantityList, PlayerDataDTO playerData, int siC)
     {
         this.Name = name;
         this.itemDataList = itemDataList;
