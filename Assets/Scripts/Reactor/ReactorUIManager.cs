@@ -9,15 +9,22 @@ public class ReactorUIManager : MonoBehaviour
     public static ReactorUIManager Instance;
 
     [Header("UI References")]
-    public GameObject panel;
+    public GameObject panel; // Panel_ReactorUI
+    public GameObject recipesPanel; //  Panel chứa danh sách công thức
     public Transform ingredientsContainer;
     public GameObject ingredientSlotPrefab;
     public Button combineButton;
+    public Button backButton;
     public Image progressFill;
-    public Transform resultSlot; // chính là "Result" node
+    public Transform resultSlot;
     public TextMeshProUGUI hintText;
     [SerializeField]
     public RecylableInventoryManager inventoryManager;
+
+    [Header("Recipe List Settings")]
+    public Transform recipesContainer; //  Content của ScrollView
+    public GameObject recipeItemPrefab; 
+    public List<CraftRecipe> allRecipes; // Danh sách công thức có thể chế tạo
 
     [Header("Reactor Settings")]
     public CraftRecipe currentRecipe;
@@ -29,21 +36,43 @@ public class ReactorUIManager : MonoBehaviour
     {
         Instance = this;
         panel.SetActive(false);
+       recipesPanel.SetActive(false);
         progressFill.fillAmount = 0;
+    }
+
+    public void ShowRecipeList()
+    {
+        //MessageNPC.Instance.Show("Bạn đã chế tạo thành công Iron Sword!");
+        panel.SetActive(true);
+        recipesPanel.SetActive(true);
+        Debug.Log("set active");
+
+        // Xóa item cũ
+        foreach (Transform child in recipesContainer)
+            Destroy(child.gameObject);
+
+        // Hiển thị danh sách recipes
+        foreach (var r in allRecipes)
+        {
+            GameObject item = Instantiate(recipeItemPrefab, recipesContainer);
+            RecipeItemUI itemUI = item.GetComponent<RecipeItemUI>();
+            itemUI.Setup(r);
+        }
     }
 
     public void ShowUI(CraftRecipe recipe)
     {
         currentRecipe = recipe;
+        recipesPanel.SetActive(false);
         panel.SetActive(true);
         progressFill.fillAmount = 0;
 
-        // Xoá slot cũ
+        // Xóa slot cũ
         foreach (var slot in currentSlots)
             Destroy(slot);
         currentSlots.Clear();
 
-        // Hiển thị các nguyên liệu
+        // Hiển thị nguyên liệu
         foreach (var ing in recipe.ingredients)
         {
             GameObject slot = Instantiate(ingredientSlotPrefab, ingredientsContainer);
@@ -60,14 +89,18 @@ public class ReactorUIManager : MonoBehaviour
         resultIcon.sprite = recipe.result.icon;
         resultText.text = $"→ {recipe.result.itemName}";
 
-        // Gán sự kiện nút Combine
-        //combineButton.onClick.RemoveAllListeners();
+        // Nút combine
+        combineButton.onClick.RemoveAllListeners();
         combineButton.onClick.AddListener(OnClickCombine);
+
+        backButton.onClick.RemoveAllListeners();
+        backButton.onClick.AddListener(OnClickBack);
     }
 
     public void HideUI()
     {
         panel.SetActive(false);
+        recipesPanel.SetActive(false);
     }
 
     public void OnClickCombine()
@@ -86,7 +119,7 @@ public class ReactorUIManager : MonoBehaviour
         bool canCraft = true;
         foreach (var ing in currentRecipe.ingredients)
         {
-            if (inventoryManager.getQuantity(ing.item)<ing.amount)
+            if (inventoryManager.getQuantity(ing.item) < ing.amount)
             {
                 canCraft = false;
                 break;
@@ -97,7 +130,7 @@ public class ReactorUIManager : MonoBehaviour
         if (!canCraft)
         {
 
-            resultText.text = "⚠️ Not enough materials!";
+            resultText.text = "<b><color=#FF3333>Not enough materials!</color></b>";
             yield break;
         }
 
@@ -117,7 +150,6 @@ public class ReactorUIManager : MonoBehaviour
             inventoryManager.decreaseQuantity(ing.item, ing.amount);
 
         //Thêm kết quả
-        //inventoryManager.AddInventoryItem(currentRecipe.result);
         if (inventoryManager.hasItem(currentRecipe.result))
         {
             inventoryManager.increaseQuantity(currentRecipe.result);
@@ -128,7 +160,25 @@ public class ReactorUIManager : MonoBehaviour
         }
 
         progressFill.fillAmount = 1f;
-        resultText.text = $"✅ Created: {currentRecipe.result.itemName}";
+        resultText.text = "<b><color=#008001>Create successfull</color></b>";
         isCrafting = false;
     }
+    public void OnClickBack()
+    {
+        // Ẩn UI chi tiết recipe
+       // panel.SetActive(false);
+
+        // Hiển thị lại danh sách công thức
+        recipesPanel.SetActive(true);
+
+        // Dọn các slot nguyên liệu (nếu cần)
+        foreach (var slot in currentSlots)
+            Destroy(slot);
+        currentSlots.Clear();
+
+        Debug.Log("Back to recipe list");
+    }
+
 }
+
+

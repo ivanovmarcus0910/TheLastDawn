@@ -1,8 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 public class ReactorInteraction : MonoBehaviour
 {
-    public CraftRecipe recipe;
     private bool playerInRange = false;
 
     void OnTriggerEnter2D(Collider2D other)
@@ -29,11 +28,12 @@ public class ReactorInteraction : MonoBehaviour
 
     void Update()
     {
+        
         if (playerInRange && Keyboard.current.eKey.wasPressedThisFrame)
         {
-            ReactorUIManager.Instance.ShowUI(recipe);
+            Debug.Log("gọi hàm show");
+            ReactorUIManager.Instance.ShowRecipeList();
             ReactorUIManager.Instance.hintText.gameObject.SetActive(false);
-
         }
     }
 }
