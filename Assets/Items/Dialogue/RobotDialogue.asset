@@ -15,10 +15,17 @@ MonoBehaviour:
   npcName: Robot
   npcPortrait: {fileID: 2118223333165189086, guid: 17484218574642546850cb904e516472, type: 3}
   dialogueLines:
-  - hello
-  - Kahnhs
-  - "hu\xE2n"
-  autoProgressLines: 010101
+  - "\u0110ang ti\u1EBFn h\xE0nh kh\u1EDFi \u0111\u1ED9ng l\u1EA1i sinh th\u1EC3\u2026 
+    K\u1EF9 s\u01B0 sinh t\u1ED3n s\u1ED1 07\u2026  T\u1EF7 l\u1EC7 s\u1EF1 s\u1ED1ng:
+    3%...  \u0110ang k\xEDch ho\u1EA1t L\xF5i N\u0103ng L\u01B0\u1EE3ng\u2026"
+  - "Ch\xE0o m\u1EEBng ng\u01B0\u01A1i tr\u1EDF l\u1EA1i, K\u1EF9 s\u01B0 sinh t\u1ED3n
+    s\u1ED1 07.  T\u1EA5t c\u1EA3 c\xE1c \u0111\u01A1n v\u1ECB kh\xE1c\u2026 \u0111\xE3
+    ng\u1EEBng ho\u1EA1t \u0111\u1ED9ng.  Ng\u01B0\u01A1i\u2026 l\xE0 ng\u01B0\u1EDDi
+    duy nh\u1EA5t c\xF2n s\u1ED1ng s\xF3t trong c\u01A1 s\u1EDF n\xE0y."
+  - "B\u1EAFt \u0111\u1EA7u ti\u1EBFn tr\xECnh kh\u1EDFi \u0111\u1ED9ng!"
+  - "Ph\xEDm \"Tab\" \u0111\u1EC3 m\u1EDF menu qu\u1EA3n l\xFD v\xE0 P \u0111\u1EC3
+    xem h\u01B0\u1EDBng d\u1EABn"
+  autoProgressLines: 01010101
   autoProgressDelay: 1.5
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
