@@ -1,39 +1,156 @@
-﻿using Firebase;
+﻿using Assets.Scripts.DTO;
+using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class LoadDataManager : MonoBehaviour
 {
     public static FirebaseUser firebaseUser;
     public static User userInGame;
-    private DatabaseReference dbReference;
+
+    public PlayerBase playerScript;
+    public MapManager mapManager;
+
+    private FirebaseDBManager firebaseDBManager;
 
     private void Awake()
     {
-        FirebaseApp app = FirebaseApp.DefaultInstance;
-        dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        // 🔹 Gán instance FirebaseDBManager
+        firebaseDBManager = FirebaseDBManager.Instance ?? FindObjectOfType<FirebaseDBManager>();
+
+        // 🔹 Lấy Firebase user (nếu đã login)
         firebaseUser = FirebaseAuth.DefaultInstance.CurrentUser;
-       
+    }
+
+    private IEnumerator Start()
+    {
+        // 🕐 Đợi FirebaseDBManager khởi tạo hoàn tất
+        while (FirebaseDBManager.Instance == null)
+        {
+            Debug.Log("⏳ Đợi FirebaseDBManager...");
+            yield return null;
+        }
+
+        firebaseDBManager = FirebaseDBManager.Instance;
+
+        // 🕐 Đợi Firebase Database sẵn sàng
+        yield return new WaitUntil(() => FirebaseDatabase.DefaultInstance != null);
+
+        if (firebaseUser == null)
+        {
+            Debug.LogError("❌ Firebase user null! Người dùng chưa đăng nhập.");
+            yield break;
+        }
+
+        Debug.Log("✅ Firebase sẵn sàng, bắt đầu load dữ liệu người chơi...");
+        GetUserInGame();
     }
 
     public void GetUserInGame()
     {
-        dbReference.Child("users").Child(firebaseUser.UserId).GetValueAsync().ContinueWithOnMainThread(task =>
+        Debug.Log($"🧩 firebaseDBManager = {(firebaseDBManager == null ? "❌ null" : "✅ ok")}");
+        Debug.Log($"🧩 firebaseUser = {(firebaseUser == null ? "❌ null" : firebaseUser.UserId)}");
+
+        if (firebaseDBManager == null || firebaseUser == null)
         {
-            if (task.IsCompleted)
-            {
-                print("Đã lấy dữ liệu người chơi từ Firebase");
-                DataSnapshot snapshot = task.Result;
-                userInGame = JsonConvert.DeserializeObject<User>(snapshot.Value.ToString());
-            }
-            else
-            {
-                Debug.LogError("Failed to read data: " + task.Exception);
-            }
+            Debug.LogError("⚠️ Firebase chưa sẵn sàng để load data!");
+            return;
         }
-            );
-    }    
+
+        firebaseDBManager.ReadDB(firebaseUser.UserId, json =>
+        {
+            Debug.Log($"📦 json từ DB = {(string.IsNullOrEmpty(json) ? "❌ null/empty" : "✅ ok")}");
+
+            if (string.IsNullOrEmpty(json))
+            {
+                Debug.LogWarning("⚠️ Không có dữ liệu user trên Firebase (có thể user mới).");
+                return;
+            }
+
+            try
+            {
+                // ⚙️ Parse JSON về object User
+                userInGame = JsonConvert.DeserializeObject<User>(json,
+                    new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Ignore });
+
+                if (userInGame == null)
+                {
+                    Debug.LogError("❌ userInGame null sau khi deserialize");
+                    return;
+                }
+
+                Debug.Log($"✅ User loaded: {userInGame.Name}");
+                Debug.Log($"🎮 PlayerData null? {(userInGame.playerData == null ? "YES" : "NO")}");
+
+                if (userInGame.playerData == null)
+                {
+                    Debug.LogWarning("⚠️ playerData trống — dùng dữ liệu mặc định.");
+                    userInGame.playerData = PlayerDataDTO.FromPlayerData(ScriptableObject.CreateInstance<PlayerData>());
+                }
+
+                // 🔁 Convert DTO → PlayerData (ScriptableObject)
+                PlayerData player = userInGame.playerData.ToPlayerData();
+
+                // 🔧 Cập nhật Player trong game
+                if (playerScript != null)
+                {
+                    playerScript.UpdatePlayerData(player);
+                    print($"✅ PlayerData đã được cập nhật: {playerScript.GetPlayerData().ToString()}");
+                }
+                else
+                    Debug.LogWarning("⚠️ playerScript chưa được gán trong Inspector!");
+
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("❌ Lỗi khi parse user: " + e.Message);
+            }
+        });
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveUserDataOnQuit();
+    }
+
+    private void SaveUserDataOnQuit()
+    {
+        if (firebaseUser == null)
+        {
+            Debug.LogWarning("⚠️ Không có user để lưu dữ liệu.");
+            return;
+        }
+
+        if (firebaseDBManager == null)
+        {
+            Debug.LogWarning("⚠️ FirebaseDBManager chưa sẵn sàng, không thể lưu.");
+            return;
+        }
+
+        try
+        {
+            // 🧠 Lấy dữ liệu mới nhất từ Player
+            PlayerData playerData = playerScript.GetPlayerData();
+            PlayerDataDTO playerDTO = PlayerDataDTO.FromPlayerData(playerData);
+
+            // Cập nhật vào user hiện tại
+            userInGame.playerData = playerDTO;
+
+            // 🔥 Ghi lại lên Firebase
+            string json = JsonConvert.SerializeObject(userInGame);
+            firebaseDBManager.WriteDB(firebaseUser.UserId, json);
+
+            Debug.Log("✅ Dữ liệu user đã được lưu lên Firebase!");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("❌ Lỗi khi lưu dữ liệu user: " + e.Message);
+        }
+    }
 }

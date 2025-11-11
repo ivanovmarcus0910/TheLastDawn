@@ -38,7 +38,20 @@ public class MapManager : MonoBehaviour
         if (playerScript && bg) playerScript.SetBounds(bg);
         if (cameraFollow && bg) cameraFollow.SetBounds(bg);
     }
+    public void ChangeCurrentMap(int index)
+    {
+        currentIndex = index;
+        for (int i = 0; i < maps.Length; i++)
+            maps[i].mapRoot.SetActive(i == currentIndex);
 
+        // Đặt spawn lần đầu (vào từ "phía trái" mặc định, tùy đại ca)
+        if (maps[currentIndex].leftSpawn)
+            player.position = maps[currentIndex].leftSpawn.position;
+
+        var bg = maps[currentIndex].background;
+        if (playerScript && bg) playerScript.SetBounds(bg);
+        if (cameraFollow && bg) cameraFollow.SetBounds(bg);
+    }
     // Gọi khi player đi ra khỏi current bằng cổng Left/Right
     public void Travel(GateSide exitSide)
     {
