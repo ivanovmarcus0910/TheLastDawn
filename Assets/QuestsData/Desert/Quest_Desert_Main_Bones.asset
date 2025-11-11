@@ -16,7 +16,7 @@ MonoBehaviour:
   title: "B\xED m\u1EADt X\u01B0\u01A1ng Tr\u1EAFng"
   description: "Kh\u1EA3o s\xE1t \u1ED1c \u0111\u1EA3o, thu th\u1EADp x\u01B0\u01A1ng
     v\xE0 ti\xEAu di\u1EC7t b\u1ECD c\u1EA1p."
-  scope: 1
+  scope: 0
   mapId: Desert
   autoAcceptOnMapEnter: 1
   autoTurnIn: 0
