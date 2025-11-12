@@ -9775,6 +9775,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 356077411}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9070431979941437831, guid: 9af7571aaf767dd46a4c07b7cd04be37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1442293187}
     - targetCorrespondingSourceObject: {fileID: 1160801822219344684, guid: 9af7571aaf767dd46a4c07b7cd04be37, type: 3}
       insertIndex: -1
       addedObject: {fileID: 667435453}
@@ -20949,6 +20952,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &1442293187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953029889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56fd145301215d443bfee0d18fa3e6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1447074475
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,11 @@ public class MapManager : MonoBehaviour
     public PlayerBase playerScript;         // có SetBounds(SpriteRenderer)
     public CameraScript cameraFollow;   // có SetBounds(SpriteRenderer)
 
+    public static string nextSpawnPointName;
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);    
+    }
     void Start()
     {
         // Bật map hiện tại, tắt map khác
@@ -76,10 +81,8 @@ public class MapManager : MonoBehaviour
             if (targetIndex == -1) return;
             if (targetIndex == 6)
             {
-                ChuyenScene();
+                ChuyenScene("SpaceStationSpawnPoint");
                 return;
-                Debug.Log("Bạn đã đến khu vực bí mật!");
-                
             }
             targetSpawn = maps[targetIndex].leftSpawn;
         }
@@ -115,10 +118,10 @@ public class MapManager : MonoBehaviour
 
         Debug.Log($"✅ Traveled to map: {maps[targetIndex].name}");
     }
-    public void ChuyenScene()
+    public void ChuyenScene(string spawnPointName)
     {
+        nextSpawnPointName = spawnPointName;
         SceneManager.LoadScene("SpaceStation");
-
     }
 
 

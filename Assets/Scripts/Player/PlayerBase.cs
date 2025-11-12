@@ -46,10 +46,20 @@ public class PlayerBase : MonoBehaviour
     public TMP_Text chiSoHealth;
     public TMP_Text chiSoSpeed;
 
-
+    public static PlayerBase Instance;
     // === KHỞI TẠO ===
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         col = GetComponent<Collider2D>();

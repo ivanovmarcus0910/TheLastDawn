@@ -9,12 +9,16 @@ public class CameraScript : MonoBehaviour
     private float minX, maxX, minY, maxY;
     private float camHalfW, camHalfH;
 
-    void Start()
+    void Awake()
     {
-        var cam = Camera.main;
+        var cam = GetComponent<Camera>();
         camHalfH = cam.orthographicSize;
         camHalfW = camHalfH * cam.aspect;
-        SetBounds(currentBackground);
+    }
+    void Start()
+    {
+        if (currentBackground != null)
+            SetBounds(currentBackground);
     }
 
     void LateUpdate()
@@ -38,5 +42,15 @@ public class CameraScript : MonoBehaviour
         maxY = b.max.y - camHalfH;
         print("Đã setBound trong Camera" + bg.name);
 
+        if (maxX < minX)
+        {
+            float mid = (b.min.x + b.max.x) / 2f;
+            minX = maxX = mid;
+        }
+        if (maxY < minY)
+        {
+            float mid = (b.min.y + b.max.y) / 2f;
+            minY = maxY = mid;
+        }
     }
 }
