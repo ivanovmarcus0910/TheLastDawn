@@ -18,6 +18,8 @@ namespace Assets.Scripts.DTO
         public int exp;
         public int sic;
 
+        public EquipmentStatus equipmentStatus;
+
         // Convert từ PlayerData sang DTO để lưu
         public static PlayerDataDTO FromPlayerData(PlayerData data)
         {
@@ -30,7 +32,8 @@ namespace Assets.Scripts.DTO
                 baseDamage = data.baseDamage,
                 jumpForce = data.jumpForce,
                 exp = data.exp,
-                sic = data.sic
+                sic = data.sic,
+                equipmentStatus = data.equipmentStatus
             };
         }
 
@@ -46,9 +49,10 @@ namespace Assets.Scripts.DTO
             playerData.jumpForce = jumpForce;
             playerData.exp = exp;
             playerData.sic = sic;
+            playerData.equipmentStatus = (this.equipmentStatus != null) ? this.equipmentStatus : new EquipmentStatus();
             return playerData;
         }
-        public string ToString()
+        public override string ToString()
         {
             return ($"Player Data DTO: {maxHealth} : {maxMana} : {moveSpeed} : {defense} : {baseDamage} : {jumpForce} : {exp} :{sic}");
         }
