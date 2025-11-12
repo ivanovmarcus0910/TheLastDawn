@@ -11,7 +11,6 @@ public class GIveAnnounce : MonoBehaviour
         {
             if (!hasAnnounced)
             {
-                // Gửi thông báo
                 Debug.Log("in rahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
                 MessageNPC.Instance.Show(announcementMessage);
                 Debug.Log("kết thúchhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");

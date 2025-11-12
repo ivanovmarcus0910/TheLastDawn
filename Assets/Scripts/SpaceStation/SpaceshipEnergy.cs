@@ -32,12 +32,12 @@ public class SpaceshipEnergy : MonoBehaviour
     public GameObject boardingPrompt;
     public Transform stairBaseLocation;
     public Collider2D mainShipCollider;
-    public string playerMovementScript = "PlayerMovement"; // Đảm bảo gõ đúng tên script
+    public string playerMovementScript = "PlayerMovement"; 
     public string winSceneName = "WinScene";
 
     [Header("Trạng thái Tàu (GameObjects)")]
-    public GameObject ship_LowEnergy;   // Kéo GameObject Ship_LowEnergy (con) vào đây
-    public GameObject ship_FullEnergy;  // Kéo GameObject Ship_FullEnergy (con) vào đây
+    public GameObject ship_LowEnergy;   
+    public GameObject ship_FullEnergy;  
     public GameObject ship_OpenDoor;
     public TrailRenderer shipTrail;
     public float fadeDuration = 2f;
@@ -54,8 +54,6 @@ public class SpaceshipEnergy : MonoBehaviour
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj == null) throw new System.Exception("Không tìm thấy Player");
             playerTransform = playerObj.GetComponent<Transform>();
-
-            //playerTransform = playerObj.transform;
         }
         catch (Exception e)
         {
@@ -78,31 +76,24 @@ public class SpaceshipEnergy : MonoBehaviour
 
     void Update()
     {
-        // 1. Nếu cutscene đang chạy, không làm gì cả
         if (isCutscenePlaying) return;
 
-        // 2. Kiểm tra Player (chết hoặc không tồn tại)
         if (playerTransform == null || !playerTransform.gameObject.activeSelf)
         {
             if (isPlayerCharging) StopCharging();
             HideUI();
-            if (boardingPrompt != null) boardingPrompt.SetActive(false); // Sửa lỗi: Ẩn prompt khi chết
+            if (boardingPrompt != null) boardingPrompt.SetActive(false);
             return;
         }
 
-        // --- Player còn sống và không có cutscene ---
-
-        // 3. Kiểm tra khoảng cách
         float distance = Vector2.Distance(transform.position, playerTransform.position);
 
         if (distance <= proximityRadius)
         {
-            // Player đang ở GẦN tàu
             if (isReadyForTakeoff)
             {
-                // Đã nạp xong, sẵn sàng bay
-                HideUI(); // Ẩn thanh nạp
-                if (boardingPrompt != null) boardingPrompt.SetActive(true); // Hiện "Nhấn [E]"
+                HideUI();
+                if (boardingPrompt != null) boardingPrompt.SetActive(true);
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -111,20 +102,18 @@ public class SpaceshipEnergy : MonoBehaviour
             }
             else if (!isCharged)
             {
-                // Chưa nạp xong, bắt đầu nạp
                 ShowUI();
                 StartCharging();
             }
         }
         else
         {
-            // Player ở XA tàu
             HideUI();
             StopCharging();
-            if (boardingPrompt != null) boardingPrompt.SetActive(false); // Ẩn "Nhấn [E]"
+            if (boardingPrompt != null) boardingPrompt.SetActive(false);
         }
 
-        // 4. Logic Nạp năng lượng (chỉ chạy nếu được kích hoạt)
+
         if (isPlayerCharging)
         {
             float maxEnergyCap = hasGolemCore ? requiredEnergy : requiredEnergy * 0.9f;
@@ -212,7 +201,6 @@ public class SpaceshipEnergy : MonoBehaviour
 
         if (progressText == null) return;
 
-        // Sửa lỗi: Thay đổi thứ tự logic
         if (isReadyForTakeoff)
         {
             progressText.text = "SẴN SÀNG CẤT CÁNH!";
@@ -221,7 +209,7 @@ public class SpaceshipEnergy : MonoBehaviour
         {
             progressText.text = $"90% (Cần Lõi Golem)";
         }
-        else if (isCharged) // Chỉ là dự phòng
+        else if (isCharged)
         {
             progressText.text = "HOÀN TẤT!";
         }
@@ -239,8 +227,6 @@ public class SpaceshipEnergy : MonoBehaviour
         HideUI();
         if (boardingPrompt != null) boardingPrompt.SetActive(false);
 
-        //(playerTransform.GetComponent<> as MonoBehaviour).enabled = false;
-
         StartCoroutine(EndingCutsceneCoroutine());
     }
 
@@ -250,29 +236,26 @@ public class SpaceshipEnergy : MonoBehaviour
         {
             mainShipCollider.enabled = false;
         }
-        // BƯỚC 2: Mở cửa và hiện cầu thang
         if (ship_FullEnergy != null) ship_FullEnergy.SetActive(false);
         if (ship_OpenDoor != null) ship_OpenDoor.SetActive(true);
 
         Animator playerAnim = playerTransform.GetComponent<Animator>();
-        if (playerAnim != null) playerAnim.SetBool("run", true); // Bật anim đi bộ
+        if (playerAnim != null) playerAnim.SetBool("run", true);
 
-        float walkSpeed = 1f; // Tốc độ Player đi
+        float walkSpeed = 1f; 
 
-        // Di chuyển Player đến vị trí "StairBaseLocation"
         while (Vector2.Distance(playerTransform.position, stairBaseLocation.position) > 0.1f)
         {
             playerTransform.position = Vector3.MoveTowards(
                 playerTransform.position,
-                stairBaseLocation.position, // Sử dụng vị trí chân cầu thang
+                stairBaseLocation.position,
                 walkSpeed * Time.deltaTime
             );
-            yield return null; // Chờ 1 frame
+            yield return null;
         }
 
         if (playerAnim != null) playerAnim.SetBool("run", false);
 
-        // BƯỚC 3: Làm mờ Player
         SpriteRenderer playerSprite = playerTransform.GetComponent<SpriteRenderer>();
         float t = 0;
         while (t < fadeDuration)
@@ -286,13 +269,11 @@ public class SpaceshipEnergy : MonoBehaviour
 
         playerTransform.gameObject.SetActive(false);
 
-        // BƯỚC 4 (Phần 1): Đóng cửa và ẩn cầu thang
-        if (ship_OpenDoor != null) ship_OpenDoor.SetActive(false); // Cầu thang tự ẩn theo
+        if (ship_OpenDoor != null) ship_OpenDoor.SetActive(false);
         if (ship_FullEnergy != null) ship_FullEnergy.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
 
-        // BƯỚC 4 & 5 (Phần 2): Bay lên
         StartCoroutine(TakeoffAndWinCoroutine());
     }
 
@@ -313,7 +294,6 @@ public class SpaceshipEnergy : MonoBehaviour
             yield return null;
         }
 
-        // BƯỚC 5: Tải Scene "YOU WIN"
         SceneManager.LoadScene(winSceneName);
     }
 }

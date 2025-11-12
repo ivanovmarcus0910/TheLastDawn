@@ -2,27 +2,20 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem; // Đã có
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Robot : MonoBehaviour
 {
-    // Các biến Public
     public NPCDialogue dialogueData;
     public GameObject dialoguePanel;
     public TMP_Text dialogueText, nameText;
     public Image portraitImage;
 
-    // Các biến Private
     private int dialogueIndex;
     private bool isTyping, isDialogueActive;
 
-    // Biến mới để theo dõi trạng thái Player trong phạm vi
     private bool isPlayerInRange = false;
-
-    // ==========================================================
-    // LOGIC PHẠM VI (TRIGGER)
-    // ==========================================================
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -39,12 +32,9 @@ public class Robot : MonoBehaviour
         }
     }
 
-    // ==========================================================
-    // LOGIC INPUT (Kiểm tra nhấn phím E)
-    // ==========================================================
     private void Update()
     {
-        // Chỉ kiểm tra phím E nếu Player đang trong phạm vi
+  
         if (isPlayerInRange && Keyboard.current.eKey.wasPressedThisFrame)
         {
             if (dialogueData == null)
@@ -52,20 +42,15 @@ public class Robot : MonoBehaviour
 
             if (isDialogueActive)
             {
-                // Hội thoại đang mở -> Chuyển dòng hoặc Skip Typing
+             
                 NextLine();
             }
             else
             {
-                // Hội thoại chưa mở -> Bắt đầu hội thoại
                 StartDialogue();
             }
         }
     }
-
-    // ==========================================================
-    // LOGIC HỘI THOẠI (Giữ nguyên)
-    // ==========================================================
 
     private void StartDialogue()
     {

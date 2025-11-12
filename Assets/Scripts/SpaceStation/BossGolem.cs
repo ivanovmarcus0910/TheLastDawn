@@ -18,9 +18,9 @@ public class BossGolem : EnemyBase
     public float teleportOffset = 4f;
 
     [Header("Leash Settings")]
-    public float maxLeashRange = 50f; // Tầm Golem từ bỏ và quay về
-    public bool isAggroed = false; // Trạng thái "đã bị kích động"
-    private Vector3 originalPosition; // Vị trí ban đầu
+    public float maxLeashRange = 50f;
+    public bool isAggroed = false; 
+    private Vector3 originalPosition; 
     private float originalGravityScale;
 
     private bool isHealing = false;
@@ -28,11 +28,11 @@ public class BossGolem : EnemyBase
     private bool hasHealedOnce = false;
 
     [Header("Skill: Falling Stones")]
-    public GameObject warningMarkerPrefab; // Kéo Prefab WarningMarker vào đây
-    public GameObject fallingStonePrefab;  // Kéo Prefab FallingStone vào đây
-    public int numberOfStones = 3;         // Số lượng đá rơi
-    public float spawnRadius = 5f;         // Bán kính xung quanh Player để đá rơi
-    public float spawnHeight = 10f;        // Độ cao mà đá xuất hiện
+    public GameObject warningMarkerPrefab; 
+    public GameObject fallingStonePrefab;  
+    public int numberOfStones = 3;         
+    public float spawnRadius = 5f;        
+    public float spawnHeight = 10f;        
     public float warningTime = 1.0f;
     public float delayBetweenStones = 0.4f;
     protected override void Start()
@@ -125,7 +125,6 @@ public class BossGolem : EnemyBase
         transform.position = originalPosition;
         rb.gravityScale = originalGravityScale;
         rb.linearVelocity = Vector2.zero;
-        //currentMana = 0;
     }
 
     public void ActivateAndTeleport()
@@ -211,16 +210,8 @@ public class BossGolem : EnemyBase
 
         StartCoroutine(SpawnFallingStonesRoutine());
 
-        // --- CẬP NHẬT TÍNH TOÁN COOLDOWN ---
-        float skillAnimTime = 2.0f; // Thời gian Golem gồng mình
-
-        // Tổng thời gian skill = (Số đá * delay) + thời gian cảnh báo
+        float skillAnimTime = 2.0f;
         float totalSkillDuration = (numberOfStones * delayBetweenStones) + warningTime;
-
-        // Đặt cooldown cho đòn tấn công tiếp theo
-        // Golem sẽ rảnh tay sau khi nó gồng (skillAnimTime)
-        // nhưng đòn tấn công tiếp theo (nextAttackTime) chỉ nên bắt đầu
-        // sau khi toàn bộ skill kết thúc
         nextAttackTime = Time.time + totalSkillDuration + data.attackCooldown;
         Invoke(nameof(StopAttack), skillAnimTime);
     }
@@ -245,54 +236,36 @@ public class BossGolem : EnemyBase
 
     private IEnumerator SpawnFallingStonesRoutine()
     {
-        // MỚI: Dùng List để lưu trữ vị trí các dấu hiệu
-        // Điều này quan trọng để đá rơi đúng chỗ dấu hiệu đã xuất hiện
         List<Vector3> markerPositions = new List<Vector3>();
 
-        // Vòng lặp 1: Tạo các dấu hiệu cảnh báo (đuổi theo Player)
         for (int i = 0; i < numberOfStones; i++)
         {
-            // 1. Lấy vị trí Player HIỆN TẠI
             Vector3 markerPos = player.position;
             markerPos.z = 0;
 
-            // 2. Tìm vị trí mặt đất dưới chân Player
             RaycastHit2D hit = Physics2D.Raycast(markerPos + Vector3.up * 50f, Vector2.down, Mathf.Infinity, groundLayer);
             if (hit.collider != null)
             {
-                markerPos.y = hit.point.y; // Đặt dấu hiệu chính xác trên mặt đất
+                markerPos.y = hit.point.y;
             }
             else
             {
-                // Nếu không tìm thấy đất (ví dụ Player đang nhảy qua vực)
-                // thì đặt nó ngang với vị trí Golem
                 markerPos.y = transform.position.y;
             }
 
-            // 3. Tạo dấu hiệu và lưu vị trí
             Instantiate(warningMarkerPrefab, markerPos, Quaternion.identity);
-            markerPositions.Add(markerPos); // Lưu vị trí này lại
+            markerPositions.Add(markerPos);
 
-            // 4. Chờ một chút rồi mới lặp lại
-            // Đây chính là yếu tố "đuổi theo"
             yield return new WaitForSeconds(delayBetweenStones);
         }
 
-        // Vòng lặp 2: Chờ và Thả đá
-
-        // Chờ cho dấu hiệu ĐẦU TIÊN hết thời gian cảnh báo
         yield return new WaitForSeconds(warningTime);
 
-        // Thả đá lần lượt tại các vị trí đã lưu
         foreach (Vector3 pos in markerPositions)
         {
-            // 1. Tính vị trí thả đá (ngay bên trên dấu hiệu)
             Vector3 stoneSpawnPos = pos + (Vector3.up * spawnHeight);
-
-            // 2. Thả đá
             Instantiate(fallingStonePrefab, stoneSpawnPos, Quaternion.identity);
 
-            // 3. Chờ (cùng thời gian delay) để tạo hiệu ứng rơi tuần tự
             yield return new WaitForSeconds(delayBetweenStones);
         }
     }
