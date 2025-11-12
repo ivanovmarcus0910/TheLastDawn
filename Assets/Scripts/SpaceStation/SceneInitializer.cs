@@ -37,15 +37,16 @@ public class SceneInitializer : MonoBehaviour
             if (cameraScript != null)
             {
                 // Gán target là Player vừa tìm thấy
-                cameraScript.target = player.transform;
+                cameraScript.target = player.GetComponent<Transform>();
 
                 // Gán giới hạn background của trạm không gian
                 cameraScript.SetBounds(stationBackground);
+                player.SetBounds(stationBackground);
 
                 // Dịch chuyển Camera ngay lập tức đến Player (tránh hiệu ứng trượt từ xa tới)
-                Vector3 startPos = player.transform.position;
-                startPos.z = cameraScript.transform.position.z;
-                cameraScript.transform.position = startPos;
+                //Vector3 startPos = player.transform.position;
+                //startPos.z = cameraScript.transform.position.z;
+                //cameraScript.transform.position = startPos;
             }
         }
     }

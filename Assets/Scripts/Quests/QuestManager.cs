@@ -32,7 +32,7 @@ public class QuestManager : MonoBehaviour
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
 
         playerQuestProgress = new Dictionary<int, QuestProgress>();
 

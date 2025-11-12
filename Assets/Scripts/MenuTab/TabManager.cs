@@ -24,6 +24,10 @@ public class TabManager : MonoBehaviour
     private bool isFading = false;
     private Coroutine fadeRoutine;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
     private void Start()
     {
         if (btnNhiemVu != null) btnNhiemVu.onClick.AddListener(() => ShowPanel(panelNhiemVu));
