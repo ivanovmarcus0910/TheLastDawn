@@ -18,7 +18,7 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
     private void Awake()
     {
         recyclableScrollRect.DataSource = this;
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this);
     }
     public int GetItemCount()
     {
@@ -71,14 +71,21 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
     }
     public bool hasItem(ItemData item)
     {
-        return itemDataList.Contains(item);
+        foreach (ItemData x in itemDataList)
+        {
+            if (x.name == item.name)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     public void increaseQuantity(ItemData item)
     {
         int id = 0;
         while (id < itemDataList.Count)
         {
-            if (itemDataList[id] == item)
+            if (itemDataList[id].name == item.name)
             {
                 itemQuantityList[id] += 1;
                 break;
@@ -94,7 +101,7 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
         int index = 0;
         while (index < itemDataList.Count)
         {
-            if (itemDataList[index] == item)
+            if (itemDataList[index].name == item.name)
             {
                 return itemQuantityList[index];
             }
@@ -107,7 +114,7 @@ public class RecylableInventoryManager : MonoBehaviour, IRecyclableScrollRectDat
         int id = 0;
         while (id < itemDataList.Count)
         {
-            if (itemDataList[id] == item)
+            if (itemDataList[id].name == item.name)
             {
                 itemQuantityList[id] -= quantity;
                 return true;

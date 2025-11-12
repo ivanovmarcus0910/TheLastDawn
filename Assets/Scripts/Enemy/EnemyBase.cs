@@ -26,7 +26,7 @@ public class EnemyBase : MonoBehaviour
     public int currentDirection = -1;
     protected float halfWidth;
     protected float nextAttackTime = 0f;
-
+    private PlayerBase playerBase;
     public Action onDeath;
     protected float lastTimeDamaged;      
     protected Coroutine regenCoroutine;  
@@ -38,7 +38,7 @@ public class EnemyBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spawnPosition = transform.position;
-
+        playerBase = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBase>();
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -229,8 +229,10 @@ public class EnemyBase : MonoBehaviour
             healthBar.gameObject.SetActive(false);
 
         onDeath?.Invoke();
+        playerBase.updateEXP(50);
+        playerBase.updateSic(50);
         DropLoot();
-
+        
         StartCoroutine(HandleRespawn(1.5f, 5.0f));
     }
 

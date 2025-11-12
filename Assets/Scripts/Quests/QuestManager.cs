@@ -92,9 +92,11 @@ public class QuestManager : MonoBehaviour
 
 
         PlayerInventory playerInventory = FindObjectOfType<PlayerInventory>();
+        PlayerBase playerBase = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBase>(); 
         if (playerInventory != null && quest.rewardItem != null)
         {
             playerInventory.AddItem(quest.rewardItem, quest.rewardItemAmount);
+            playerBase.updateEXP(quest.rewardExp);
         }
       
         int completedQuestIndex = allQuests.FindIndex(q => q.questID == questID);

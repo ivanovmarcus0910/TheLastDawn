@@ -329,4 +329,23 @@ public class PlayerBase : MonoBehaviour
         chiSoHealth.text = data.maxHealth.ToString();
         chiSoSpeed.text = data.moveSpeed.ToString();
     }
+    public void updateEXP(int exp)
+    {
+        data.exp += exp;
+        UpdateTaiNguyen();
+    }
+    public void updateSic(int sic)
+    {
+        data.sic += sic;
+        UpdateTaiNguyen();
+    }
+    public void updateCurrentHeal(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > data.maxHealth)
+        {
+            currentHealth = data.maxHealth;
+        }
+        playerHealthBar?.UpdateBar(currentHealth, data.maxHealth);
+    }    
 }

@@ -21,10 +21,12 @@ public class PlayerInventory : MonoBehaviour
             // Logic lưu trữ (Giữ nguyên code của bạn)
             if (inventoryManage.hasItem(item))
             {
+                Debug.Log("Đã có item trong kho");
                 inventoryManage.increaseQuantity(item); // Sẽ được gọi 'count' lần
             }
             else
             {
+                Debug.Log("Chưa có item trong kho");
                 inventoryManage.AddInventoryItem(item); // Sẽ được gọi 1 lần
             }
         }

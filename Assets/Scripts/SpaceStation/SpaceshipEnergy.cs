@@ -53,7 +53,9 @@ public class SpaceshipEnergy : MonoBehaviour
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj == null) throw new System.Exception("Không tìm thấy Player");
-            playerTransform = playerObj.transform;
+            playerTransform = playerObj.GetComponent<Transform>();
+
+            //playerTransform = playerObj.transform;
         }
         catch (Exception e)
         {
@@ -237,7 +239,7 @@ public class SpaceshipEnergy : MonoBehaviour
         HideUI();
         if (boardingPrompt != null) boardingPrompt.SetActive(false);
 
-        (playerTransform.GetComponent(playerMovementScript) as MonoBehaviour).enabled = false;
+        //(playerTransform.GetComponent<> as MonoBehaviour).enabled = false;
 
         StartCoroutine(EndingCutsceneCoroutine());
     }

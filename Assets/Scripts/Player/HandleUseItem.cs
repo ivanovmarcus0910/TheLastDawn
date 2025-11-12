@@ -108,6 +108,13 @@ public class HandleUseItem : MonoBehaviour
                     }
                     Debug.Log("Dùng Quần");
                     break;
+                case "Hp Potion":
+                    
+                        player.updateCurrentHeal(50);
+                        inventoryManager.decreaseQuantity(item, 1);
+
+                    Debug.Log("Dùng Hồi HP");
+                    break;
 
                 default:
                     Debug.Log("⚠️ Item chưa được định nghĩa hành động!");

@@ -9,7 +9,7 @@ public class VendingMachine : MonoBehaviour
     public float interactRange = 0.5f;          
     public GameObject vendingUI;             
     public Transform player;
-    public TextMeshPro message;
+    public TextMeshProUGUI message;
 
     [Header("Items for Sale")]
     public ItemData[] itemsForSale;             

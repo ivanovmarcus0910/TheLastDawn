@@ -1496,7 +1496,7 @@ MonoBehaviour:
   skillManaCost: 50
   skillLaunchPoint: {fileID: 2066198294}
   handProjectilePrefab: {fileID: 412321569988530177, guid: 9944212617727df498f1c18b4714f3d3, type: 3}
-  spaceshipEnergy: {fileID: 0}
+  spaceshipEnergy: {fileID: 1930681207}
   teleportOffset: 2.8
   maxLeashRange: 10
   isAggroed: 0
