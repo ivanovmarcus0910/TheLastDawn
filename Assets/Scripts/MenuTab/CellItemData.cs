@@ -9,7 +9,7 @@ public class CellItemData : MonoBehaviour, ICell
     public Text quantityLabel;
     public Text decriptionLabel;
     public Image icon;
-    private ItemData itemData;
+    public ItemData itemData;
     private int cellIndex;
     public void ConfigureCell (ItemData itemData, int quantity, int cellIndex)
     {

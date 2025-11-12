@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.DTO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
  
@@ -38,6 +39,13 @@ public class PlayerBase : MonoBehaviour
     private SpriteRenderer backgroundForBounds;
     private float minX, maxX, minY, maxY;
     private Vector2 halfSize;
+
+    [Header("Chỉ số")]
+    public TMP_Text chiSoDame;
+    public TMP_Text chiSoDefend;
+    public TMP_Text chiSoHealth;
+    public TMP_Text chiSoSpeed;
+
 
     // === KHỞI TẠO ===
     void Awake()
@@ -103,7 +111,8 @@ public class PlayerBase : MonoBehaviour
         this.data = data;
         currentHealth = data.maxHealth;
         playerHealthBar?.UpdateBar(currentHealth, data.maxHealth);
-        taiNguyenManager.UpdateUI(data.sic, data.exp);
+        UpdateChiSo();
+        //taiNguyenManager.UpdateUI(data.sic, data.exp);
     }
     public PlayerData GetPlayerData()
     {
@@ -277,5 +286,32 @@ public class PlayerBase : MonoBehaviour
             birdChild.transform.SetParent(transform);
 
         }
+    }
+    public void Heal(int amount)
+    {
+        data.maxHealth += amount;
+        UpdateChiSo();
+    }
+    public void Defend(int amount)
+    {
+        data.defense += amount;
+        UpdateChiSo();
+    }
+    public void Speed(int amount)
+    {
+        data.moveSpeed += amount;
+        UpdateChiSo();
+    }
+    public void Dame(int amount)
+    {
+        data.baseDamage += amount;
+        UpdateChiSo();
+    }
+    public void UpdateChiSo()
+    {
+               chiSoDame.text = data.baseDamage.ToString();
+        chiSoDefend.text = data.defense.ToString();
+        chiSoHealth.text = data.maxHealth.ToString();
+        chiSoSpeed.text = data.moveSpeed.ToString();
     }
 }

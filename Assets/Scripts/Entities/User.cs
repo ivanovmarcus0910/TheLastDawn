@@ -14,18 +14,20 @@ public class User
     public List<int> itemQuantityList { get; set; }
     public PlayerDataDTO playerData { get; set; }
     public int currentMapIndex { get; set; }
+    public List<int> equipmentStatusList { get; set; }
 
     public User()
     {
     }
 
-    public User(string name, List<ItemDataDTO> itemDataList, List<int> itemQuantityList, PlayerDataDTO playerData, int currentMap)
+    public User(string name, List<ItemDataDTO> itemDataList, List<int> itemQuantityList, PlayerDataDTO playerData, int currentMap, List<int> equipmentStatusList)
     {
         this.Name = name;
         this.itemDataList = itemDataList;
         this.itemQuantityList = itemQuantityList;
         this.playerData = playerData;
         this.currentMapIndex = currentMap;
+        this.equipmentStatusList = equipmentStatusList;
     }
 
     public override string ToString()

@@ -31,7 +31,7 @@ public class LoginManager : MonoBehaviour
     private FirebaseAuth auth;
     public FirebaseDBManager firebaseDBManager;
     //item mặc định để tránh null
-    public ItemData itemData;
+    public ItemData[] listItemDataDefault;
     private IEnumerator Start()
     {
         auth = FirebaseAuth.DefaultInstance;
@@ -79,9 +79,15 @@ public class LoginManager : MonoBehaviour
                 PlayerData defaultData = ScriptableObject.CreateInstance<PlayerData>();
                 PlayerDataDTO defaultDataDTO = PlayerDataDTO.FromPlayerData(defaultData);
                 List<ItemDataDTO> itemDatas = new List<ItemDataDTO>();
-                itemDatas.Add(ItemDataDTO.FromItemData(itemData));
-                List<int> itemQuantiy = new List<int>() {1}; 
-                User userInGame = new User(email, itemDatas, itemQuantiy, defaultDataDTO, 5);
+                List<int> itemQuantiy = new List<int>();
+
+                foreach (ItemData x in listItemDataDefault)
+                {
+                    itemDatas.Add(ItemDataDTO.FromItemData(x));
+                    itemQuantiy.Add(0);
+                }
+                List<int> equipmentStatusList = new List<int>() { 0, 0, 0, 0, 0, 0 };
+                User userInGame = new User(email, itemDatas, itemQuantiy, defaultDataDTO, 5, equipmentStatusList);
 
                 // 🔹 Serialize đúng JSON format
                 string json = JsonConvert.SerializeObject(userInGame);

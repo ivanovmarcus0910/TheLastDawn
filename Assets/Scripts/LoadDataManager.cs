@@ -21,7 +21,7 @@ public class LoadDataManager : MonoBehaviour
     public MapManager mapManager;
 
     private FirebaseDBManager firebaseDBManager;
-    public ItemData defaultItemData;
+   // public ItemData defaultItemData;
 
     private void Awake()
     {
@@ -81,76 +81,38 @@ public class LoadDataManager : MonoBehaviour
         {
             Debug.Log($"📦 json từ DB = {(string.IsNullOrEmpty(json) ? "❌ null/empty" : "✅ ok")}");
 
-            // ▼▼▼ LOGIC ĐÃ ĐƯỢC SỬA LẠI HOÀN TOÀN ▼▼▼
+            if (string.IsNullOrEmpty(json))
+            {
+                Debug.LogWarning("⚠️ Không có dữ liệu user trên Firebase (có thể user mới).");
+                return;
+            }
+
             try
             {
-                // 1. CỐ GẮNG LOAD DATA CŨ (NẾU CÓ)
-                if (!string.IsNullOrEmpty(json))
-                {
-                    userInGame = JsonConvert.DeserializeObject<User>(json,
-                        new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Ignore });
-                }
-                else
-                {
-                    userInGame = null; // Set là null để khối 'if' bên dưới biết là phải TẠO MỚI
-                }
+                // ⚙️ Parse JSON về object User
+                userInGame = JsonConvert.DeserializeObject<User>(json,
+                    new JsonSerializerSettings { MissingMemberHandling = MissingMemberHandling.Ignore });
 
-
-                // 2. KIỂM TRA XEM CÓ CẦN TẠO MỚI USER KHÔNG
                 if (userInGame == null)
                 {
-                    Debug.LogWarning("⚠️ Không có dữ liệu user. TẠO DỮ LIỆU MẶC ĐỊNH MỚI...");
-
-                    // Tạo PlayerData mặc định
-                    PlayerData defaultData = ScriptableObject.CreateInstance<PlayerData>();
-                    // Đây chính là cái {0,0,0,0,0,0,0} bạn muốn!
-                    defaultData.equipmentStatus = new EquipmentStatus();
-                    PlayerDataDTO defaultDataDTO = PlayerDataDTO.FromPlayerData(defaultData);
-
-                    // Tạo Inventory mặc định (với 1 item)
-                    List<ItemDataDTO> defaultItems = new List<ItemDataDTO>();
-                    List<int> defaultQuantities = new List<int>();
-                    if (defaultItemData != null)
-                    {
-                        defaultItems.Add(ItemDataDTO.FromItemData(defaultItemData));
-                        defaultQuantities.Add(1);
-                    }
-                    else
-                    {
-                        Debug.LogError("⚠️ 'defaultItemData' chưa được gán trong Inspector của LoadDataManager!");
-                    }
-
-                    // Lấy email user và map mặc định
-                    string userEmail = (firebaseUser != null) ? firebaseUser.Email : "new_user@email.com";
-                    int defaultMapIndex = 5; // Giống như trong LoginManager
-
-                    // Tạo đối tượng User mới
-                    userInGame = new User(userEmail, defaultItems, defaultQuantities, defaultDataDTO, defaultMapIndex);
-
-                    Debug.Log("✅ Đã tạo userInGame mặc định. Chuẩn bị ĐẨY (push) lên Firebase...");
-
-                    // 3. (QUAN TRỌNG) ĐẨY DỮ LIỆU LÊN FIREBASE NGAY LẬP TỨC
-                    SaveUserDataOnQuit(); // Chúng ta "mượn" hàm save này để đẩy data lên
+                    Debug.LogError("❌ userInGame null sau khi deserialize");
+                    return;
                 }
 
-                // 4. KIỂM TRA NẾU USER CŨ NHƯNG THIẾU PLAYERDATA (code cũ của bạn)
-                else if (userInGame.playerData == null)
+                Debug.Log($"✅ User loaded: {userInGame.Name}");
+                Debug.Log($"🎮 PlayerData null? {(userInGame.playerData == null ? "YES" : "NO")}");
+                //Debug.Log("Item Data Listt" + userInGame.itemDataList.Count);
+                //Debug.Log("Item Quantity Listt" + userInGame.itemQuantityList.Count);
+                if (userInGame.playerData == null)
                 {
                     Debug.LogWarning("⚠️ playerData trống — dùng dữ liệu mặc định.");
-                    PlayerData defaultData = ScriptableObject.CreateInstance<PlayerData>();
-                    defaultData.equipmentStatus = new EquipmentStatus();
-                    userInGame.playerData = PlayerDataDTO.FromPlayerData(defaultData);
-                    // Cũng nên lưu lại ngay
-                    SaveUserDataOnQuit();
+                    userInGame.playerData = PlayerDataDTO.FromPlayerData(ScriptableObject.CreateInstance<PlayerData>());
                 }
 
-                // ▲▲▲ HẾT PHẦN LOGIC SỬA ▲▲▲
-
-
-                // 5. CẬP NHẬT GAME (code cũ của bạn)
-                Debug.Log($"✅ User loaded: {userInGame.Name}");
+                // 🔁 Convert DTO → PlayerData (ScriptableObject)
                 PlayerData player = userInGame.playerData.ToPlayerData();
 
+                // 🔧 Cập nhật Player trong game
                 if (playerScript != null)
                 {
                     playerScript.UpdatePlayerData(player);
@@ -158,7 +120,6 @@ public class LoadDataManager : MonoBehaviour
                 }
                 else
                     Debug.LogWarning("⚠️ playerScript chưa được gán trong Inspector!");
-
                 if (inventoryManager != null)
                 {
                     List<ItemData> itemDataList = new List<ItemData>();
@@ -171,8 +132,7 @@ public class LoadDataManager : MonoBehaviour
                     Debug.Log("✅ Inventory đã được tải.");
                 }
                 else
-                    Debug.LogWarning("⚠️ inventoryManager chưa được gán trong Inspector!");
-
+                    Debug.LogWarning("��️ inventoryManager chưa được gán trong Inspector!");
                 if (mapManager != null)
                 {
                     mapManager.ChangeCurrentMap(userInGame.currentMapIndex);
@@ -183,7 +143,7 @@ public class LoadDataManager : MonoBehaviour
             }
             catch (Exception e)
             {
-                Debug.LogError("❌ Lỗi khi parse hoặc tạo user: " + e.ToString()); // Dùng e.ToString() để xem lỗi chi tiết
+                Debug.LogError("❌ Lỗi khi parse user: " + e.Message);
             }
         });
     }
@@ -193,59 +153,95 @@ public class LoadDataManager : MonoBehaviour
         SaveUserDataOnQuit();
     }
 
+   
+
+
+
     private void SaveUserDataOnQuit()
+
     {
+
         if (firebaseUser == null)
+
         {
+
             Debug.LogWarning("⚠️ Không có user để lưu dữ liệu.");
+
             return;
+
         }
+
+
 
         if (firebaseDBManager == null)
+
         {
+
             Debug.LogWarning("⚠️ FirebaseDBManager chưa sẵn sàng, không thể lưu.");
+
             return;
+
         }
 
-        try
-        {
-            // 🧠 Lấy dữ liệu mới nhất từ Player
-            PlayerData playerData = playerScript.GetPlayerData();
 
-            // ▼▼▼ SỬA LẠI (2) - DÒNG QUAN TRỌNG NHẤT ▼▼▼
-            // Cập nhật 'playerData' với trạng thái trang bị mới nhất
-            // từ 'userInGame' (mà nút bấm đã thay đổi trong RAM).
-            if (userInGame != null && userInGame.playerData != null)
-            {
-                playerData.equipmentStatus = userInGame.playerData.equipmentStatus;
-            }
-            // ▲▲▲ HẾT PHẦN SỬA ▲▲▲
+
+        try
+
+        {
+
+            // 🧠 Lấy dữ liệu mới nhất từ Player
+
+            PlayerData playerData = playerScript.GetPlayerData();
 
             PlayerDataDTO playerDTO = PlayerDataDTO.FromPlayerData(playerData);
 
+
+
             // Cập nhật vào user hiện tại
+
             List<ItemDataDTO> itemDataDTOList = new List<ItemDataDTO>();
+
             if (inventoryManager.GetItemDataList() != null)
+
                 foreach (ItemData itemData in inventoryManager.GetItemDataList())
+
                 {
+
                     itemDataDTOList.Add(ItemDataDTO.FromItemData(itemData));
+
                 }
+
             userInGame.playerData = playerDTO;
+
             userInGame.itemDataList = itemDataDTOList;
+
             userInGame.itemQuantityList = inventoryManager.GetItemQuantityList();
+
             print("Current Index" + mapManager.currentIndex);
+
             userInGame.currentMapIndex = mapManager.currentIndex;
+
             print("Data Player khi lưu " + playerData.ToString());
 
             // 🔥 Ghi lại lên Firebase
+
             string json = JsonConvert.SerializeObject(userInGame);
+
             firebaseDBManager.WriteDB(firebaseUser.UserId, json);
 
+
+
             Debug.Log("✅ Dữ liệu user đã được lưu lên Firebase!");
+
         }
+
         catch (Exception e)
+
         {
+
             Debug.LogError("❌ Lỗi khi lưu dữ liệu user: " + e.Message);
+
         }
+
     }
 }

@@ -839,7 +839,12 @@ MonoBehaviour:
   loginForm: {fileID: 967215484}
   registerForm: {fileID: 1725227378}
   firebaseDBManager: {fileID: 657605778}
-  itemData: {fileID: 11400000, guid: a6ad53d3c2151e042a0ec406149b00d7, type: 2}
+  listItemDataDefault:
+  - {fileID: 11400000, guid: d9027df516ccaf649b302a49fa866aa6, type: 2}
+  - {fileID: 11400000, guid: a4292bbc53d49794b805f83acf2627d8, type: 2}
+  - {fileID: 11400000, guid: bb76877021aa9db429d78f0ff4637631, type: 2}
+  - {fileID: 11400000, guid: a5fc4bf03220c7f42a060c38483a80de, type: 2}
+  - {fileID: 11400000, guid: c2d98582f0ac82347a8d61f45652e843, type: 2}
 --- !u!4 &1960383493
 Transform:
   m_ObjectHideFlags: 0

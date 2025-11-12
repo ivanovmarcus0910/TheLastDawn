@@ -4,14 +4,7 @@
 public class ItemData_Equipment : ScriptableObject
 {
     [Header("Thông tin cơ bản")]
-    public string itemName;             // Tên hiển thị
-    public Sprite icon;                 // Ảnh trong UI
-    public int price;                   // Giá bán/mua
-    public GameObject prefab;           // Prefab trong game (nếu có)
-    [TextArea] public string description;
-
-    [Header("Loại trang bị")]
-    public EquipmentSlot slotType;      // Vị trí mặc: Mũ, Giáp, Giày...
+    public ItemData baseData;   // Thông tin chung của item
 
     [Header("Chỉ số cộng thêm khi trang bị")]
     public int bonusHealth;             // +Máu
@@ -25,6 +18,6 @@ public class ItemData_Equipment : ScriptableObject
 
     public override string ToString()
     {
-        return $"{itemName} | HP+{bonusHealth}, DEF+{bonusDefense}, SPD+{bonusMoveSpeed}, DMG+{bonusDamage}";
+        return $"{baseData.itemName} | HP+{bonusHealth}, DEF+{bonusDefense}, SPD+{bonusMoveSpeed}, DMG+{bonusDamage}";
     }
 }
