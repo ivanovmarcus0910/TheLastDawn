@@ -8,7 +8,7 @@ public class EquipmentStatus   // 2
 
     public EquipmentStatus()   // 4
     {
-        slots = new List<int> { 0, 0, 0, 0, 0, 0, 0 };  // 5
+        slots = new List<int> { 1, 1, 1, 1, 1, 1, 1 }; // 5
     }
 
     public void SetSlot(int index, bool isEquipped)

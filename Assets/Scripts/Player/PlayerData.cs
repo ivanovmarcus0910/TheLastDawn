@@ -14,6 +14,8 @@ public class PlayerData : ScriptableObject
 
     [Header("Chỉ số Nhảy")]
     public float jumpForce = 5f;
+    [Header("Trang bị")]
+    public EquipmentStatus equipmentStatus = new EquipmentStatus();
     public string ToString()
     {
         return ($"Player Data Scriptable : {maxHealth} : {maxMana} : {moveSpeed} : {defense} : {baseDamage} : {jumpForce} : {exp} : {sic}");
