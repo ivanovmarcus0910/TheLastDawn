@@ -101,16 +101,17 @@ public class LoadDataManager : MonoBehaviour
 
                 Debug.Log($"✅ User loaded: {userInGame.Name}");
                 Debug.Log($"🎮 PlayerData null? {(userInGame.playerData == null ? "YES" : "NO")}");
-                //Debug.Log("Item Data Listt" + userInGame.itemDataList.Count);
-                //Debug.Log("Item Quantity Listt" + userInGame.itemQuantityList.Count);
+              
                 if (userInGame.playerData == null)
                 {
                     Debug.LogWarning("⚠️ playerData trống — dùng dữ liệu mặc định.");
                     userInGame.playerData = PlayerDataDTO.FromPlayerData(ScriptableObject.CreateInstance<PlayerData>());
                 }
-
                 // 🔁 Convert DTO → PlayerData (ScriptableObject)
+
                 PlayerData player = userInGame.playerData.ToPlayerData();
+
+                
 
                 // 🔧 Cập nhật Player trong game
                 if (playerScript != null)
