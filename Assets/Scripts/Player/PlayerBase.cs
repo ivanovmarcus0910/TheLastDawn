@@ -112,7 +112,12 @@ public class PlayerBase : MonoBehaviour
         currentHealth = data.maxHealth;
         playerHealthBar?.UpdateBar(currentHealth, data.maxHealth);
         UpdateChiSo();
-        //taiNguyenManager.UpdateUI(data.sic, data.exp);
+        UpdateTaiNguyen();
+    }
+    public void UpdateTaiNguyen()
+    {
+        taiNguyenManager.UpdateUI(data.sic, data.exp);
+
     }
     public PlayerData GetPlayerData()
     {
